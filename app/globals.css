@@ -56,6 +56,14 @@
     @apply text-14 px-4 py-2.5 font-semibold;
   }
 
+  .bg-gray-25 {
+    background-color: #f9fafb; /* Replace with your desired color */
+  }
+  
+  .text-bankGradient {
+    color: #5089DD; /* Replace with your desired color */
+  }
+
   .flex-center {
     @apply flex items-center justify-center;
   }
