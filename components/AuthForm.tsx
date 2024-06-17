@@ -22,7 +22,7 @@ import { authformSchema } from '@/lib/utils'
 import { Control } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signIn, signUp } from '@/lib/actions/user.actions'
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 
 
 const AuthForm = ({type}:{type: string}) => {
