@@ -3,9 +3,11 @@
 import { ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { parseStringify } from "../utils";
-import { CountryCode, Products } from 'plaid';
+import { encryptId, parseStringify } from "../utils";
+import { CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCreateRequestProcessorEnum, Products } from 'plaid';
 import { plaidClient } from '@/lib/plaid';
+import { revalidatePath } from "next/cache";
+import { addFundingSource } from "./dwolla.actions";
 
 export const signIn = async ({email, password}: signInProps) =>{
     try {
@@ -88,6 +90,10 @@ export async function getLoggedInUser() {
     }
   }
 
+  //exchange public token for access token.
+  // allows to create bank account, get that account data 
+  // then connect a payment processor dwolla and allows funds to transfer between accounts
+
   export const exchangePublicToken = async ({
     publicToken,
     user,
@@ -103,6 +109,52 @@ export async function getLoggedInUser() {
       //get account info from Plaid using access token
       const accountsResponse = await plaidClient.accountsGet({
         access_token: accessToken,
+      });
+
+      //get account data
+      const accountData = accountsResponse.data.accounts[0];
+      //create processor token for dwolla using the access token and account ID
+      const request: ProcessorTokenCreateRequest = {
+        access_token: accessToken,
+        account_id: accountData.account_id,
+        processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
+      };
+
+      //generate processor token
+      const processorTokenResponse = await plaidClient.processorTokenCreate(request);
+      //assign to processorToken from response data specification
+      const processorToken = processorTokenResponse.data.processor_token;
+      
+      //create funding source url for the account using the dwolla customer Id, processor token and bank name
+
+      //connect payment processor function to bank account so you can send/receive funds
+      const fundingSourceUrl = await addFundingSource({
+        dwollaCustomerId: user.dwollaCustomerId,
+        processorToken,
+        bankName: accountData.name,
+      });
+
+      // if funding source url isnt created, throw error
+      if (!fundingSourceUrl) throw Error;
+
+      //if funding source exists, create bank account using user id, item id, account id, access token, funding source url, and sharable id.
+      
+      //await server action createBankAccount
+      await createBankAccount({
+        userId: user.$id,
+        bankId: itemId,
+        accountId: accountData.account_id,
+        accessToken,
+        fundingSourceUrl,
+        sharableId: encryptId(accountData.account_id),
+      });
+
+      //revalidate path to reflect changes
+      revalidatePath("/");
+
+      //return success message
+      return parseStringify({
+        publicTokenExchange: "complete",
       });
 
     } catch (error) {
