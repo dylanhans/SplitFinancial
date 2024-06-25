@@ -3,11 +3,18 @@
 import { ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { encryptId, parseStringify } from "../utils";
+import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../utils";
 import { CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCreateRequestProcessorEnum, Products } from 'plaid';
 import { plaidClient } from '@/lib/plaid';
 import { revalidatePath } from "next/cache";
-import { addFundingSource } from "./dwolla.actions";
+import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
+
+//destructure for easy integration
+const {
+  APPWRITE_DATABASE_ID: DATABASE_ID,
+  APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
+  APPWRITE_BANK_COLLECTION_ID: BANK_COLLECTION_ID, 
+} = process.env;
 
 export const signIn = async ({email, password}: signInProps) =>{
     try {
@@ -20,22 +27,54 @@ export const signIn = async ({email, password}: signInProps) =>{
     }
 }
 
-export const signUp = async (userData: SignUpParams) =>{
-    const { email, password, firstName, lastName} = userData;
+export const signUp = async ({ password, ...userData}: SignUpParams) =>{
+    const { email, firstName, lastName} = userData;
+
+    //make atomic, works or doesn't.
+    let newUserAccount;
 
     try {
         //mutation or database or make fetch
         //create a user account
-        const { account } = await createAdminClient();
+        //extract -->below account and database
+        const { account, database } = await createAdminClient();
 
-        const newUserAccount = await account.create(ID.unique(), 
-        email, 
-        password, 
-        `${firstName} ${lastName}`
+        newUserAccount = await account.create(
+          ID.unique(), 
+          email, 
+          password, 
+          `${firstName} ${lastName}`
         );
+
+        if(!newUserAccount) throw new Error('Error creating user')
+
+        const dwollaCustomerUrl = await createDwollaCustomer({
+          //spread user data
+          ...userData, 
+          type: 'personal'
+        })
+
+        //check if received dwolla customer url
+        if(!dwollaCustomerUrl) throw new Error('Error creating Dwolla customer')
+
+        const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+
+        const newUser = await database.createDocument(
+          DATABASE_ID!,
+          USER_COLLECTION_ID!,
+          ID.unique(1),
+          {
+            //object containing information needed
+            ...userData,
+            userId: newUserAccount.$id,
+            dwollaCustomerId,
+            dwollaCustomerUrl,
+          } 
+        )
 
         const session = await account.createEmailPasswordSession(email, password);
       
+        //store in cookies, new user. need to store in database and connect to plaid.
         cookies().set("appwrite-session", session.secret, {
           path: "/",
           httpOnly: true,
@@ -43,7 +82,7 @@ export const signUp = async (userData: SignUpParams) =>{
           secure: true,
         });
 
-        return parseStringify(newUserAccount);
+        return parseStringify(newUser);
     } catch (error) {
         console.error('error', error);
     }
@@ -76,7 +115,7 @@ export async function getLoggedInUser() {
         user: {
         client_user_id: user.$id
       },
-      client_name: user.name,
+      client_name: `${user.firstName} ${user.lastName}`,
       products: ['auth'] as Products[],
       language: 'en',
       country_codes: ['US'] as CountryCode[],
@@ -87,6 +126,38 @@ export async function getLoggedInUser() {
       return parseStringify({linkToken: response.data.link_token})
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  export const createBankAccount = async ({
+    accessToken,
+    userId,
+    accountId,
+    bankId,
+    fundingSourceUrl,
+    shareableId,
+  }: createBankAccountProps) => {
+    try {
+      //destructure, create bank account as document in program database (appwrite)
+      const  { database } = await createAdminClient();
+      // create new document and add to collection, from api appwrite
+      const bankAccount = await database.createDocument(
+        DATABASE_ID!, 
+        BANK_COLLECTION_ID!,
+        ID.unique(),
+        {
+          userId,
+          bankId,
+          accountId,
+          accessToken,
+          fundingSourceUrl,
+          shareableId,
+        }
+      )
+
+      return parseStringify(bankAccount);
+    } catch (error) {
+      
     }
   }
 
@@ -146,7 +217,7 @@ export async function getLoggedInUser() {
         accountId: accountData.account_id,
         accessToken,
         fundingSourceUrl,
-        sharableId: encryptId(accountData.account_id),
+        shareableId: encryptId(accountData.account_id),
       });
 
       //revalidate path to reflect changes
