@@ -17,6 +17,7 @@ const RecentTransactions = ({
             <h2 className="recent-transactions-label">
                 Recent Transactions
             </h2>
+            {/* redirect to trans history with appwrite specific id and bank account*/}
             <Link href={`/transaction-history/?id=${appwriteItemId}`} className="view-all-btn">
                 View all
             </Link>
