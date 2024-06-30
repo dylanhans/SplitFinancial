@@ -4,10 +4,12 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({accounts}: DoughnutChartProps) => {
+const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
+  // Flatten the nested accounts array
+  const flatAccounts = accounts.flat();
 
-  const accountNames = accounts.map((a) => a.name);
-  const balances = accounts.map((a) => a.currentBalance);
+  const accountNames = flatAccounts.map((a) => a.name);
+  const balances = flatAccounts.map((a) => a.currentBalance);
 
   const data = {
     datasets: [
@@ -20,17 +22,19 @@ const DoughnutChart = ({accounts}: DoughnutChartProps) => {
     labels: accountNames
   }
 
-  return <Doughnut 
-    data={data} 
-    options={{
-      cutout: '60%',
-      plugins: {
-        legend: {
-          display: false
+  return (
+    <Doughnut 
+      data={data} 
+      options={{
+        cutout: '60%',
+        plugins: {
+          legend: {
+            display: false
+          }
         }
-      } 
-    }}
-  />
+      }}
+    />
+  );
 }
 
-export default DoughnutChart
+export default DoughnutChart;
