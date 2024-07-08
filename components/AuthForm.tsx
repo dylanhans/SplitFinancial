@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { z } from "zod"
+import { TailSpin } from 'react-loader-spinner'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
@@ -200,8 +201,8 @@ const AuthForm = ({type}:{type: string}) => {
                 label="Password"
                 placeholder="Enter your password"
             />
-            <div className=" flex flex-col gap-4">
-            <Button type="submit" className="form-btn" disabled={isLoading}>
+            <div className=" flex flex-col gap-4 ">
+            <Button type="submit" className="form-btn " disabled={isLoading}>
                 {isLoading ?(
                     <>
                         <Loader2 size={20} 

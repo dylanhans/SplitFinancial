@@ -3,15 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { navLists2 } from '../constants';
 
-export const appleImg = '/icons/apple.svg';
-export const bagImg = '/icons/bag.svg';
-export const searchImg = '/icons/search.svg';
-
 const SmallNavbar: React.FC = () => {
-  const imageStyle = {
-    cursor: 'pointer',
-    transition: 'filter 0.3s',
-  };
 
   return (
     <header className="w-full py-2 sm:px-10 px-5 flex justify-between items-center bg-black-1">

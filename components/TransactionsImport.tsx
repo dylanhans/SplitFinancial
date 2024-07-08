@@ -5,6 +5,10 @@ import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
 import { Pagination } from './Pagination'
+import PendingTransactions from './PendingTransactions'
+import { getTransactionStatus } from '@/lib/utils'
+import { Switch } from "@/components/ui/switch"
+
 
 const RecentTransactions = ({
     accounts,
@@ -21,15 +25,24 @@ const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
 const currentTransactions = transactions.slice(
     indexOfFirstTransaction, indexOfLastTransaction
 )
+
+const processingTransactions = currentTransactions.filter(transaction => {
+    const status = getTransactionStatus(new Date(transaction.date));
+    return status === 'Processing';
+  });
+
+const postedTransactions = currentTransactions.filter(transaction => {
+    const status = getTransactionStatus(new Date(transaction.date));
+    return status === 'Success';
+  });
+
   return (
     <section className="recent-transactions">
         <header className="flex items-center justify-between">
-            <h2 className="recent-transactions-label">
-                Recent Transactions
-            </h2>
             {/* redirect to trans history with appwrite specific id and bank account*/}
-            <Link href={`/transaction-history/?id=${appwriteItemId}`} className="view-all-btn">
-                View all
+            <Link href={`/lock-card/?id=${appwriteItemId}`} className="lock-card-all-btn">
+                Lock Card
+                <Switch />
             </Link>
         </header>
 
@@ -59,9 +72,17 @@ const currentTransactions = transactions.slice(
                     appwriteItemId={appwriteItemId}
                     type="full"
                 />
-
+                <p className="recent-transactions-label">
+                    Authorized Transactions <span className="text-blue-900 text-sm">ⓘ</span>
+                </p>
+                <PendingTransactions
+                    transactions={processingTransactions}
+                />
+                <p className="recent-transactions-label">
+                    Posted Transactions <span className="text-blue-900 text-sm">ⓘ</span>
+                </p>
                 <TransactionsTable 
-                    transactions={currentTransactions}
+                    transactions={postedTransactions}
                 />
 
                 {totalPages > 1 && (

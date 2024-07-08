@@ -1,3 +1,4 @@
+import HomeAdver from '@/components/HomeAdver';
 import Navbar from '@/components/NavBar';
 import SmallNavbar from '@/components/SmallNavbar';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
@@ -10,6 +11,7 @@ const Home = () => {
     <div>
       <SmallNavbar />
       <Navbar />
+      <HomeAdver />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { navLists } from '../constants';
 
-export const appleImg = '/icons/apple.svg';
+export const appleImg = '/icons/newlogo.png';
 export const bagImg = '/icons/bag.svg';
 export const searchImg = '/icons/search.svg';
 
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
       `}</style>
       <nav className="flex w-full screen-max-width">
         <div style={imageStyle} className="image-hover">
-          <Image src={appleImg} alt="Apple" width={14} height={18} />
+          <Image src={appleImg} alt="Apple" width={40} height={40} />
         </div>
 
         <div className="flex flex-1 justify-center max-sm:hidden">

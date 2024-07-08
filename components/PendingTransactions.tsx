@@ -25,8 +25,9 @@ import {
       </div> 
     )
   } 
+
   
-  const TransactionsTable = ({ transactions }: TransactionTableProps) => {
+  const PendingTransactions = ({ transactions }: TransactionTableProps) => {
     return (
       <Table>
         <TableHeader className="bg-[#fffcfc]">
@@ -44,6 +45,7 @@ import {
             const amount = formatAmount(t.amount);
             const isDebit = t.type === 'debit';
             const isCredit = t.type === 'credit';
+            const isSplit = t.type ==='debit';
   
             return (
               <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT`}>
@@ -90,5 +92,4 @@ import {
     );
   };
   
-  export default TransactionsTable;
-  
+  export default PendingTransactions

@@ -60,6 +60,14 @@
     background-color: #f9fafb; /* Replace with your desired color */
   }
   
+  .font-smallbold {
+    font-weight: 450;
+  }
+
+  .transaction-font {
+    font-size: 2rem;
+  }
+
   .text-bankGradient {
     color: #5089DD; /* Replace with your desired color */
   }
@@ -93,7 +101,7 @@
   }
 
   .text-20 {
-    @apply text-[20px] leading-[24px];
+    @apply text-[10px] leading-[24px];
   }
 
   .text-24 {
@@ -154,7 +162,7 @@
   }
 
   .recent-transactions-label {
-    @apply text-20 md:text-24 font-semibold text-gray-900;
+    @apply text-16 md:text-16 font-smallbold text-gray-900;
   }
 
   .recent-transactions-tablist {

@@ -1,5 +1,5 @@
 import HeaderBox from '@/components/HeaderBox'
-import RecentTransactions from '@/components/RecentTransactions';
+import RecentTransactions from '@/components/TransactionsImport';
 import RightSideBar from '@/components/RightSideBar';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
