@@ -10,6 +10,7 @@ import { getTransactionStatus } from '@/lib/utils'
 import { Switch } from "@/components/ui/switch"
 import CardTable from './CardTable'
 import SearchTransactions from './SearchTransactions'
+import { Separator } from "@/components/ui/separator"
 
 
 const RecentTransactions = ({
@@ -81,22 +82,27 @@ const postedTransactions = currentTransactions.filter(transaction => {
                     <p className="recent-transactions-label pl-1 pr-10">
                         Authorized Transactions <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
                     </p>
-                        <PendingTransactions
-                            transactions={processingTransactions}
-                        />
-                        <div className="empty-transactions gap-3.5">
-                            {processingTransactions.length === 0 ? (
-                        <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5">There are currently no transactions to display.</p>
-                            ) : ''}
+                    <Separator className="flex-grow border-t border-gray-300 mt-2" /> {/* Line with full width */}
+                        <div className="pending-transactions">
+                            <PendingTransactions
+                                transactions={processingTransactions}
+                            />
+                            <div className="empty-transactions gap-3.5">
+                                {processingTransactions.length === 0 ? (
+                            <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5">There are currently no transactions to display.</p>
+                                ) : ''}
+                            </div>
+                            <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
                         </div>
                     </div>
                     <div className="official-transactions">
-                        <p className="recent-transactions-label mt-10 pl-1 pr-10">
-                            Posted Transactions <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer mt-10">ⓘ</span>
+                        <p className="recent-transactions-label mt-8 pl-1 pr-10">
+                            Posted Transactions <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
                         </p>
                         <div className="searchable-transactions-posted">
                             <SearchTransactions 
                             />
+                            <Separator className="flex-grow border-t border-gray-300 mt-3" /> {/* Line with full width */}
                             <TransactionsTable 
                                 transactions={postedTransactions}
                             />

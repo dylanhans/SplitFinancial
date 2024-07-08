@@ -79,8 +79,21 @@ export function formatAmount(amount: number): string {
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
 export const removeSpecialCharacters = (value: string) => {
-  return value.replace(/[^\w\s]/gi, "");
+  // Remove special characters
+  const newValue = value.replace(/[^\w\s]/gi, "");
+
+  // Capitalize first letter if not already capitalized
+  return newValue.charAt(0).toUpperCase() + newValue.slice(1);
 };
+
+export const removePaymentCharacters = (value: string) => {
+  
+  const desiredString = "PAYMENT - THANK YOU / PAIEMENT - MERCI";
+
+  // Convert to uppercase and return
+  return desiredString.toUpperCase();
+};
+
 
 interface UrlQueryParams {
   params: string;

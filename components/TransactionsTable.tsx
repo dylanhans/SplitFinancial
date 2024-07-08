@@ -44,11 +44,11 @@ import router from "next/router";
       <Table>
         <TableHeader className="bg-[#fffcfc]">
           <TableRow>
-            <TableHead className="px-2 border-b-[2px] border-gray-500 text-blue-900">Date <span className="text-blue-900 text-sm">↓</span></TableHead>
-            <TableHead className="px-2 border-b-[2px] border-gray-500 mr-5">Transaction</TableHead>
-            <TableHead className="px-2 border-b-[2px] border-gray-500">Debit</TableHead>
-            <TableHead className="px-2 border-b-[2px] border-gray-500">Credit</TableHead>
-            <TableHead className="px-2 border-b-[2px] border-gray-500">Split ✔</TableHead>
+            <TableHead className="px-2 border-b-[2px] border-black-2 text-blue-900">Date <span className="text-blue-900 text-sm">↓</span></TableHead>
+            <TableHead className="px-2 border-b-[2px] border-black-2 mr-5">Transaction</TableHead>
+            <TableHead className="px-2 border-b-[2px] border-black-2">Debit</TableHead>
+            <TableHead className="px-2 border-b-[2px] border-black-2">Credit</TableHead>
+            <TableHead className="px-2 border-b-[2px] border-black-2">Split ✔</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -59,8 +59,7 @@ import router from "next/router";
             const isCredit = t.type === 'credit';
 
             return (
-              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT hover:bg-[#FDFEFF] cursor-pointer`} onClick={handleLogOut}
-              >
+              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT hover:bg-[#fffcfc] cursor-pointer`} onClick={handleLogOut}>
                 <TableCell className="min-w-32 pl-2 pr-10">
                   {formatDateTime(new Date(t.date)).dateOnly}
                 </TableCell>
