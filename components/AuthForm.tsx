@@ -8,6 +8,8 @@ import { TailSpin } from 'react-loader-spinner'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 import {
   Form,
   FormControl,
@@ -91,7 +93,7 @@ const AuthForm = ({type}:{type: string}) => {
   return (
     <section className="auth-form">
         <header className="flex flex-col gap-5 md:gap-8">
-            <Link href="/" className="cursor-pointer flex items-center gap-1">
+            {/*<Link href="/" className="cursor-pointer flex items-center gap-1">
             <Image
                 src="/icons/logo.svg"
                 width={34}
@@ -99,10 +101,10 @@ const AuthForm = ({type}:{type: string}) => {
                 alt="Split logo"
             />
             <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Split</h1>
-            </Link>
+            </Link>*/}
 
             <div className="flex flex-col gap-1 md:gap-3">
-                <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
+                <h1 className="text-24 lg:text-30 font-semibold text-gray-900">
                     {user
                     ? 'Link Account'
                     : type==='sign-in'
@@ -126,7 +128,7 @@ const AuthForm = ({type}:{type: string}) => {
         ): (
             <>
                 <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             
             {type==='sign-up' && (
                 <>
@@ -135,13 +137,13 @@ const AuthForm = ({type}:{type: string}) => {
                         control={form.control}
                         name="firstName"
                         label="First Name"
-                        placeholder=""
+                        placeholder="Jane"
                     />
                     <CustomInput 
                         control={form.control}
                         name="lastName"
                         label="Last Name"
-                        placeholder=""
+                        placeholder="Smith"
                     />
                     </div>
                     
@@ -201,7 +203,17 @@ const AuthForm = ({type}:{type: string}) => {
                 label="Password"
                 placeholder="Enter your password"
             />
-            <div className=" flex flex-col gap-4 ">
+            {type==='sign-up' && (
+            <>
+            <div className="flex items-center justify-center space-x-2">
+                <Checkbox id="terms" />
+                <label htmlFor="terms" className="cursor-pointer text-12">
+                    Accept <span className="underline text-12 text-blue-600">terms and conditions</span>
+                </label>
+            </div>
+            </>
+            )}
+            <div className=" flex flex-col gap-2 ">
             <Button type="submit" className="form-btn " disabled={isLoading}>
                 {isLoading ?(
                     <>
