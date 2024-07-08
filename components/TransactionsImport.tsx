@@ -82,7 +82,9 @@ const totalProcessingAmount = processingTransactions.reduce(
                     type="full"
                 />
 
-                <CardTable />
+                <CardTable 
+                    
+                />
                     <div className="official-transactions">
                         <div className="flex items-center justify-between">
                             <div className="authorized-transactions-row flex-grow">

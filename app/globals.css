@@ -59,6 +59,10 @@
   .bg-gray-25 {
     background-color: #f9fafb; /* Replace with your desired color */
   }
+
+  .custom-border-left {
+    border-left-width: 1px; /* Example border properties */
+  }
   
   .font-smallbold {
     font-weight: 450;
