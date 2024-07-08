@@ -89,9 +89,10 @@ export const removeSpecialCharacters = (value: string) => {
 export const removePaymentCharacters = (value: string) => {
   
   const desiredString = "PAYMENT - THANK YOU / PAIEMENT - MERCI";
+  const newString = desiredString.replace(" /", "\n/");
 
   // Convert to uppercase and return
-  return desiredString.toUpperCase();
+  return newString.toUpperCase();
 };
 
 

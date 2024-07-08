@@ -64,6 +64,14 @@
     font-weight: 450;
   }
 
+  .font-smallboldish{
+    font-weight: 300;
+  }
+
+  .font-smallbolder{
+    font-weight: 375
+  }
+
   .w-search{
     width: 1100px;
   }

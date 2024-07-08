@@ -40,6 +40,11 @@ const postedTransactions = currentTransactions.filter(transaction => {
     return status === 'Success';
   });
 
+const totalProcessingAmount = processingTransactions.reduce(
+    (total, transaction) => total + parseFloat(transaction.amount),
+    0
+);
+
   return (
     <section className="recent-transactions">
         <header className="flex items-center justify-between">
@@ -79,21 +84,29 @@ const postedTransactions = currentTransactions.filter(transaction => {
 
                 <CardTable />
                     <div className="official-transactions">
-                    <p className="recent-transactions-label pl-1 pr-10">
-                        Authorized Transactions <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
-                    </p>
-                    <Separator className="flex-grow border-t border-gray-300 mt-2" /> {/* Line with full width */}
-                        <div className="pending-transactions">
-                            <PendingTransactions
-                                transactions={processingTransactions}
-                            />
-                            <div className="empty-transactions gap-3.5">
-                                {processingTransactions.length === 0 ? (
-                            <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5">There are currently no transactions to display.</p>
-                                ) : ''}
+                        <div className="flex items-center justify-between">
+                            <div className="authorized-transactions-row flex-grow">
+                                <p className="recent-transactions-label pl-1 pr-10">
+                                    Authorized Transactions{' '}
+                                    <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
+                                </p>
                             </div>
-                            <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
+                                <p className="balance-label text-sm font-smallboldish pl-1 pr-3 mr-0 ml-auto">
+                                Total: <span className="font-smallbolder">-${totalProcessingAmount.toFixed(2).toString()}</span>
+                                </p>
                         </div>
+                        <Separator className="flex-grow border-t border-gray-300 mt-2" /> {/* Line with full width */}
+                            <div className="pending-transactions">
+                                <PendingTransactions
+                                    transactions={processingTransactions}
+                                />
+                                <div className="empty-transactions gap-3.5">
+                                    {processingTransactions.length === 0 ? (
+                                <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5">There are currently no transactions to display.</p>
+                                    ) : ''}
+                                </div>
+                                <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
+                            </div>
                     </div>
                     <div className="official-transactions">
                         <p className="recent-transactions-label mt-8 pl-1 pr-10">
