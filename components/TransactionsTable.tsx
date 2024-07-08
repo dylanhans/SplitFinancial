@@ -1,3 +1,4 @@
+'use client'
 import {
     Table,
     TableBody,
@@ -7,10 +8,17 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+  import TransactionSheet from "./TransactionSheet" 
   import { transactionCategoryStyles } from "@/constants"
   import { cn, formatAmount, formatDateTime, getTransactionStatus, removeSpecialCharacters } from "@/lib/utils"
+  import { useRouter } from 'next/navigation';
+  import { logoutAccount } from '@/lib/actions/user.actions'
+import router from "next/router";
+
   
   const CategoryBadge = ({ category }: CategoryBadgeProps) => {
+    const router = useRouter();
+
     const {
       borderColor,
       backgroundColor,
@@ -27,6 +35,11 @@ import {
   } 
   
   const TransactionsTable = ({ transactions }: TransactionTableProps) => {
+    const handleLogOut = async () =>{
+      const loggedOut = await logoutAccount();
+
+      if(loggedOut) router.push('/sign-in')
+   }
     return (
       <Table>
         <TableHeader className="bg-[#fffcfc]">
@@ -44,9 +57,10 @@ import {
             const amount = formatAmount(t.amount);
             const isDebit = t.type === 'debit';
             const isCredit = t.type === 'credit';
-  
+
             return (
-              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT`}>
+              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT hover:bg-[#FDFEFF] cursor-pointer`} onClick={handleLogOut}
+              >
                 <TableCell className="min-w-32 pl-2 pr-10">
                   {formatDateTime(new Date(t.date)).dateOnly}
                 </TableCell>

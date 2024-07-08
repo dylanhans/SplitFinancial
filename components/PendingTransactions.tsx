@@ -7,6 +7,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+  import TransactionSheet from "./TransactionSheet" 
   import { transactionCategoryStyles } from "@/constants"
   import { cn, formatAmount, formatDateTime, getTransactionStatus, removeSpecialCharacters } from "@/lib/utils"
   
@@ -48,7 +49,7 @@ import {
             const isSplit = t.type ==='debit';
   
             return (
-              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT`}>
+              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT cursor-pointer hover:bg-[#FDFEFF]`}>
                 <TableCell className="min-w-32 pl-2 pr-10">
                   {formatDateTime(new Date(t.date)).dateOnly}
                 </TableCell>
