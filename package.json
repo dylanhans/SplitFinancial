@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "@react-email/components": "^0.0.21",
     "@sentry/nextjs": "^8.9.2",
     "chart.js": "^4.4.3",

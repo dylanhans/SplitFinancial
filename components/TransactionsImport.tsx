@@ -11,7 +11,12 @@ import { Switch } from "@/components/ui/switch"
 import CardTable from './CardTable'
 import SearchTransactions from './SearchTransactions'
 import { Separator } from "@/components/ui/separator"
-
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
 
 const RecentTransactions = ({
     accounts,
@@ -88,14 +93,25 @@ const totalProcessingAmount = processingTransactions.reduce(
                     <div className="official-transactions">
                         <div className="flex items-center justify-between">
                             <div className="authorized-transactions-row flex-grow">
-                                <p className="recent-transactions-label pl-1 pr-10">
-                                    Authorized Transactions{' '}
-                                    <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
+                                <TooltipProvider>
+                                    <p className="recent-transactions-label mt-8 pl-1 pr-10">
+                                        Authorized Transactions{' '}
+                                        <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
+                                            <Tooltip>
+                                                <TooltipTrigger>ⓘ</TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Processing</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </span>
+                                    </p>
+                                </TooltipProvider>
+                            </div>
+                            <div className="ml-auto">
+                                <p className="balance-label text-sm font-smallboldish pl-1 pr-3 mt-8">
+                                    Total: <span className="font-smallbolder">-${totalProcessingAmount.toFixed(2)}</span>
                                 </p>
                             </div>
-                                <p className="balance-label text-sm font-smallboldish pl-1 pr-3 mr-0 ml-auto">
-                                Total: <span className="font-smallbolder">-${totalProcessingAmount.toFixed(2).toString()}</span>
-                                </p>
                         </div>
                         <Separator className="flex-grow border-t border-gray-300 mt-2" /> {/* Line with full width */}
                             <div className="pending-transactions">
@@ -111,9 +127,19 @@ const totalProcessingAmount = processingTransactions.reduce(
                             </div>
                     </div>
                     <div className="official-transactions">
+                    <TooltipProvider>
                         <p className="recent-transactions-label mt-8 pl-1 pr-10">
-                            Posted Transactions <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">ⓘ</span>
+                            Posted Transactions{' '}
+                            <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
+                            <Tooltip>
+                                <TooltipTrigger>ⓘ</TooltipTrigger>
+                                <TooltipContent>
+                                <p>Succeeded</p>
+                                </TooltipContent>
+                            </Tooltip>
+                            </span>
                         </p>
+                    </TooltipProvider>
                         <div className="searchable-transactions-posted">
                             <SearchTransactions 
                             />

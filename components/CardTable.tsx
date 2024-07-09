@@ -68,13 +68,13 @@ const CardTable = () => {
       <ResizablePanelGroup direction="horizontal" className="flex w-full mt-3 bg-white">
         <ResizablePanel defaultSize={15} style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)' }}>
           <div className="flex h-[150px] items-center justify-center p-6">
-            <span className="font-semibold">Credit Score</span>
+            <span className="font-semibold">Statements</span>
           </div>
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={15} className="custom-border-left border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)' }}>
           <div className="flex h-[150px] items-center justify-center p-6">
-            <span className="font-semibold">Statements</span>
+            <span className="font-semibold">Credit Score</span>
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
