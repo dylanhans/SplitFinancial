@@ -1,4 +1,5 @@
 import Navbar from '@/components/bank/NavBar';
+import { Canadians } from '@/components/home/Canadians';
 import { Credit } from '@/components/home/Credit';
 import { CreditSecured } from '@/components/home/CreditSecured';
 import { PlatformSection } from '@/components/home/PlatformSection';
@@ -17,7 +18,7 @@ const Home = () => {
       <PlatformSection />
       <Superpowers />
       <Credit />
-      {/* <Canadians /> */}
+      <Canadians />
     </div>
   )
 }
