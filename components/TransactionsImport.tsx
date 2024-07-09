@@ -52,14 +52,6 @@ const totalProcessingAmount = processingTransactions.reduce(
 
   return (
     <section className="recent-transactions">
-        <header className="flex items-center justify-between">
-            {/* redirect to trans history with appwrite specific id and bank account*/}
-            <Link href={`/lock-card/?id=${appwriteItemId}`} className="lock-card-all-btn">
-                Lock Card
-                <Switch />
-            </Link>
-        </header>
-
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist">
                 {/* as many triggers as bank accounts, map over each account of type Account*/}
@@ -81,15 +73,16 @@ const totalProcessingAmount = processingTransactions.reduce(
                 key={account.id}
                 className="space-y-4"
             >
-                <BankInfo 
-                    account={account}
-                    appwriteItemId={appwriteItemId}
-                    type="full"
-                />
-
-                <CardTable 
+            <header className="flex items-center justify-between">
+            {/* redirect to trans history with appwrite specific id and bank account*/}
+            <Link href={`/lock-card/?id=${appwriteItemId}`} className="lock-card-all-btn">
+                Lock Card
+                <Switch />
+            </Link>
+            </header>
+            <CardTable 
                     
-                />
+            />
                     <div className="official-transactions mt-0">
                         <div className="flex items-center justify-between">
                             <div className="authorized-transactions-row flex-grow">

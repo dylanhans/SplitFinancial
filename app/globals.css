@@ -68,6 +68,14 @@
     font-weight: 450;
   }
 
+  .mt-own{
+    margin-top: 0.1rem;
+  }
+  .font-littlebold{
+    font-weight: 300;
+    font-size: 11px;
+  }
+
   .balance-text-13{
     font-size: 15px;
   }

@@ -40,7 +40,7 @@ const CardTable = () => {
               <TooltipProvider>
                 <div className="balance-text-13 mt-3 ml-4 font-smallboldish">
                   Current Balance{' '}
-                  <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
+                  <span className="text-blue-900 text-sm cursor-pointer">
                     <Tooltip>
                       <TooltipTrigger>ⓘ</TooltipTrigger>
                       <TooltipContent>
@@ -72,7 +72,7 @@ const CardTable = () => {
             <div className="flex flex-col h-full items-start justify-start border-l border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
             <TooltipProvider>
               <span className="balance-text-13 mt-3 ml-4 font-smallboldish">Available Credit {' '}
-                <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
+                <span className="text-blue-900 text-sm cursor-pointer">
                   <Tooltip>
                     <TooltipTrigger>ⓘ</TooltipTrigger>
                       <TooltipContent>
@@ -98,14 +98,23 @@ const CardTable = () => {
 
 
         <ResizablePanel defaultSize={10} style={{ height: '100%'}} className="border-l border-gray-200">
-          <div className="flex h-full items-center justify-center p-6">
-            <span className="font-semibold">Last Payment</span>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            {/* First Row */}
+            <div className="flex flex-col h-full items-start justify-start border-l border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
+              <span className="balance-text-13 mt-3 ml-4 font-smallboldish">Last Payment {' '} </span>
+            <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
+                <AnimatedCounter amount={(35.74)} />
+            </span>
+            <span className="mt-1 ml-4 font-littlebold">
+                on Jul 4, 2024
+            </span>
           </div>
+        </div>
         </ResizablePanel>
       </ResizablePanelGroup>
 
       {/* Spacing */}
-      <ResizablePanelGroup direction="horizontal" className="flex w-full mt-1 bg-white">
+      <ResizablePanelGroup direction="horizontal" className="flex w-full mt-own bg-white">
       </ResizablePanelGroup>
       
       {/* Third Row with 2 columns */}
@@ -113,7 +122,7 @@ const CardTable = () => {
         <ResizablePanel defaultSize={15} style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)' }}>
         <div className="flex">
           {/* First column */}
-          <div className="flex h-[150px] items-start justify-start ml-4 mt-2">
+          <div className="flex h-[150px] items-start justify-start ml-4 mt-1">
             <ul className="flex flex-col gap-4">
               <li>
                 <div>
@@ -129,7 +138,7 @@ const CardTable = () => {
           </div>
 
           {/* Second column */}
-          <div className="flex h-[150px] items-start justify-start ml-40 mt-2">
+          <div className="flex h-[150px] items-start justify-start ml-40 mt-1">
             <ul className="flex flex-col gap-4">
               <li>
                 <div>
@@ -157,7 +166,7 @@ const CardTable = () => {
 
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel defaultSize={15} className="custom-border-left border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)' }}>
+        <ResizablePanel defaultSize={15} className="custom-border-left border-gray-200" style={{ height: '100%'}}>
           <div className="flex h-[150px] items-center justify-center p-6">
             <span className="font-semibold">Credit Score</span>
           </div>
