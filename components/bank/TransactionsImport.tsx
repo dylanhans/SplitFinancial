@@ -113,7 +113,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                                 />
                                 <div className="empty-transactions gap-3.5">
                                     {processingTransactions.length === 0 ? (
-                                <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5">There are currently no transactions to display.</p>
+                                <p className="pl-2 pr-10 text-sm text-[#242424] mt-2.5 mb-2.5">There are currently no transactions to display.</p>
                                     ) : ''}
                                 </div>
                                 <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}

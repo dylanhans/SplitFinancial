@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import Image from 'next/image';
-import { navLists2 } from '../constants';
+import { navLists2 } from '../../constants';
 
 const SmallNavbar: React.FC = () => {
 

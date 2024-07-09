@@ -1,31 +1,38 @@
-import MobileNav from "@/components/MobileNav";
-import Sidebar from "@/components/Sidebar";
+import MobileNav from "@/components/bank/MobileNav";
+import Sidebar from "@/components/bank/Sidebar";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default async function RootLayout({
   children,
+  sidebarChildren,
 }: Readonly<{
   children: React.ReactNode;
+  sidebarChildren: React.ReactNode;
 }>) {
   const loggedIn = await getLoggedInUser();
 
   if(!loggedIn) redirect('/sign-in')
 
-  return (
-    <main className="flex h-screen w-full font-inter">
-        <Sidebar user={loggedIn}/>
-
-        <div className="flex size-full flex-col">
+    return (
+      <main className="flex h-screen w-[1250px] ml-[250px] font-inter">
+        {/* Main content */}
+        <div className="flex size-full flex-col w-3/4">
           <div className="root-layout">
-            <Image src="/icons/logo.svg/" width={30} height={30} alt="logo"/>
+            <Image src="/icons/logo.svg/" width={30} height={30} alt="logo" />
             <div>
-              <MobileNav user={loggedIn}/>
+              <MobileNav user={loggedIn} />
             </div>
           </div>
           {children}
         </div>
-    </main>
-  );
-}
+  
+        {/* New column to the right */}
+        <div className="flex flex-col w-1/4">
+          <p>This is the new column to the right.</p>
+          {sidebarChildren}
+        </div>
+      </main>
+    );
+  }

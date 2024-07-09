@@ -1,0 +1,44 @@
+/* ------------------------------ Font-Family CSS ---------------------------*/
+
+@font-face {
+    font-family: 'Commons-Bold';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ Bold.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-ExtraBold';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ ExtraBold.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-Light';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ Light.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-Medium';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ Medium.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-Regular';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ Regular.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-UltraLight';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ ExtraLight.otf');
+  }
+  
+  @font-face {
+    font-family: 'Commons-Semibold';
+    src: url('../assets/fonts/tt-commons/TT\ Commons\ DemiBold.otf');
+  }
+  .tt-common {
+    font-family: 'Commons-Regular' !important;
+  }
+  
+  body {
+    font-family: 'Commons-Regular' !important;
+  }
+  

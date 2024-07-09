@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import Image from 'next/image';
-import { navLists } from '../constants';
+import { navLists } from '../../constants';
 
 export const appleImg = '/icons/newlogo.png';
 export const bagImg = '/icons/bag.svg';

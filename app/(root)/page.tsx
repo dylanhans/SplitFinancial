@@ -1,7 +1,7 @@
-import HeaderBox from '@/components/HeaderBox'
-import RecentTransactions from '@/components/TransactionsImport';
-import RightSideBar from '@/components/RightSideBar';
-import TotalBalanceBox from '@/components/TotalBalanceBox';
+import HeaderBox from '@/components/bank/HeaderBox'
+import RecentTransactions from '@/components/bank/TransactionsImport';
+import RightSideBar from '@/components/bank/RightSideBar';
+import TotalBalanceBox from '@/components/bank/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import { logoutAccount } from '@/lib/actions/user.actions'
@@ -49,12 +49,12 @@ const Home = async({ searchParams: {id, page}}: SearchParamProps) => {
         />
       </div>
 
-      <RightSideBar
+      {/*<RightSideBar
         user={loggedIn}
         transactions={[account?.transactions]}
         banks={accountsData?.slice(0,2)}
 
-      />
+        />*/}
     </section>
   )
 }

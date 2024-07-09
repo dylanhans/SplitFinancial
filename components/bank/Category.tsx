@@ -3,7 +3,7 @@ import Image from "next/image";
 import { topCategoryStyles } from "@/constants";
 import { cn } from "@/lib/utils";
 
-import { Progress } from "./ui/progress";
+import { Progress } from "../ui/progress";
 
 const Category = ({ category }: CategoryProps) => {
   const {
