@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import AnimatedCounter from './AnimatedCounter';
 
 const CardTable = () => {
   return (
@@ -35,23 +36,26 @@ const CardTable = () => {
         <ResizablePanel defaultSize={10} style={{ height: '100%'}}>
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             {/* First Row */}
-            <div className="flex h-full items-start justify-start" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
-            <TooltipProvider>
-              <span className="balance-text-13 mt-3 ml-4 font-smallboldish">Current Balance {' '}
-                <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
-                  <Tooltip>
-                    <TooltipTrigger>ⓘ</TooltipTrigger>
+            <div className="flex flex-col h-full items-start justify-start" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)' }}>
+              <TooltipProvider>
+                <div className="balance-text-13 mt-3 ml-4 font-smallboldish">
+                  Current Balance{' '}
+                  <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
+                    <Tooltip>
+                      <TooltipTrigger>ⓘ</TooltipTrigger>
                       <TooltipContent>
-                        <p className="text-xs">The Current Balance is the total amount owing on your credit card. </p>
+                        <p className="text-xs">The Current Balance is the total amount owing on your credit card.</p>
                         <p className="text-xs">It includes all of your Posted Transactions plus any fees and interest.</p>
                         <p className="text-xs">Your Current Balance does not include Authorized Transactions, which may take a few days to process.</p>
                       </TooltipContent>
-                  </Tooltip>
-                </span>
+                    </Tooltip>
+                  </span>
+                </div>
+              </TooltipProvider>
+              <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
+                <AnimatedCounter amount={320} />
               </span>
-            </TooltipProvider>
             </div>
-
             {/* Second Row (if needed) */}
             <div className="flex h-[35px] items-center justify-start p-4 ml-0 mr-auto mt-1">
               {/* Content for the second row */}
@@ -65,7 +69,7 @@ const CardTable = () => {
         <ResizablePanel defaultSize={10} style={{ height: '100%'}}>
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             {/* First Row */}
-            <div className="flex h-full items-start justify-start border-l border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
+            <div className="flex flex-col h-full items-start justify-start border-l border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
             <TooltipProvider>
               <span className="balance-text-13 mt-3 ml-4 font-smallboldish">Available Credit {' '}
                 <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
@@ -79,6 +83,9 @@ const CardTable = () => {
                 </span>
               </span>
             </TooltipProvider>
+            <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
+                <AnimatedCounter amount={(15000-320)} />
+              </span>
           </div>
             {/* Second Row (if needed) */}
             <div className="flex h-[40px] items-start justify-start p-4 ml-0 mr-auto border-t border-gray-200">
