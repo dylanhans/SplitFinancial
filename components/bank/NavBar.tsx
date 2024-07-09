@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React, { useState } from 'react';
-//import Drawer from '../ui/Drawer';
+import Drawer from '@/components/ui/drawer';
 
 interface NavItem {
   label: string;
@@ -149,7 +149,7 @@ export const NavBar: React.FC = () => {
       {/* hide on scroll down  */}
       <div className="ease-in-out transition-all duration-500 max-h-0 max-h-[10rem] delay-500">
         <div className="top cursor-pointer relative py-[12px] px-[24px] bg-[#eacfb3] max-h duration gap-[32px] flex items-center justify-between w-full ">
-          <Image src="/assets/cebl-logo.svg" height={34} width={24} alt="logo" />
+          <Image src="/icons/cebl-logo.svg" height={34} width={24} alt="logo" />
           <span className="text-sm w-full leading-5 font-normal not-italic text-black text-center">
             <span className="font-bold underline">Enter for your chance to win</span> the CEBL Championship Sweepstakes
             powered by Neo
@@ -239,7 +239,7 @@ export const NavBar: React.FC = () => {
                             openId === item.id ? 'rotate-180' : 'rotate-0'
                           }`}
                         >
-                          <img src="/assets/down.png" alt="" />
+                          <img src="/icons/down.png" alt="" />
                         </div>
                       </div>
                     </button>
@@ -319,7 +319,7 @@ export const NavBar: React.FC = () => {
                     </svg>
                     <span className="inline-block text-base font-medium">{selectedLanguage}</span>
                     <img
-                      src="/assets/down.png"
+                      src="/icons/down.png"
                       alt=""
                       className={`transform transition-transform ${dropdown ? 'rotate-180' : 'rotate-0'}`}
                     />
@@ -376,7 +376,7 @@ export const NavBar: React.FC = () => {
                 <span className="block absolute h-0.5 w-5 bg-current transition duration-150 ease-in-out translate-y-1.5"></span>
               </div>
             </button>
-            {/*<Drawer isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />*/}
+            <Drawer isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
           </div>
         </div>
       </div>
