@@ -157,7 +157,7 @@ export const NavBar: React.FC = () => {
         </div>
       </div>
       {/* hide on scroll down  */}
-
+          
       <div className="hidden lg:block">
         <nav className="relative px-0 pt-2 text-white lg:bg-[#1b1b1b] lg:px-6 lg:py-1">
           <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
@@ -337,9 +337,9 @@ export const NavBar: React.FC = () => {
                         </a>
                         <a
                           className="text-subduedInverse w-full rounded bg-transparent py-3 text-left text-lg lg:px-5 lg:text-base lg:hover:bg-[#262626] cursor-pointer"
-                          onClick={() => handleSelectLanguage('Spanish')}
+                          onClick={() => handleSelectLanguage('French')}
                         >
-                          Spanish
+                          French
                         </a>
                         {/* Add more languages here if needed */}
                       </div>
@@ -347,13 +347,18 @@ export const NavBar: React.FC = () => {
                   </div>
                 )}
               </div>
+
               <div className="flex items-stretch gap-xs text-center lg:hidden">
+                {/* handle signin*/}
                 <div className="flex-1 rounded border-2 border-web-borderOnBlack py-5 text-center text-xl font-bold">
                   Log In
                 </div>
+
+                {/* handle signup */}
                 <div className="flex-1 rounded border-2 border-web-borderOnBlack bg-surfaceDefault py-5 text-center text-xl font-bold text-contentDefault">
                   Get Started
                 </div>
+
               </div>
               <div className="hidden lg:block">
                 <div className="bg-transparent cursor-pointer text-contentDefaultInverse text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">

@@ -17,7 +17,7 @@ export const CreditSecured = () => {
               data-aos="fade-right"
               data-aos-duration="1000"
             >
-              <h1 className="text-4xl md:text-[3.7rem] font-semibold not-italic">
+              <h1 className="text-4xl md:text-[3.7rem] font-semibold not-italic" style={{ lineHeight: '1' }}>
                 Voted Canada’s Best Secured Credit Card¹
               </h1>
             </div>

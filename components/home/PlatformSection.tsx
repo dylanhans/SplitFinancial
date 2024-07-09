@@ -48,10 +48,10 @@ export const PlatformSection = () => {
                 }}
               >
                 <div className="flex flex-col p-[32px] ">
-                  <span className="text-3xl leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
+                  <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
                     Spend
                   </span>
-                  <span className="text-xl leading-7 font-normal text-contentOnColor not-italic">
+                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
                     Spend, track, and move your money with ease.
                   </span>
                 </div>
@@ -64,10 +64,10 @@ export const PlatformSection = () => {
                 }}
               >
                 <div className="flex flex-col p-[32px] ">
-                  <span className="text-3xl leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
+                  <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
                     Save
                   </span>
-                  <span className="text-xl leading-7 font-normal text-contentOnColor not-italic">
+                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
                     Grow your money and reach your goals with high-interest savings.
                   </span>
                 </div>
@@ -80,10 +80,10 @@ export const PlatformSection = () => {
                 }}
               >
                 <div className="flex flex-col p-[32px] ">
-                  <span className="text-3xl leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
+                  <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
                     Earn
                   </span>
-                  <span className="text-xl leading-7 font-normal text-contentOnColor not-italic">
+                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
                     Earn instant, unlimited rewards on all your spending.
                   </span>
                 </div>

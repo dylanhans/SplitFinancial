@@ -6,6 +6,7 @@ import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import { logoutAccount } from '@/lib/actions/user.actions'
 import React from 'react'
+import NavBar from '@/components/bank/NavBar';
 
 const Home = async({ searchParams: {id, page}}: SearchParamProps) => {
 
