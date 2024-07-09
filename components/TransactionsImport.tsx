@@ -90,7 +90,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                 <CardTable 
                     
                 />
-                    <div className="official-transactions">
+                    <div className="official-transactions mt-0">
                         <div className="flex items-center justify-between">
                             <div className="authorized-transactions-row flex-grow">
                                 <TooltipProvider>
@@ -100,7 +100,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                                             <Tooltip>
                                                 <TooltipTrigger>ⓘ</TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>Processing</p>
+                                                    <p className="text-xs">Authorized Transactions are transactions that still need to be settled by a retailer or service provider.</p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </span>
@@ -134,7 +134,8 @@ const totalProcessingAmount = processingTransactions.reduce(
                             <Tooltip>
                                 <TooltipTrigger>ⓘ</TooltipTrigger>
                                 <TooltipContent>
-                                <p>Succeeded</p>
+                                <p className="text-xs">Posted Transactions are completed purchases, payments or transfers that have been settled and posted to your account.</p>
+                                <p className="text-xs"> Transactions are typically posted 2-3 days after they have been authorized, and may reflect adjustments to the amount initially authorized. </p>
                                 </TooltipContent>
                             </Tooltip>
                             </span>

@@ -68,6 +68,19 @@
     font-weight: 450;
   }
 
+  .balance-text-13{
+    font-size: 15px;
+  }
+
+  .other-text-13{
+    font-size: 13px;
+  }
+
+
+  .hover-card-trigger:hover {
+    text-decoration: underline;
+  }
+
   .font-smallboldish{
     font-weight: 300;
   }
