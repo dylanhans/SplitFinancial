@@ -21,18 +21,30 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
     // get banks from db
     const banks = await getBanks({ userId });
 
+    if (!banks) {
+      throw new Error('Banks not found'); // Example error handling
+    }
+
     const accounts = await Promise.all(
-      banks?.map(async (bank: Bank) => {
+      banks.map(async (bank: Bank) => {
         // get each account info from plaid
         const accountsResponse = await plaidClient.accountsGet({
           access_token: bank.accessToken,
         });
         const accountData = accountsResponse.data.accounts[0];
 
+        if (!accountData) {
+          throw new Error('Account data not found'); // Example error handling
+        }
+
         // get institution info from plaid
         const institution = await getInstitution({
           institutionId: accountsResponse.data.item.institution_id!,
         });
+
+        if (!institution) {
+          throw new Error('Institution data not found'); // Example error handling
+        }
 
         const account = {
           id: accountData.account_id,
@@ -58,8 +70,13 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
     }, 0);
 
     return parseStringify({ data: accounts, totalBanks, totalCurrentBalance });
-  } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error("An error occurred while getting the accounts:", error.message);
+    } else {
+      console.error("An unexpected error occurred:", error);
+    }
+    throw error; // Optionally rethrow the error for upstream handling
   }
 };
 

@@ -11,14 +11,14 @@ export const CreditSecured = () => {
     <section>
       <div className="bg-[#000000]">
         <div className="grid grid-cols-1 bg-black md:grid-cols-2 md:items-end overflow-hidden">
-          <div className="flex flex-col text-white pt-[80px] pb-[40px] px-6 justify-center md:max-w-[520px] md:m-auto lg:max-w-[540px] lg:mr-[40px] lg:ml-auto">
+          <div className="flex flex-col text-white pt-[60px] pb-[40px] px-6 justify-center md:max-w-[520px] md:m-auto lg:max-w-[540px] lg:mr-[40px] lg:ml-auto">
             <div
               className="ease-out transition-[transform opacity] duration-1000 opacity-100"
               data-aos="fade-right"
               data-aos-duration="1000"
             >
               <h1 className="text-4xl md:text-[3.7rem] font-semibold not-italic" style={{ lineHeight: '1' }}>
-                Voted Canada’s Best Secured Credit Card¹
+              The Leading Financing Credit Card Option¹
               </h1>
             </div>
             <div className="flex space-y-xs mt-[16px] flex-col" data-aos="fade-right" data-aos-duration="1000">

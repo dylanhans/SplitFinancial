@@ -92,7 +92,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                                         <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
                                             <Tooltip>
                                                 <TooltipTrigger>ⓘ</TooltipTrigger>
-                                                <TooltipContent>
+                                                <TooltipContent className="p-3 m-2 shadow-sm bg-white" style={{ marginLeft: '200px', position: 'relative', left: '10px' }}>
                                                     <p className="text-xs">Authorized Transactions are transactions that still need to be settled by a retailer or service provider.</p>
                                                 </TooltipContent>
                                             </Tooltip>
@@ -126,7 +126,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                             <span className="text-blue-900 text-sm hover:bg-[#FDFEFF] cursor-pointer">
                             <Tooltip>
                                 <TooltipTrigger>ⓘ</TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent className="p-3 m-2 shadow-sm bg-white" style={{ marginLeft: '275px', position: 'relative', left: '10px' }}>
                                 <p className="text-xs">Posted Transactions are completed purchases, payments or transfers that have been settled and posted to your account.</p>
                                 <p className="text-xs"> Transactions are typically posted 2-3 days after they have been authorized, and may reflect adjustments to the amount initially authorized. </p>
                                 </TooltipContent>

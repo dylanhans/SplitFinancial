@@ -43,7 +43,7 @@ const CardTable = () => {
                   <span className="text-blue-900 text-sm cursor-pointer">
                     <Tooltip>
                       <TooltipTrigger>ⓘ</TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="p-3 m-2 shadow-sm bg-white">
                         <p className="text-xs">The Current Balance is the total amount owing on your credit card.</p>
                         <p className="text-xs">It includes all of your Posted Transactions plus any fees and interest.</p>
                         <p className="text-xs">Your Current Balance does not include Authorized Transactions, which may take a few days to process.</p>
@@ -75,7 +75,7 @@ const CardTable = () => {
                 <span className="text-blue-900 text-sm cursor-pointer">
                   <Tooltip>
                     <TooltipTrigger>ⓘ</TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="p-3 m-2 shadow-sm bg-white">
                         <p className="text-xs">Your Credit Limit – (Current Balance + Authorized Transactions) = Your Available Credit</p>
                         <p className="text-xs">We may reduce the amount of credit available to you in certain circumstances, such as when payment is past due.</p>
                       </TooltipContent>

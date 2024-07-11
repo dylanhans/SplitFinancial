@@ -11,9 +11,9 @@ export const PlatformSection = () => {
                 An AI-enabled platform for your money
               </span>
               <span className="text-base leading-7 text-black md:text-lg font-normal not-italic">
-                Everything you need to make your money work smarter.
+                Finance to make your money work smarter.
               </span>
-              <div className="mt-2">
+              <div className="mt-3">
                 <a
                   className="bg-[#006aff] text-[#fff] text-base px-5 py-3 rounded font-semibold focus:ring inline-block w-auto"
                   //   target="_blank"
@@ -49,10 +49,10 @@ export const PlatformSection = () => {
               >
                 <div className="flex flex-col p-[32px] ">
                   <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
-                    Spend
+                    Save
                   </span>
-                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
-                    Spend, track, and move your money with ease.
+                  <span className="text-xl text-white leading-7 mt-1 font-normal text-contentOnColor not-italic">
+                    Grow your money and reach your goals with high-interest savings.
                   </span>
                 </div>
               </a>
@@ -65,10 +65,10 @@ export const PlatformSection = () => {
               >
                 <div className="flex flex-col p-[32px] ">
                   <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
-                    Save
+                    Finance
                   </span>
-                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
-                    Grow your money and reach your goals with high-interest savings.
+                  <span className="text-xl text-white leading-7 mt-1 font-normal text-contentOnColor not-italic">
+                    Tap and choose payment plans, with no interest
                   </span>
                 </div>
               </a>
@@ -83,8 +83,8 @@ export const PlatformSection = () => {
                   <span className="text-3xl text-white leading-10 md:text-4xl font-semibold text-contentOnColor not-italic pb-xs">
                     Earn
                   </span>
-                  <span className="text-xl text-white leading-7 font-normal text-contentOnColor not-italic">
-                    Earn instant, unlimited rewards on all your spending.
+                  <span className="text-xl text-white leading-7 mt-1 font-normal text-contentOnColor not-italic">
+                    Build credit, earn unlimited rewards on all your spending.
                   </span>
                 </div>
               </a>

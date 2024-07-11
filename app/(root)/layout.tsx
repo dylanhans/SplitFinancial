@@ -1,3 +1,4 @@
+import AlternateNavBar from "@/components/bank/AlternateNavBar";
 import MobileNav from "@/components/bank/MobileNav";
 import NavBar from "@/components/bank/NavBar";
 import Sidebar from "@/components/bank/Sidebar";
@@ -18,7 +19,7 @@ export default async function RootLayout({
 
     return (
       <main className="main-screen">
-        <NavBar />
+        <AlternateNavBar />
         <div className="flex h-screen w-[1250px] ml-[250px] font-inter">
           {/* Main content */}
           <div className="flex size-full flex-col w-3/4">
