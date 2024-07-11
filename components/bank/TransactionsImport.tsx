@@ -73,13 +73,16 @@ const totalProcessingAmount = processingTransactions.reduce(
                 key={account.id}
                 className="space-y-4"
             >
-            <header className="flex items-center justify-between">
-            {/* redirect to trans history with appwrite specific id and bank account*/}
-            <Link href={`/lock-card/?id=${appwriteItemId}`} className="lock-card-all-btn">
-                Lock Card
-                <Switch />
-            </Link>
+            <div className="lock-card">
+            <header className="flex items-center justify-between w-full h-full">
+                {/* redirect to trans history with appwrite specific id and bank account */}
+                <div className="flex-grow"></div>
+                <Link href={``} className="flex items-center lock-card-all-btn">
+                    <span className="other-text-13 font-smallboldish pt-1">Lock Card</span>
+                    <Switch className="bg-blue-900 border-white border-1 ml-4 shadow-sm" />
+                </Link>
             </header>
+            </div>
             <CardTable 
                     
             />

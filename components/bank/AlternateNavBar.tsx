@@ -1,7 +1,9 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Drawer from '@/components/ui/drawer';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 
 interface NavItem {
   label: string;
@@ -112,6 +114,43 @@ export const AlternateNavBar: React.FC = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState('account');
+  const [previousTab, setPreviousTab] = useState<string>('account');
+  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
+  const tabsRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    setPreviousTab(activeTab);
+  }, [activeTab]);
+
+  useEffect(() => {
+    const updateIndicator = () => {
+      const activeTabElement = tabsRef.current?.querySelector(`[data-value="${activeTab}"]`);
+      if (activeTabElement) {
+        const { offsetLeft, clientWidth } = activeTabElement as HTMLElement;
+        // Decrease width by 20 pixels (adjust as needed)
+        setIndicatorStyle({
+          left: offsetLeft,
+          width: clientWidth,
+        });
+      }
+    };
+
+    updateIndicator(); // Initial update
+
+  }, [activeTab]);
+
+  const handleTabClick = (value: string) => {
+    setActiveTab(value);
+    const activeTabElement = tabsRef.current?.querySelector(`[data-value="${value}"]`);
+    if (activeTabElement) {
+      const { offsetLeft, clientWidth } = activeTabElement as HTMLElement;
+      setIndicatorStyle({
+        left: offsetLeft,
+        width: clientWidth,
+      });
+    }
+  };
 
   const handleClick = (id: string) => {
     setOpenId(openId === id ? null : id);
@@ -130,17 +169,19 @@ export const AlternateNavBar: React.FC = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  
+
   return (
     <div className="relative">
       <div className="hidden lg:block">
-      <nav className="fixed top-0 left-0 right-0 z-50 px-0 text-white bg-[#0f0f0f] lg:bg-[#1b1b1b] lg:px-6 lg:py-1">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-0 text-white bg-[#232222] lg:bg-[#232222] lg:px-6 lg:py-1">
           <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
             {/* Removed Personal, Partners, and Youth <18 sections */}
           </ul>
         </nav>
       </div>
       {/* fixed on top when scroll down */}
-      <div className="z-20 py-6 w-full text-white lg:py-5 lg:px-6 transition ease-in-out duration-500 bg-[#1b1b1b]">
+      <div className="z-20 py-6 w-full text-white lg:py-5 lg:px-6 transition ease-in-out duration-500 bg-[#232222]">
           <div className="relative flex items-center justify-between space-x-xxxl px-6 lg:mx-auto lg:max-w-7xl lg:px-0">
             <div className="flex items-center space-x-xxl">
               <a
@@ -157,7 +198,7 @@ export const AlternateNavBar: React.FC = () => {
                   data-testid="split-logo"
                 />
               </a>
-              <nav className="relative hidden md:ml-7 gap-4 lg:flex lg:items-center">
+              <nav className="relative hidden md:ml-8 gap-4 lg:flex lg:items-center">
                 {navItems.map((item) => (
                   <div key={item.id} data-headlessui-state="" className="relative">
                     <button
@@ -320,47 +361,83 @@ export const AlternateNavBar: React.FC = () => {
             <Drawer isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
           </div>
         </div>
-        <div className="ease-in-out transition-all duration-500 max-h-0 max-h-[10rem] delay-500">
+        <div className="ease-in-out transition-all duration-500 max-h-[10rem] delay-500">
         {/* hide on scroll down  */}
             
-        <div className="hidden lg:block border-b-gray-25 border-t">
-          <nav className="relative px-0 pt-2 text-white lg:bg-[#1b1b1b] lg:px-6 lg:py-1">
-            <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
-              <li
-                aria-label="Personal"
-                className="tab-item cursor-pointer relative opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0"
-              >
-                <div className="text-xl lg:text-sm">Accounts</div>
-                <div
-                  className="tab-indicator hidden lg:block"
-                  style={{
-                    transition: 'left 0.3s ease 0s, width 0.3s ease 0s',
-                    position: 'absolute',
-                    bottom: '0px',
-                    height: '2px',
-                    backgroundColor: 'currentcolor',
-                    left: '2px',
-                    width: '100%',
-                    //bottom: '-4px',
-                  }}
-                ></div>
-              </li>
-              <li
-                aria-label="Partners"
-                className="tab-item cursor-pointer relative opacity-70 border-b-2 border-transparent lg:border-0"
-              >
-                <div className="text-xl lg:text-sm">Products & Services</div>
-              </li>
-              <li
-                aria-label="Youth <18"
-                className="tab-item cursor-pointer relative opacity-70 border-b-2 border-transparent lg:border-0"
-              >
-                <div className="text-xl lg:text-sm">Help</div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        </div>
+        <div className="hidden lg:block">
+        <nav className="relative px-0 text-white lg:bg-[#323232] lg:px-6">
+          <div className="account-functions ml-[260px]">
+          <Tabs defaultValue="account" className="w-full" onValueChange={handleTabClick}>
+            <TabsList>
+              <ul className="flex space-x-2 lg:mx-auto lg:max-w-7xl lg:px-0" ref={tabsRef}>
+                <li
+                  data-value="account"
+                  aria-label="Personal"
+                  className={`tab-item cursor-pointer relative ${activeTab === 'account' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
+                >
+                  <TabsTrigger value="account">
+                    <a href="/" className="text-xl lg:text-sm">Accounts</a>
+                  </TabsTrigger>
+                </li>
+                <li
+                  data-value="transfer"
+                  aria-label="Youth <18"
+                  className={`tab-item cursor-pointer relative ${activeTab === 'transfer' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
+                >
+                  <TabsTrigger value="transfer">
+                    <a href="/payment-transfer" className="text-xl lg:text-sm">Transfer</a>
+                  </TabsTrigger>
+                </li>
+                <li
+                  data-value="history"
+                  aria-label="Partners"
+                  className={`tab-item cursor-pointer relative ${activeTab === 'history' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
+                >
+                  <TabsTrigger value="history">
+                    <a href="/transaction-history" className="text-xl lg:text-sm">History</a>
+                  </TabsTrigger>
+                </li>
+                <li
+                  data-value="products-services"
+                  aria-label="Partners"
+                  className={`tab-item cursor-pointer relative ${activeTab === 'products-services' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
+                >
+                  <TabsTrigger value="products-services">
+                    <a href="/products-services" className="text-xl lg:text-sm">Products & Services</a>
+                  </TabsTrigger>
+                </li>
+                <li
+                  data-value="help"
+                  aria-label="Youth <18"
+                  className={`tab-item cursor-pointer relative ${activeTab === 'help' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
+                >
+                  <TabsTrigger value="help">
+                    <a href="/help" className="text-xl lg:text-sm">Help</a>
+                  </TabsTrigger>
+                </li>
+              </ul>
+              <div
+                className="tab-indicator hidden lg:block"
+                style={{
+                  ...indicatorStyle,
+                  transition: `${activeTab === 'account' ? 'width 2.5s ease' : 'left 2.5s ease, width 2.5s ease'}`,
+                  position: 'absolute',
+                  bottom: '5px',
+                  height: '2px',
+                  backgroundColor: 'currentcolor',
+                }}
+              ></div>
+            </TabsList>
+            <TabsContent value="account"></TabsContent>
+            <TabsContent value="transfer"></TabsContent>
+            <TabsContent value="history"></TabsContent>
+            <TabsContent value="products-services"></TabsContent>
+            <TabsContent value="help"></TabsContent>
+          </Tabs>
+          </div>
+        </nav>
+    </div>
+    </div>
     </div>
   );
 };

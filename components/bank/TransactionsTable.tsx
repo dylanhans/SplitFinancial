@@ -120,7 +120,7 @@ import { useState } from "react"
           </TableBody>
         </Table>
   
-        <TransactionSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} />
+        <TransactionSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} transactions={undefined} />
       </>
     );
   };

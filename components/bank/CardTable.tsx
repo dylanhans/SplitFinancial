@@ -15,6 +15,7 @@ import AnimatedCounter from './AnimatedCounter';
 
 const CardTable = () => {
   return (
+    
     <div className="w-full rounded-lg">
       {/* First Row with 4 columns */}
       <ResizablePanelGroup direction="horizontal" className="flex w-full bg-[#f5f6f7] p-1.5 border-t border-b border-gray-200" style={{ height: '130px' }}>
