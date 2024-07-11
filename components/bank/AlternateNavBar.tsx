@@ -157,7 +157,7 @@ export const AlternateNavBar: React.FC = () => {
                   data-testid="split-logo"
                 />
               </a>
-              <nav className="relative hidden md:ml-4 gap-4 lg:flex lg:items-center">
+              <nav className="relative hidden md:ml-7 gap-4 lg:flex lg:items-center">
                 {navItems.map((item) => (
                   <div key={item.id} data-headlessui-state="" className="relative">
                     <button

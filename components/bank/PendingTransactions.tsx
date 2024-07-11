@@ -1,3 +1,4 @@
+'use client'
 import {
     Table,
     TableBody,
@@ -11,6 +12,9 @@ import {
   import { transactionCategoryStyles } from "@/constants"
   
   import { cn, formatAmount, formatDateTime, getTransactionStatus, removePaymentCharacters, removeSpecialCharacters } from "@/lib/utils"
+import router from "next/router"
+import { useState } from "react"
+import { logoutAccount } from "@/lib/actions/user.actions"
   
   const CategoryBadge = ({ category }: CategoryBadgeProps) => {
     const {
@@ -30,7 +34,19 @@ import {
 
   
   const PendingTransactions = ({ transactions }: TransactionTableProps) => {
+      const [isSheetOpen, setIsSheetOpen] = useState(false);
+    
+      const handleTransactionClick = () => {
+        setIsSheetOpen(true);
+      };
+    
+      const handleLogOut = async () => {
+        const loggedOut = await logoutAccount();
+    
+        if (loggedOut) router.push('/sign-in');
+      };
     return (
+      <>
       <Table>
         <TableHeader className="bg-[#fffcfc]">
           <TableRow>
@@ -51,7 +67,8 @@ import {
             const isSplit = t.type ==='debit';
   
             return (
-              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT cursor-pointer hover:bg-[#fffcfc]`}>
+              <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#ffffff]' : 'bg-[#ffffff]'} !over:bg-none !border-b-DEFAULT hover:bg-[#fffcfc] cursor-pointer`}
+              onClick={handleTransactionClick}>
                 <TableCell className="min-w-32 pl-2 pr-10" style={{ width: '225px' }}>
                   {formatDateTime(new Date(t.date)).dateOnly}
                 </TableCell>
@@ -96,6 +113,8 @@ import {
           })}
         </TableBody>
       </Table>
+      <TransactionSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} />
+      </>
     );
   };
   
