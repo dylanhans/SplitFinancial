@@ -15,6 +15,16 @@ import SearchTransactions from './SearchTransactions'
 import { Separator } from "@/components/ui/separator"
 import { Toaster } from "@/components/ui/sonner"
 import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+  } from "@/components/ui/navigation-menu"
+import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -31,15 +41,6 @@ const RecentTransactions = ({
 const rowsPerPage = 20;
 const totalPages = Math.ceil(transactions.length/rowsPerPage);
 const [isChecked, setIsChecked] = React.useState(false);
-const handleLockCardClick = () => {
-    toast("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo"),
-      },
-    });
-  };
 
 const indexOfLastTransaction = page * rowsPerPage;
 const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
@@ -68,12 +69,13 @@ const totalProcessingAmount = processingTransactions.reduce(
     <section className="recent-transactions">
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist w-full">
-                {accounts.slice(0, 1).map((account: Account) => (
+            {accounts.slice(0, 1).map((account: Account) => (
                 <TabsTrigger key={account.id} value={account.appwriteItemId} className="flex items-center w-full">
                     <BankTabItem 
                         key={account.id}
                         account={account}
                         appwriteItemId={appwriteItemId}
+                        accounts={accounts}
                         />
                             <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
                             Lock Card
@@ -87,10 +89,11 @@ const totalProcessingAmount = processingTransactions.reduce(
                 ))}
             </TabsList>
 
-            {accounts.slice(0, 1).map((account: Account) => (
+            {accounts.map((account: Account)=> (
                 <TabsContent
                 value={account.appwriteItemId}
                 key={account.id}
+                className="content"
             >
             <CardTable 
                     
