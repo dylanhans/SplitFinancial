@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,14 +10,17 @@ import PendingTransactions from './PendingTransactions'
 import { getTransactionStatus } from '@/lib/utils'
 import { Switch } from "@/components/ui/switch"
 import CardTable from './CardTable'
+import { Button } from "@/components/ui/button"
 import SearchTransactions from './SearchTransactions'
 import { Separator } from "@/components/ui/separator"
+import { Toaster } from "@/components/ui/sonner"
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
   } from "@/components/ui/tooltip"
+import { toast } from 'sonner'
 
 const RecentTransactions = ({
     accounts,
@@ -26,6 +30,16 @@ const RecentTransactions = ({
 }: RecentTransactionsProps) => {
 const rowsPerPage = 20;
 const totalPages = Math.ceil(transactions.length/rowsPerPage);
+const [isChecked, setIsChecked] = React.useState(false);
+const handleLockCardClick = () => {
+    toast("Event has been created", {
+      description: "Sunday, December 03, 2023 at 9:00 AM",
+      action: {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+      },
+    });
+  };
 
 const indexOfLastTransaction = page * rowsPerPage;
 const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
@@ -53,40 +67,35 @@ const totalProcessingAmount = processingTransactions.reduce(
   return (
     <section className="recent-transactions">
         <Tabs defaultValue={appwriteItemId} className="w-full">
-            <TabsList className="recent-transactions-tablist">
-                {/* as many triggers as bank accounts, map over each account of type Account*/}
-                {accounts.map((account: Account) => (
-                    //return for each mapping of account
-                    <TabsTrigger key={account.id} value={account.appwriteItemId}>
-                        <BankTabItem 
-                            key={account.id}
-                            account={account}
-                            appwriteItemId={appwriteItemId}
+            <TabsList className="recent-transactions-tablist w-full">
+                {accounts.slice(0, 1).map((account: Account) => (
+                <TabsTrigger key={account.id} value={account.appwriteItemId} className="flex items-center w-full">
+                    <BankTabItem 
+                        key={account.id}
+                        account={account}
+                        appwriteItemId={appwriteItemId}
                         />
-                    </TabsTrigger>
+                            <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
+                            Lock Card
+                            </span>
+                            <Switch
+                                checked={isChecked}
+                                onCheckedChange={setIsChecked}
+                                className="bg-blue-900 border-white border-1 shadow-sm mt-2"
+                            />
+                </TabsTrigger>
                 ))}
             </TabsList>
 
-            {accounts.map((account: Account)=>(
-            <TabsContent
+            {accounts.slice(0, 1).map((account: Account) => (
+                <TabsContent
                 value={account.appwriteItemId}
                 key={account.id}
-                className="space-y-4"
             >
-            <div className="lock-card">
-            <header className="flex items-center justify-between w-full h-full">
-                {/* redirect to trans history with appwrite specific id and bank account */}
-                <div className="flex-grow"></div>
-                <Link href={``} className="flex items-center lock-card-all-btn">
-                    <span className="other-text-13 font-smallboldish pt-1">Lock Card</span>
-                    <Switch className="bg-blue-900 border-white border-1 ml-4 shadow-sm" />
-                </Link>
-            </header>
-            </div>
             <CardTable 
                     
             />
-                    <div className="official-transactions mt-0">
+                    <div className="official-transactions ">
                         <div className="flex items-center justify-between">
                             <div className="authorized-transactions-row flex-grow">
                                 <TooltipProvider>
