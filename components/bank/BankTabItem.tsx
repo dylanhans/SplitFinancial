@@ -1,26 +1,18 @@
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
-import { cn, formUrlQuery } from '@/lib/utils'; // Import your utility function for classNames
+import { NavigationMenu, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
+import { cn, formUrlQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
+import PlaidLink from './PlaidLink'; // Assuming PlaidLink is correctly imported
 
 interface RecentTransactionsProps {
-  // Define props specific to RecentTransactions
   accounts: Account[];
   appwriteItemId: string;
+  user: User; // Include user prop
 }
 
 interface BankTabItemProps {
-  // Define props specific to BankTabItem
   account: Account;
   appwriteItemId: string;
+  user: User; // Include user prop
 }
 
 type CombinedProps = RecentTransactionsProps & BankTabItemProps;
@@ -28,7 +20,8 @@ type CombinedProps = RecentTransactionsProps & BankTabItemProps;
 export const BankTabItem = ({
   account,
   appwriteItemId,
-  accounts, // Include accounts prop from RecentTransactionsProps
+  accounts,
+  user, // Receive user prop
 }: CombinedProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -46,7 +39,6 @@ export const BankTabItem = ({
   const firstAccount = accounts[0];
 
   return (
-    <div>
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -54,37 +46,39 @@ export const BankTabItem = ({
             <div
               onClick={() => handleBankChange()}
               className={cn(`banktab-item`, {
-                'border-blue-600': isActive, // Add condition for active state if needed
+                'border-blue-600': isActive,
               })}>
-            <p
-              className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
-                'text-blue-600': isActive, // Add condition for active state if needed
-              })}>
-            {firstAccount.name}
-            </p>
+              <p
+                className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
+                  'text-blue-600': isActive,
+                })}>
+                {firstAccount.name}
+              </p>
             </div>
           </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {accounts.slice(1).map((acc: Account) => (
-                <NavigationMenuLink>
+          <NavigationMenuContent>
+            {accounts.slice(1).map((acc: Account) => (
+              <NavigationMenuLink key={acc.id}>
                 <div
-              onClick={() => handleBankChange()}
-              className={cn(`banktab-item`, {
-                'border-blue-600': isActive, // Add condition for active state if needed
-              })}>
-            <p
-              className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
-                'text-blue-600': isActive, // Add condition for active state if needed
-              })}>
-            {acc.name}
-            </p>
-            </div>
-            </NavigationMenuLink>
+                  onClick={() => handleBankChange()}
+                  className={cn(`banktab-item`, {
+                    'border-blue-600 bg-white': isActive,
+                  })}>
+                  <p
+                    className={cn(`text-16 bg-white line-clamp-1 flex-1 font-medium text-gray-500`, {
+                      'text-blue-600': isActive,
+                    })}>
+                    {acc.name}
+                  </p>
+                </div>
+              </NavigationMenuLink>
             ))}
-            </NavigationMenuContent>
+            <NavigationMenuLink>                
+                  <PlaidLink user={user} /> {/* Pass user prop to PlaidLink */}
+            </NavigationMenuLink>
+          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-    </div>
   );
 };

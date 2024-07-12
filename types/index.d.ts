@@ -229,6 +229,7 @@ declare interface RecentTransactionsProps {
   transactions: Transaction[];
   appwriteItemId: string;
   page: number;
+  user: User;
 }
 
 declare interface TransactionHistoryTableProps {

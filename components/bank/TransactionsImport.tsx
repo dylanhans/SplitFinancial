@@ -36,6 +36,7 @@ const RecentTransactions = ({
     accounts,
     transactions = [],
     appwriteItemId,
+    user,
     page=1,
 }: RecentTransactionsProps) => {
 const rowsPerPage = 20;
@@ -76,6 +77,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                         account={account}
                         appwriteItemId={appwriteItemId}
                         accounts={accounts}
+                        user={user}
                         />
                             <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
                             Lock Card
