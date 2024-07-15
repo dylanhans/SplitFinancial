@@ -74,7 +74,7 @@ export const BankTabItem = ({
               </NavigationMenuLink>
             ))}
             <NavigationMenuLink>                
-                  <PlaidLink user={user} /> {/* Pass user prop to PlaidLink */}
+                  {/*<PlaidLink user={user} /> {/* Pass user prop to PlaidLink */}
             </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>

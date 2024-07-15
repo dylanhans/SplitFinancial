@@ -68,6 +68,14 @@
     font-weight: 450;
   }
 
+  .w-\[325px\] {
+    width: 340px;
+}
+
+  .placeholder-black::placeholder{
+    color: black;
+  }
+
   .mt-own{
     margin-top: 0.1rem;
   }
@@ -363,7 +371,7 @@
 
   /* Auth */
   .auth-asset {
-    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden;
+    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-[#000000] max-lg:hidden;
   }
   
   .full-width-navbar {

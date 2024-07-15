@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import AnimatedCounter from './AnimatedCounter';
+import CreditScore from './CreditScore';
 
 const CardTable = () => {
   return (
@@ -168,8 +169,13 @@ const CardTable = () => {
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={15} className="custom-border-left border-gray-200" style={{ height: '100%'}}>
-          <div className="flex h-[150px] items-center justify-center p-6">
-            <span className="font-semibold">Credit Score</span>
+          <div className="flex h-[150px] items-center justify-center p-6 mr-5">
+            Credit Score
+            {/*<CreditScore
+              labels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
+              data={[65, 59, 80, 81, 56, 55, 40]}
+            label="Credit Score"*
+  />*/}
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
