@@ -6,6 +6,7 @@ import React from 'react'
 
 //pass accounts, containing data for bank accounts. Choose from which to send money from and to.
 const Transfer = async () => {
+
   const loggedIn = await getLoggedInUser();
 
   const accounts = await getAccounts({ userId: loggedIn.$id})
@@ -15,6 +16,7 @@ const Transfer = async () => {
   const accountsData = accounts?.data;
   
   return (
+    
     <section className="payment-transfer">
       <HeaderBox 
         title="Payment Transfer"
@@ -27,8 +29,6 @@ const Transfer = async () => {
         />
       </section>
     </section>
-
-
   )
 }
 

@@ -140,26 +140,26 @@ const CardTable = () => {
           </div>
 
           {/* Second column */}
-          <div className="flex h-[150px] items-start justify-start ml-40 mt-1">
+          <div className="flex h-[150px] items-start justify-start ml-[115px] mt-1 mr-0">
             <ul className="flex flex-col gap-4">
               <li>
                 <div>
-                  <p className=" other-text-13 font-smallboldish">Statement Balance: </p>
+                  <p className="other-text-13 font-smallboldish">Statement Balance: <span> $110.15</span></p>
                 </div>
               </li>
               <li>
                 <div>
-                  <p className=" other-text-13 font-smallboldish">Statement Date: </p>
+                  <p className=" other-text-13 font-smallboldish">Statement Date: <span> July 25, 2024</span></p>
                 </div>
               </li>
               <li>
                 <div>
-                  <p className=" other-text-13 font-smallboldish">Payment Due: </p>
+                  <p className=" other-text-13 font-smallboldish">Payment Due: <span> August 3, 2024</span></p>
                 </div>
               </li>
               <li>
                 <div>
-                  <p className="other-text-13 font-smallboldish">Minimum Payment: </p>
+                  <p className="other-text-13 font-smallboldish">Minimum Payment: <span> $10.00</span></p>
                 </div>
               </li>
             </ul>

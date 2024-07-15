@@ -1,5 +1,6 @@
 import React from 'react'
 import CreditQuick from './CreditQuick'
+import CreditOffer from './CreditOffer';
 
 const SidebarCredit = () => {
   return (
@@ -7,7 +8,7 @@ const SidebarCredit = () => {
       <CreditQuick />
       <div>Split</div>
       <div>Account Management</div>
-      <div>Promo</div>
+      <CreditOffer />
     </div>
   );
 };
