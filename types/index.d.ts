@@ -149,6 +149,10 @@ declare interface BankInfoProps {
   type: "full" | "card";
 }
 
+declare interface CardTableProps {
+  account: Account;
+}
+
 declare interface HeaderBoxProps {
   type?: "title" | "greeting";
   title: string;
@@ -264,6 +268,11 @@ declare interface getAccountsProps {
 
 declare interface getAccountProps {
   appwriteItemId: string;
+}
+
+declare interface getRecentPaymentProps{
+  transactions: Transaction[];
+
 }
 
 declare interface getInstitutionProps {

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Split",
   description: "Finance payments for in-store purchases",
   icons: {
-    icon: 'icon/logo.svg'
+    icon: '/icons/testlogo4.jpeg',
   }
 };
 

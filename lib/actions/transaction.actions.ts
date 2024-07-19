@@ -30,6 +30,11 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
   }
 }
 
+/*export const getRecentPayment = async ({transactions}: getRecentPaymentProps) => {
+
+
+}*/
+
 export const getTransactionsByBankId = async ({bankId}: getTransactionsByBankIdProps) => {
   try {
     const { database } = await createAdminClient();

@@ -2,6 +2,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuTrigger, NavigationMe
 import { cn, formUrlQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PlaidLink from './PlaidLink'; // Assuming PlaidLink is correctly imported
+import { useState } from "react";
 
 interface RecentTransactionsProps {
   accounts: Account[];
@@ -13,6 +14,7 @@ interface BankTabItemProps {
   account: Account;
   appwriteItemId: string;
   user: User; // Include user prop
+  setFirstAccount: (account: Account) => void; // Add setter function
 }
 
 type CombinedProps = RecentTransactionsProps & BankTabItemProps;
@@ -21,22 +23,21 @@ export const BankTabItem = ({
   account,
   appwriteItemId,
   accounts,
-  user, // Receive user prop
+  setFirstAccount
 }: CombinedProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const isActive = appwriteItemId === account?.appwriteItemId;
 
-  const handleBankChange = () => {
+  const handleBankChange = (account: Account) => {
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: 'id',
-      value: account?.appwriteItemId,
+      value: account.appwriteItemId,
     });
     router.push(newUrl, { scroll: false });
+    setFirstAccount(account); // Update firstAccount state
   };
-
-  const firstAccount = accounts[0];
 
   return (
     <NavigationMenu>
@@ -44,7 +45,7 @@ export const BankTabItem = ({
         <NavigationMenuItem>
           <NavigationMenuTrigger>
             <div
-              onClick={() => handleBankChange()}
+              onClick={() => handleBankChange(account)}
               className={cn(`banktab-item`, {
                 'border-blue-600': isActive,
               })}>
@@ -52,15 +53,15 @@ export const BankTabItem = ({
                 className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
                   'text-blue-600': isActive,
                 })}>
-                {firstAccount.name}
+                {account.name}
               </p>
             </div>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            {accounts.slice(1).map((acc: Account) => (
-              <NavigationMenuLink key={acc.id}>
+            {accounts.map((account: Account) => (
+              <NavigationMenuLink key={account.id}>
                 <div
-                  onClick={() => handleBankChange()}
+                  onClick={() => handleBankChange(account)}
                   className={cn(`banktab-item`, {
                     'border-blue-600 bg-white': isActive,
                   })}>
@@ -68,7 +69,7 @@ export const BankTabItem = ({
                     className={cn(`text-16 bg-white line-clamp-1 flex-1 font-medium text-gray-500`, {
                       'text-blue-600': isActive,
                     })}>
-                    {acc.name}
+                    {account.name}
                   </p>
                 </div>
               </NavigationMenuLink>

@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
@@ -31,6 +31,7 @@ import {
     TooltipTrigger,
   } from "@/components/ui/tooltip"
 import { toast } from 'sonner'
+import { createDwollaCustomer } from '@/lib/actions/dwolla.actions'
 
 const RecentTransactions = ({
     accounts,
@@ -42,6 +43,7 @@ const RecentTransactions = ({
 const rowsPerPage = 20;
 const totalPages = Math.ceil(transactions.length/rowsPerPage);
 const [isChecked, setIsChecked] = React.useState(false);
+const [firstAccount, setFirstAccount] = useState<Account>(accounts[0]);
 
 const indexOfLastTransaction = page * rowsPerPage;
 const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
@@ -61,6 +63,7 @@ const postedTransactions = currentTransactions.filter(transaction => {
     return status === 'Success';
   });
 
+
 const totalProcessingAmount = processingTransactions.reduce(
     (total, transaction) => total + parseFloat(transaction.amount),
     0
@@ -78,6 +81,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                         appwriteItemId={appwriteItemId}
                         accounts={accounts}
                         user={user}
+                        setFirstAccount={setFirstAccount}
                         />
                             <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
                             Lock Card
@@ -98,7 +102,11 @@ const totalProcessingAmount = processingTransactions.reduce(
                 className="content"
             >
             <CardTable 
-                    
+                account={account}
+                appwriteItemId={appwriteItemId}
+                //paymentInfo={paymentInfo}
+                //splitInfo={splitInfo}
+                transactions={transactions}
             />
                     <div className="official-transactions ">
                         <div className="flex items-center justify-between">

@@ -12,7 +12,7 @@ import {
 import { plaidClient } from "../plaid";
 import { parseStringify } from "../utils";
 
-import { getTransactionsByBankId } from "./transaction.actions";
+import { getRecentPayment, getTransactionsByBankId } from "./transaction.actions";
 import { getBanks, getBank } from "./user.actions";
 
 // Get multiple bank accounts
@@ -79,6 +79,26 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
     throw error; // Optionally rethrow the error for upstream handling
   }
 };
+
+/*export const mostRecentPayment = async ({transactions}: getRecentPaymentProps) => {
+  try {
+    const mostRecentPayment = await getRecentPayment({transactions});
+
+    const mostRecentPaymentTransaction = currentTransactions.filter(transaction => {
+      const status = getTransactionStatus(new Date(transaction.date));
+      return status === 'Success';
+
+      return parseStringify({
+        data: account,
+        transactions: allTransactions,
+      });
+    });
+  
+
+  } catch (error) {
+    console.error("An error occurred while getting the most recent transaction:", error);
+  }
+}*/
 
 // Get one bank account
 export const getAccount = async ({ appwriteItemId }: getAccountProps) => {

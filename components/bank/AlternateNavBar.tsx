@@ -403,7 +403,7 @@ export const AlternateNavBar: React.FC = () => {
                   className={`tab-item cursor-pointer relative ${activeTab === 'products-services' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
                   <TabsTrigger value="products-services">
-                    <a href="/products-services" className="text-xl lg:text-sm">Products & Services</a>
+                    <a href="/accounts-page" className="text-xl lg:text-sm">Products & Services</a>
                   </TabsTrigger>
                 </li>
                 <li

@@ -13,10 +13,13 @@ import {
 } from "@/components/ui/tooltip"
 import AnimatedCounter from './AnimatedCounter';
 import CreditScore from './CreditScore';
+import { formatAmount } from '@/lib/utils';
 
-const CardTable = () => {
+
+const CardTable: React.FC<CardTableProps> = ({ account }) => {
+  const availableCredit = 15000;
+
   return (
-    
     <div className="w-full rounded-lg">
       {/* First Row with 4 columns */}
       <ResizablePanelGroup direction="horizontal" className="flex w-full bg-[#f5f6f7] p-1.5 border-t border-b border-gray-200" style={{ height: '130px' }}>
@@ -55,14 +58,14 @@ const CardTable = () => {
                 </div>
               </TooltipProvider>
               <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
-                <AnimatedCounter amount={320} />
+                <AnimatedCounter amount={(account.currentBalance)} />
               </span>
             </div>
             {/* Second Row (if needed) */}
             <div className="flex h-[35px] items-center justify-start p-4 ml-0 mr-auto mt-1">
               {/* Content for the second row */}
               <div>
-                  <p className="other-text-13 font-smallboldish">Credit Limit: <span className="font-smallbolder">$15,000.00</span></p>
+                  <p className="other-text-13 font-smallboldish">Credit Limit: <span className="font-smallbolder">{formatAmount(availableCredit)}</span></p>
               </div>
             </div>
           </div>
@@ -86,7 +89,7 @@ const CardTable = () => {
               </span>
             </TooltipProvider>
             <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
-                <AnimatedCounter amount={(15000-320)} />
+                <AnimatedCounter amount={(availableCredit-account.currentBalance)} />
               </span>
           </div>
             {/* Second Row (if needed) */}
@@ -105,10 +108,10 @@ const CardTable = () => {
             <div className="flex flex-col h-full items-start justify-start border-l border-gray-200" style={{ height: '100%', boxShadow: '0 0 2px rgba(0, 0, 0, 0.1)'}}>
               <span className="balance-text-13 mt-3 ml-4 font-smallboldish">Last Payment {' '} </span>
             <span className="balance-text-13 mt-1 ml-4 font-smallbolder">
-                <AnimatedCounter amount={(35.74)} />
+                <AnimatedCounter amount={100} />
             </span>
             <span className="mt-1 ml-4 font-littlebold">
-                on Jul 4, 2024
+                June 2
             </span>
           </div>
         </div>
@@ -144,7 +147,7 @@ const CardTable = () => {
             <ul className="flex flex-col gap-4">
               <li>
                 <div>
-                  <p className="other-text-13 font-smallboldish">Statement Balance: <span> $110.15</span></p>
+                  <p className="other-text-13 font-smallboldish">Statement Balance: <span> ${((account.currentBalance)/2.00)} </span></p>
                 </div>
               </li>
               <li>
