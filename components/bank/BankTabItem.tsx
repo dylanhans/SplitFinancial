@@ -23,8 +23,8 @@ export const BankTabItem = ({
   account,
   appwriteItemId,
   accounts,
-  setFirstAccount
 }: CombinedProps) => {
+  const [firstAccount, setFirstAccount] = useState<Account>(account);
   const searchParams = useSearchParams();
   const router = useRouter();
   const isActive = appwriteItemId === account?.appwriteItemId;
@@ -36,7 +36,7 @@ export const BankTabItem = ({
       value: account.appwriteItemId,
     });
     router.push(newUrl, { scroll: false });
-    setFirstAccount(account); // Update firstAccount state
+    setFirstAccount(account);
   };
 
   return (
@@ -45,7 +45,7 @@ export const BankTabItem = ({
         <NavigationMenuItem>
           <NavigationMenuTrigger>
             <div
-              onClick={() => handleBankChange(account)}
+              onClick={() => handleBankChange(firstAccount)}
               className={cn(`banktab-item`, {
                 'border-blue-600': isActive,
               })}>
@@ -53,12 +53,12 @@ export const BankTabItem = ({
                 className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
                   'text-blue-600': isActive,
                 })}>
-                {account.name}
+                {firstAccount.name}
               </p>
             </div>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            {accounts.map((account: Account) => (
+            {accounts.slice(1).map((account: Account) => (
               <NavigationMenuLink key={account.id}>
                 <div
                   onClick={() => handleBankChange(account)}

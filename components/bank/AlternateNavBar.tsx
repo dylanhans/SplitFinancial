@@ -3,7 +3,18 @@ import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 import Drawer from '@/components/ui/drawer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select2"
 
 interface NavItem {
   label: string;
@@ -109,7 +120,11 @@ const navItems: NavItem[] = [
   },
 ];
 
-export const AlternateNavBar: React.FC = () => {
+interface AlternateNavBarProps {
+  user: User; // Adjust 'User' to the appropriate type used in your project
+}
+
+export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
   const [openId, setOpenId] = useState<string | null>(null);
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
@@ -118,6 +133,7 @@ export const AlternateNavBar: React.FC = () => {
   const [previousTab, setPreviousTab] = useState<string>('account');
   const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
   const tabsRef = useRef<HTMLUListElement>(null);
+  
 
   useEffect(() => {
     setPreviousTab(activeTab);
@@ -274,75 +290,42 @@ export const AlternateNavBar: React.FC = () => {
               </nav>
             </div>
             <div className="hidden lg:flex lg:items-center lg:space-x-4">
-              <div className="relative">
-                <button
-                  className="flex items-center gap-2 lg:rounded lg:bg-[#333333] lg:px-4 lg:py-2"
-                  id="headlessui-menu-button-:rc:"
-                  onClick={handleOpen}
-                >
-                  <div className="flex items-center gap-2">
-                    <svg
-                      className="fill-black h-4 w-4 fill-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10A10 10 0 0 0 12 2zm6.93 6H16a15.65 15.65 0 0 0-1.38-3.56A8 8 0 0 1 18.92 8zM12 4a14.09 14.09 0 0 1 1.91 4h-3.82A14.09 14.09 0 0 1 12 4zM4.26 14a7.82 7.82 0 0 1 0-4h3.38a16.52 16.52 0 0 0-.14 2c.006.669.053 1.337.14 2zm.82 2H8a15.651 15.651 0 0 0 1.38 3.56A8 8 0 0 1 5.08 16zM8 8H5.08a8 8 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8 8zm4 12a14.089 14.089 0 0 1-1.91-4h3.82A14.089 14.089 0 0 1 12 20zm2.34-6H9.66a14.71 14.71 0 0 1-.16-2c.007-.67.06-1.338.16-2h4.68c.1.662.153 1.33.16 2-.008.67-.061 1.338-.16 2zm.25 5.56A15.652 15.652 0 0 0 16 16h3a8 8 0 0 1-4.41 3.56zM16.36 14c.087-.663.134-1.331.14-2a16.516 16.516 0 0 0-.14-2h3.38a7.82 7.82 0 0 1 0 4z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                    <span className="inline-block text-base font-medium">{selectedLanguage}</span>
-                    <img
-                      src="/icons/down.png"
-                      alt=""
-                      className={`transform transition-transform ${dropdown ? 'rotate-180' : 'rotate-0'}`}
-                    />
-                  </div>
-                </button>
-                {dropdown && (
-                  <div className="absolute top-0 z-10 mt-16 transform opacity-100 translate-y-0">
-                    <div className="relative flex w-full min-w-[160px] flex-col lg:flex-row lg:rounded-lg lg:bg-[#0f0f0f] lg:p-3">
-                      <div className="mb-8 inline-flex flex-col last:mb-0 lg:mb-0 lg:space-y-xxxs w-full">
-                        <a
-                          className="text-subduedInverse w-full rounded bg-transparent py-3 text-left text-lg lg:px-5 lg:text-base lg:hover:bg-[#262626] cursor-pointer"
-                          onClick={() => handleSelectLanguage('English')}
-                        >
-                          English
-                        </a>
-                        <a
-                          className="text-subduedInverse w-full rounded bg-transparent py-3 text-left text-lg lg:px-5 lg:text-base lg:hover:bg-[#262626] cursor-pointer"
-                          onClick={() => handleSelectLanguage('French')}
-                        >
-                          French
-                        </a>
-                        {/* Add more languages here if needed */}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
               <div className="flex items-stretch gap-xs text-center lg:hidden">
                 {/* handle signin*/}
                 <div className="flex-1 rounded border-2 border-web-borderOnBlack py-5 text-center text-xl font-bold">
-                  Log In
+                 
                 </div>
 
                 {/* handle signup */}
                 <div className="flex-1 rounded border-2 border-web-borderOnBlack bg-surfaceDefault py-5 text-center text-xl font-bold text-contentDefault">
-                  Get Started
+                  
                 </div>
 
               </div>
               <div className="hidden lg:block">
-                <div className="bg-transparent cursor-pointer text-contentDefaultInverse text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
-                  <a href="/" className="inline-block leading-none">Log In</a>
-                </div>
-                <div className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
-                  <a href="/sign-up"className="inline-block leading-none">Get Started</a>
+                <div className="flex items-center space-x-4">
+                  <div className="bg-transparent cursor-pointer text-contentDefaultInverse text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
+                    <Select>
+                      <SelectTrigger className="w-[180px] flex items-center leading-none">
+                        <span className="mr-2">
+                          <Avatar>
+                            <AvatarImage src="/icons/plogo.jpg" />
+                          </Avatar>
+                        </span>
+                        <SelectValue placeholder={`${user.firstName} ${user.lastName}`} /> 
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="settings">Profile & Settings</SelectItem>
+                          <SelectItem value="Guide">Guide</SelectItem>
+                          {/* Add other SelectItem components as needed */}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring flex justify-center items-center">
+                    <a href="/sign-up" className="leading-none">Sign Out</a>
+                  </div>
                 </div>
               </div>
             </div>

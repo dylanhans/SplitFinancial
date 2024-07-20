@@ -5,9 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Pagination } from './Pagination'
 import PendingTransactions from './PendingTransactions'
-import { getTransactionStatus } from '@/lib/utils'
+import { formUrlQuery, getTransactionStatus } from '@/lib/utils'
 import { Switch } from "@/components/ui/switch"
 import CardTable from './CardTable'
 import { Button } from "@/components/ui/button"
@@ -15,15 +16,16 @@ import SearchTransactions from './SearchTransactions'
 import { Separator } from "@/components/ui/separator"
 import { Toaster } from "@/components/ui/sonner"
 import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuIndicator,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    NavigationMenuViewport,
-  } from "@/components/ui/navigation-menu"
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
 import {
     Tooltip,
     TooltipContent,
@@ -43,7 +45,15 @@ const RecentTransactions = ({
 const rowsPerPage = 20;
 const totalPages = Math.ceil(transactions.length/rowsPerPage);
 const [isChecked, setIsChecked] = React.useState(false);
+const [isAlertOpen, setIsAlertOpen] = useState(false);
 const [firstAccount, setFirstAccount] = useState<Account>(accounts[0]);
+
+const handleCheckedChange = (checked) => {
+    setIsChecked(checked);
+    if (checked) {
+      setIsAlertOpen(true);
+    }
+  };
 
 const indexOfLastTransaction = page * rowsPerPage;
 const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
@@ -62,12 +72,13 @@ const postedTransactions = currentTransactions.filter(transaction => {
     const status = getTransactionStatus(new Date(transaction.date));
     return status === 'Success';
   });
-
-
+  
 const totalProcessingAmount = processingTransactions.reduce(
     (total, transaction) => total + parseFloat(transaction.amount),
     0
 );
+
+
 
   return (
     <section className="recent-transactions">
@@ -86,11 +97,42 @@ const totalProcessingAmount = processingTransactions.reduce(
                             <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
                             Lock Card
                             </span>
-                            <Switch
-                                checked={isChecked}
-                                onCheckedChange={setIsChecked}
-                                className="bg-blue-900 border-white border-1 shadow-sm mt-2"
-                            />
+                            <div>
+                                <Switch
+                                    checked={isChecked}
+                                    onCheckedChange={handleCheckedChange}
+                                    className="bg-blue-900 border-white border-1 shadow-sm mt-2"
+                                />
+
+                                <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+                                    <AlertDialogContent className="bg-white">
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                        This action cannot be undone. This will temporarily suspend your
+                                        credit card and withold the account from any further transactions.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                    <AlertDialogCancel
+                                        onClick={() => {
+                                            setIsAlertOpen(false);
+                                            setIsChecked(false);
+                                        }}
+                                        >
+                                        Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction onClick={() => {
+                                        setIsAlertOpen(true);
+                                        setIsChecked(true);
+                                        // Handle the continue action here
+                                        }}>
+                                        Continue
+                                        </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </div>
                 </TabsTrigger>
                 ))}
             </TabsList>

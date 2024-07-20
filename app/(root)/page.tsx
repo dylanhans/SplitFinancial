@@ -24,6 +24,10 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
 
   const account = await getAccount({ appwriteItemId });
 
+  const displayName = loggedIn?.firstName && loggedIn?.lastName 
+    ? `${loggedIn.firstName} ${loggedIn.lastName}`
+    : 'Guest';
+
   return (
       <section className="home">
         <div className="home-content">
@@ -31,7 +35,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
             <HeaderBox
               type="greeting"
               title="Welcome"
-              user={loggedIn?.firstName || 'Guest'}
+              user={displayName || 'Guest'}
               subtext="Access and manage your account and transactions efficiently."
             />
             {/*<TotalBalanceBox
