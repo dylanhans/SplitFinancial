@@ -42,10 +42,9 @@ export default async function RootLayout({
           </div>
   
           {/* Conditional rendering for sidebar */}
-            
               <div className="flex flex-col w-1/4">
                 <SidebarCredit />
-                {sidebarChildren}
+                  {sidebarChildren}
               </div>
         </div>
       </main>

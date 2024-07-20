@@ -64,11 +64,10 @@ const CreditQuick = () => {
               <Label htmlFor="framework" className="balance-text-13 font-smallbolder">From</Label>
               <Select>
                 <SelectTrigger id="framework" className="other-text-13 font-smallboldish rounded-sm bg-white">
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder =" Plaid Savings (ID), (Amount) "/>
                 </SelectTrigger>
-                <SelectContent position="popper" className="other-text-13 font-smallboldish">
+                <SelectContent position="popper" className="other-text-13 font-smallboldish bg-white">
                   <SelectItem value="next">Plaid Savings (ID), (Amount)</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
                 </SelectContent>
               </Select>
               <div className="flex flex-col space-y-3 mt-2">

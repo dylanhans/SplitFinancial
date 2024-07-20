@@ -17,7 +17,7 @@ const AccountSidebar = () => {
         <ResizableHandle />
         <ResizablePanel defaultSize={50} className="flex-1">
         <div className="flex w-full h-full items-center justify-center p-6 bg-white">
-            <span className="other-text-13 font-semiboldish">One</span>
+            <span className="other-text-13 font-semiboldish">Two</span>
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
