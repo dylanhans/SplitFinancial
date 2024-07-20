@@ -203,6 +203,7 @@ const totalProcessingAmount = processingTransactions.reduce(
                     </TooltipProvider>
                         <div className="searchable-transactions-posted">
                             <SearchTransactions 
+                                //if input active, sort and return transactions in transactions table. otherwise, postedtransactions.
                             />
                             <Separator className="flex-grow border-t border-gray-300 mt-3" /> {/* Line with full width */}
                             <TransactionsTable 

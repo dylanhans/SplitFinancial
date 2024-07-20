@@ -32,9 +32,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabspayment'
 const CreditQuick = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
-
-  //const firstAccount = accounts[0];
-
   return (
     <section className="QuickTransfer Title w-[350px]">
       <div className="QuickTransfer Title w-[350px]">
@@ -42,9 +39,11 @@ const CreditQuick = () => {
             <TabsContent>
               <TabsList className="recent-transactions-tablist w-full">
                   <TabsTrigger className="flex items-center w-full">
-                  <span className="balance-text-13 font-smallboldish pt-2 bg-transparent border-none">
-                              Make a Payment
-                  </span>
+                  <div className="banktab-item pt-2 bg-transparent border-blue-600">
+                    <p className="text-14 line-clamp-1 flex-1 font-medium text-blue-600">
+                      Make a Payment
+                    </p>
+                  </div>
                   </TabsTrigger>
               </TabsList>
               </TabsContent>
@@ -56,32 +55,30 @@ const CreditQuick = () => {
       </CardHeader>
       <CardContent>
         <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
+          <div className="grid w-full items-center gap-4 mt-2">
+            <div className="flex flex-col space-y-3">
               <Label htmlFor="name" className="balance-text-13 font-smallbolder">Amount</Label>
               <Input id="name" placeholder="Minimum Payment $10.00" className="rounded-sm placeholder-black other-text-13 font-smallboldish"/>
             </div>
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-3 mt-2">
               <Label htmlFor="framework" className="balance-text-13 font-smallbolder">From</Label>
               <Select>
-                <SelectTrigger id="framework" className="other-text-13 font-smallboldish rounded-sm">
+                <SelectTrigger id="framework" className="other-text-13 font-smallboldish rounded-sm bg-white">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper" className="other-text-13 font-smallboldish">
-                  <SelectItem value="next">Next.js</SelectItem>
+                  <SelectItem value="next">Plaid Savings (ID), (Amount)</SelectItem>
                   <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
                 </SelectContent>
               </Select>
-              <div className="flex flex-col space-y-1.5">
+              <div className="flex flex-col space-y-3 mt-2">
               <Label htmlFor="name" className="balance-text-13 font-smallbolder">Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-[280px] justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal bg-white rounded-sm",
                       !date && "text-muted-foreground"
                     )}
                   >
@@ -95,7 +92,7 @@ const CreditQuick = () => {
                     selected={date}
                     onSelect={setDate}
                     initialFocus
-                    className="other-text-13 font-smallboldish"
+                    className="other-text-13 font-smallboldish bg-white"
                   />
                 </PopoverContent>
               </Popover>
@@ -116,3 +113,83 @@ const CreditQuick = () => {
 }
 
 export default CreditQuick
+
+{/* 
+import { NavigationMenu, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
+import { cn, formUrlQuery } from '@/lib/utils';
+import { useRouter, useSearchParams } from 'next/navigation';
+import PlaidLink from './PlaidLink'; // Assuming PlaidLink is correctly imported
+import { useState } from "react";
+
+interface RecentTransactionsProps {
+  accounts: Account[];
+  appwriteItemId: string;
+  user: User; // Include user prop
+}
+
+interface BankTabItemProps {
+  account: Account;
+  appwriteItemId: string;
+  user: User; // Include user prop
+  setFirstAccount: (account: Account) => void; // Add setter function
+}
+
+type CombinedProps = RecentTransactionsProps & BankTabItemProps;
+
+export const BankTabItem = ({
+  account,
+  appwriteItemId,
+  accounts,
+}: CombinedProps) => {
+  const [firstAccount, setFirstAccount] = useState<Account>(account);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const isActive = appwriteItemId === account?.appwriteItemId;
+
+  const handleBankChange = (account: Account) => {
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: 'id',
+      value: account.appwriteItemId,
+    });
+    router.push(newUrl, { scroll: false });
+    setFirstAccount(account);
+  };
+
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>
+            <div
+              onClick={() => handleBankChange(firstAccount)}
+              className={cn(`banktab-item`, {
+                'border-blue-600': isActive,
+              })}>
+              <p
+                className={cn(`text-16 line-clamp-1 flex-1 font-medium text-gray-500`, {
+                  'text-blue-600': isActive,
+                })}>
+                {firstAccount.name}
+              </p>
+            </div>
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {accounts.slice(1).map((account: Account) => (
+              <NavigationMenuLink key={account.id}>
+                <div
+                  onClick={() => handleBankChange(account)}
+                  className={cn(`banktab-item`, {
+                    'border-blue-600 bg-white': isActive,
+                  })}>
+                  <p
+                    className={cn(`text-16 bg-white line-clamp-1 flex-1 font-medium text-gray-500`, {
+                      'text-blue-600': isActive,
+                    })}>
+                    {account.name}
+                  </p>
+                </div>
+              </NavigationMenuLink>
+            ))}
+            <NavigationMenuLink>                
+*/}

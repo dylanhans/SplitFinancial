@@ -173,7 +173,7 @@ const CardTable: React.FC<CardTableProps> = ({ account }) => {
         <ResizableHandle />
         <ResizablePanel defaultSize={15} className="custom-border-left border-gray-200" style={{ height: '100%'}}>
           <div className="flex h-[150px] items-center justify-center p-6 mr-5">
-            Credit Score
+            Split Information
             {/*<CreditScore
               labels={['January', 'February', 'March', 'April', 'May', 'June', 'July']}
               data={[65, 59, 80, 81, 56, 55, 40]}

@@ -315,9 +315,9 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                         <SelectValue placeholder={`${user.firstName} ${user.lastName}`} /> 
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="settings">Profile & Settings</SelectItem>
-                          <SelectItem value="Guide">Guide</SelectItem>
+                        <SelectGroup className="bg-[#232222]">
+                          <SelectItem value="settings" className="text-white">Profile & Settings</SelectItem>
+                          <SelectItem value="Guide" className="text-white">Guide</SelectItem>
                           {/* Add other SelectItem components as needed */}
                         </SelectGroup>
                       </SelectContent>
