@@ -88,6 +88,10 @@
     font-size: 15px;
   }
 
+  .balance-text-16{
+    font-size: 16px;
+  }
+
   .balance-text-14{
     font-size: 14px;
   }
@@ -344,6 +348,10 @@
   }
 
   .banktab-item {
+    @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+  }
+
+  .banktab-item2 {
     @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
   }
 

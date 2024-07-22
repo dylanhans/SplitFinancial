@@ -1,13 +1,13 @@
 import HeaderBox from '@/components/bank/HeaderBox';
-import RecentTransactions from '@/components/bank/TransactionsImport';
+import HomeAccounts from '@/components/bank/HomeAccounts';
 import RightSideBar from '@/components/bank/RightSideBar';
 import TotalBalanceBox from '@/components/bank/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react';
 import NavBar from '@/components/bank/NavBar';
-import RootLayout from './layout';
 import CreditQuick from '@/components/bank/CreditQuick';
+import Link from 'next/link';
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);
@@ -34,7 +34,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
           <header className="home-header">
             <HeaderBox
               type="greeting"
-              title="Welcome"
+              title="Good Evening,"
               user={displayName || 'Guest'}
               subtext="Access and manage your account and transactions efficiently."
             />
@@ -44,11 +44,11 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
               totalCurrentBalance={accounts?.totalCurrentBalance}
             />*/}
           </header>
-          <RecentTransactions
+          <HomeAccounts
             accounts={accountsData}
             transactions={account?.transactions}
             appwriteItemId={appwriteItemId}
-            page={currentPage}
+            //page={currentPage}
           />
         </div>
 

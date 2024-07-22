@@ -7,16 +7,15 @@ import Sidebar from "@/components/bank/Sidebar";
 import SidebarCredit from "@/components/bank/SidebarCredit";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 import { useRouter } from 'next/router';
 
 
 export default async function RootLayout({
   children,
-  sidebarChildren,
 }: Readonly<{
   children: React.ReactNode;
-  sidebarChildren: React.ReactNode;
 }>) {
   
   const loggedIn = await getLoggedInUser();
@@ -29,23 +28,19 @@ export default async function RootLayout({
         <AlternateNavBar 
           user={loggedIn}
         />
+        <Link href="/credit">
+            <p className="cursor-pointer text-blue-900">Credit</p>
+          </Link>
         <div className="flex h-screen w-[1250px] ml-[250px] font-inter">
           {/* Main content */}
           <div className="flex size-full flex-col w-3/4">
-            <div className="root-layout">
-              <Image src="/icons/logo.svg/" width={30} height={30} alt="logo" />
-              <div>
-                <MobileNav user={loggedIn} />
-              </div>
-            </div>
             {children}
           </div>
-  
-          {/* Conditional rendering for sidebar */}
-              <div className="flex flex-col w-1/4">
-                <SidebarCredit />
-                  {sidebarChildren}
-              </div>
+          <div className="flex flex-col w-1/4">
+            <SidebarCredit 
+              type={"homepage"}
+            />
+          </div>
         </div>
       </main>
     );

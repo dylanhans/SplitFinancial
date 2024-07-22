@@ -160,6 +160,11 @@ declare interface HeaderBoxProps {
   user?: string;
 }
 
+declare interface SidebarCreditProps {
+  type: "homepage" | "credit";
+
+}
+
 declare interface MobileNavProps {
   user: User;
 }
@@ -179,7 +184,7 @@ declare interface PaginationProps {
 
 declare interface PlaidLinkProps {
   user: User;
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "credit" | "bankaccount" | "loan/line";
   dwollaCustomerId?: string;
 }
 
@@ -247,6 +252,13 @@ declare interface CategoryBadgeProps {
 
 declare interface TransactionTableProps {
   transactions: Transaction[];
+}
+
+declare interface AccountTypeProps {
+  transactions: Transaction[];
+  accounts: Account[];
+  type?: 'debit' | 'credit' | 'Loan' | 'Line'
+  header: string
 }
 
 declare interface CategoryProps {

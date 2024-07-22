@@ -13,9 +13,11 @@ import {
   }
   
   const slides: Slide[] = [
-    { title: "Insights", description: "This is the first slide's description." },
-    { title: "Insights", description: "This is the second slide's description." },
-    { title: "Insights", description: "This is the third slide's description." }
+    { title: "Spending Insight", description: "This is the first slide's description." },
+    { title: "Cash Flow", description: "This is the second slide's description." },
+    { title: "Monthly Expenses", description: "This is the third slide's description." },
+    { title: "Deposits", description: "This is the third slide's description." },
+    { title: "Refunds", description: "This is the third slide's description." }
   ]
 
 const CreditOffer = () => {

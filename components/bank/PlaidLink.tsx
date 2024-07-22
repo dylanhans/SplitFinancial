@@ -53,6 +53,36 @@ const { open, ready } = usePlaidLink(config);
                 />
                 <p className="hiddenl text-[16px] font-semibold text-black-2 xl:block">Connect Bank</p>
             </Button>
+        ): variant === 'bankaccount' ?(
+            <Button onClick={()=>open()} variant="bankaccount" className="plaidlink-ghost">
+                <Image
+                    src="/icons/connect-bank.svg"
+                    alt="connect bank"
+                    width={24}
+                    height={24}
+                />
+                <p className="hiddenl text-15 font-semibold text-blue-900 xl:block">Open a Bank Account</p>
+            </Button>
+        ): variant === 'credit' ?(
+            <Button onClick={()=>open()} variant="credit" className="plaidlink-ghost">
+                <Image
+                    src="/icons/connect-bank.svg"
+                    alt="connect bank"
+                    width={24}
+                    height={24}
+                />
+                <p className="hiddenl text-15 font-semibold text-blue-900 xl:block">Apply for a Credit Card</p>
+            </Button>
+        ): variant === 'loan/line' ?(
+            <Button onClick={()=>open()} variant="loan/line" className="plaidlink-ghost">
+                <Image
+                    src="/icons/connect-bank.svg"
+                    alt="connect bank"
+                    width={24}
+                    height={24}
+                />
+                <p className="hiddenl text-15 font-semibold text-blue-900 xl:block">Apply for a Loan</p>
+            </Button>
         ):(
             <Button onClick={()=>open()} className="plaidlink-default">
                 <Image

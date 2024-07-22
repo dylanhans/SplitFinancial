@@ -6,10 +6,10 @@ import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react';
 import NavBar from '@/components/bank/NavBar';
-import RootLayout from './layout';
 import CreditQuick from '@/components/bank/CreditQuick';
+import Link from 'next/link';
 
-const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
+const Credit = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);
 
   const loggedIn = await getLoggedInUser();
@@ -24,6 +24,10 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
 
   const account = await getAccount({ appwriteItemId });
 
+  const displayName = loggedIn?.firstName && loggedIn?.lastName 
+    ? `${loggedIn.firstName} ${loggedIn.lastName}`
+    : 'Guest';
+
   return (
       <section className="home">
         <div className="home-content">
@@ -31,7 +35,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
             <HeaderBox
               type="greeting"
               title="Welcome"
-              user={loggedIn?.firstName || 'Guest'}
+              user={'Guest'}
               subtext="Access and manage your account and transactions efficiently."
             />
             {/*<TotalBalanceBox
@@ -48,6 +52,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
           />
         </div>
 
+
         {/*<RightSideBar
           user={loggedIn}
           transactions={[account?.transactions]}
@@ -57,4 +62,4 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   );
 };
 
-export default Home;
+export default Credit;

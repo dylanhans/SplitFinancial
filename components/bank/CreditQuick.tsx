@@ -33,14 +33,14 @@ const CreditQuick = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   return (
-    <section className="QuickTransfer Title w-[350px]">
-      <div className="QuickTransfer Title w-[350px]">
-          <Tabs className="w-full">
+    <section className="QuickTransfer Main w-[350px]">
+      <div className="QuickTransfer w-[350px] border-b border-gray-200 pb-1">
+          <Tabs className="w-full cursor-none pointer-events-none">
             <TabsContent>
               <TabsList className="recent-transactions-tablist w-full">
                   <TabsTrigger className="flex items-center w-full">
-                  <div className="banktab-item pt-2 bg-transparent border-blue-600">
-                    <p className="text-14 line-clamp-1 flex-1 font-medium text-blue-600">
+                  <div className="banktab-item2 pt-2 bg-transparent border-blue-600">
+                    <p className="balance-text-14 line-clamp-1 flex-1 font-medium text-blue-600">
                       Make a Payment
                     </p>
                   </div>
@@ -49,19 +49,18 @@ const CreditQuick = () => {
               </TabsContent>
           </Tabs>
       </div>
-    <div className="QuickTransfer Title">
-    <Card className="w-[350px]">
+    <Card className="w-[350px] border-t border-gray-200">
       <CardHeader>
       </CardHeader>
       <CardContent>
         <form>
-          <div className="grid w-full items-center gap-4 mt-2">
+          <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-3">
-              <Label htmlFor="name" className="balance-text-13 font-smallbolder">Amount</Label>
+              <Label htmlFor="name" className="balance-text-14 font-smallboldish">Amount</Label>
               <Input id="name" placeholder="Minimum Payment $10.00" className="rounded-sm placeholder-black other-text-13 font-smallboldish"/>
             </div>
             <div className="flex flex-col space-y-3 mt-2">
-              <Label htmlFor="framework" className="balance-text-13 font-smallbolder">From</Label>
+              <Label htmlFor="framework" className="balance-text-14 font-smallboldish">From</Label>
               <Select>
                 <SelectTrigger id="framework" className="other-text-13 font-smallboldish rounded-sm bg-white">
                   <SelectValue placeholder =" Plaid Savings (ID), (Amount) "/>
@@ -70,8 +69,9 @@ const CreditQuick = () => {
                   <SelectItem value="next">Plaid Savings (ID), (Amount)</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
               <div className="flex flex-col space-y-3 mt-2">
-              <Label htmlFor="name" className="balance-text-13 font-smallbolder">Date</Label>
+              <Label htmlFor="name" className="balance-text-14 font-smallboldish">Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -97,7 +97,6 @@ const CreditQuick = () => {
               </Popover>
             </div>
             </div>
-          </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
@@ -106,7 +105,6 @@ const CreditQuick = () => {
         </div>
       </CardFooter>
     </Card>
-    </div>
     </section>
   )
 }
