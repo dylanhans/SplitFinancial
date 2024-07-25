@@ -15,6 +15,7 @@ import {
 import router from "next/router"
 import { useState } from "react"
 import { logoutAccount } from "@/lib/actions/user.actions"
+import { BankTabItem } from "./BankTabItem"
   
   const CategoryBadge = ({ category }: CategoryBadgeProps) => {
     const {
@@ -33,7 +34,13 @@ import { logoutAccount } from "@/lib/actions/user.actions"
   } 
 
   
-  const AccountType = ({ type, transactions, header, accounts }: AccountTypeProps) => {
+  const AccountType = ({
+    accounts,
+    transactions = [],
+    appwriteItemId,
+    user,
+    page=1,
+}: RecentTransactionsProps) => {
       const [isSheetOpen, setIsSheetOpen] = useState(false);
     
       const handleTransactionClick = () => {
@@ -59,9 +66,11 @@ import { logoutAccount } from "@/lib/actions/user.actions"
         </TableHeader>
         <TableBody>
 
+        
+
         {/*} {accounts.map((account: Account)=> (
 
-         ) */}
+         ) 
 
           {transactions.map((t: Transaction) => {
             const status = getTransactionStatus(new Date(t.date));
@@ -104,7 +113,7 @@ import { logoutAccount } from "@/lib/actions/user.actions"
                 <TableCell className="pl-2 pr-10">
                 <div className="flex items-center">
                   {isSplit}
-                  {/*<CategoryBadge category={status} />*/}
+                  {/*<CategoryBadge category={status} />
                 </div>
                 </TableCell>
                 <TableCell className="p-0" style={{ width: '1px' }}>
@@ -114,7 +123,8 @@ import { logoutAccount } from "@/lib/actions/user.actions"
                 </TableCell>
               </TableRow>
             )
-          })}
+          } 
+        */}
         </TableBody>
       </Table>
       <TransactionSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} />

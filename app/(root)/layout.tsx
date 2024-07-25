@@ -1,15 +1,9 @@
 // layout.tsx
 import AlternateNavBar from "@/components/bank/AlternateNavBar";
-import CreditQuick from "@/components/bank/CreditQuick";
-import MobileNav from "@/components/bank/MobileNav";
-import NavBar from "@/components/bank/NavBar";
-import Sidebar from "@/components/bank/Sidebar";
 import SidebarCredit from "@/components/bank/SidebarCredit";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
-import { useRouter } from 'next/router';
 
 
 export default async function RootLayout({
@@ -38,7 +32,7 @@ export default async function RootLayout({
           </div>
           <div className="flex flex-col w-1/4">
             <SidebarCredit 
-              type={"homepage"}
+              type='homepage'
             />
           </div>
         </div>

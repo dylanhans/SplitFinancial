@@ -1,5 +1,4 @@
 import HeaderBox from '@/components/bank/HeaderBox';
-import RecentTransactions from '@/components/bank/TransactionsImport';
 import RightSideBar from '@/components/bank/RightSideBar';
 import TotalBalanceBox from '@/components/bank/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
@@ -8,6 +7,7 @@ import React from 'react';
 import NavBar from '@/components/bank/NavBar';
 import CreditQuick from '@/components/bank/CreditQuick';
 import Link from 'next/link';
+import RecentTransactions from '@/components/bank/TransactionsImport';
 
 const Credit = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);

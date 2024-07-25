@@ -9,7 +9,9 @@ const SidebarCredit = ({type}: SidebarCreditProps) => {
     <div style={{ marginTop: '145px' }}>
       <CreditQuick />
       <div style={{ marginTop: '25px' }}>
-        <AccountSidebar />
+        <AccountSidebar 
+          type={type}
+        />
       </div>
       <div>
       <CreditOffer 

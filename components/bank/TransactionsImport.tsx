@@ -32,8 +32,6 @@ import {
     TooltipProvider,
     TooltipTrigger,
   } from "@/components/ui/tooltip"
-import { toast } from 'sonner'
-import { createDwollaCustomer } from '@/lib/actions/dwolla.actions'
 
 const RecentTransactions = ({
     accounts,

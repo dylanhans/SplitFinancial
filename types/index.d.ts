@@ -165,6 +165,11 @@ declare interface SidebarCreditProps {
 
 }
 
+declare interface AccountSidebarProps {
+  type: "homepage" | "credit";
+
+}
+
 declare interface MobileNavProps {
   user: User;
 }
@@ -176,6 +181,14 @@ declare interface PageHeaderProps {
   bottomDescription: string;
   connectBank?: boolean;
 }
+
+declare interface HomeAccountsProps {
+  accounts: Account[];
+  transactions: Transaction[];
+  appwriteItemId: string;
+  user: User;
+}
+
 
 declare interface PaginationProps {
   page: number;
@@ -239,6 +252,7 @@ declare interface RecentTransactionsProps {
   appwriteItemId: string;
   page: number;
   user: User;
+  header?: string;
 }
 
 declare interface TransactionHistoryTableProps {
@@ -255,10 +269,13 @@ declare interface TransactionTableProps {
 }
 
 declare interface AccountTypeProps {
-  transactions: Transaction[];
   accounts: Account[];
-  type?: 'debit' | 'credit' | 'Loan' | 'Line'
-  header: string
+  transactions: Transaction[];
+  appwriteItemId: string;
+  page: number;
+  user: User;
+  type?: 'debit' | 'credit' | 'Loan' | 'Line';
+  header: string;
 }
 
 declare interface CategoryProps {
