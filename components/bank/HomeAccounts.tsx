@@ -23,7 +23,6 @@ const handleCheckedChange = (checked) => {
       setIsAlertOpen(true);
     }
   };
-
   return (
     <section className="recent-transactions">
                 <div className="bank-accounts ">
@@ -34,7 +33,7 @@ const handleCheckedChange = (checked) => {
                         </div>
                             <div className="pending-transactions">
                                 <BankImport
-                                    type="debit"
+                                    type={("savings" || "checking")}
                                     header="Bank Accounts"
                                     accounts={accounts}
                                 />

@@ -40,6 +40,7 @@ const BankImport = ({
     appwriteItemId,
     user,
     header,
+    type,
 }: RecentTransactionsProps) => {
 const rowsPerPage = 20;
 const totalPages = Math.ceil(transactions.length/rowsPerPage);
@@ -59,29 +60,22 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
         if (loggedOut) router.push('/sign-in');
       };
 
-const handleCheckedChange = (checked) => {
-    setIsChecked(checked);
-    if (checked) {
-      setIsAlertOpen(true);
-    }
-  };
-
 
   return (
     <>
-      <Table>
-        <TableHeader className="bg-[#fffcfc]">
-          <TableRow>
-            <TableHead className="px-2 border-b-[2px] border-black-2 mr-5 balance-text-16 font-smallbold">{header}</TableHead>
-            <TableHead className="px-2 border-b-[2px] border-black-2"></TableHead>
-            <TableHead className="px-2 border-b-[2px] border-black-2"></TableHead>
-            <TableHead className="px-2 border-b-[2px] border-black-2"></TableHead>
-            <TableHead className="px-2 border-b-[2px] border-black-2"></TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <Table className="w-full">
+  <TableHeader className="bg-[#fffcfc] w-full">
+    <TableRow className="w-full">
+      <TableHead className="px-2 border-b-[2px] border-black-2 mr-5 balance-text-16 font-smallbold w-full">{header}</TableHead>
+      <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+      <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+      <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+      <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody className="w-full">
 
-    <section className="bank-listings">
+    <section className="bank-listings w-full">
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist w-full">
             {accounts.slice(0, 1).map((account: Account) => (

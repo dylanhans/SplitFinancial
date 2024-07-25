@@ -29,8 +29,21 @@ import { CalendarIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabspayment'
 
-const CreditQuick = () => {
+
+const CreditQuick = ({
+  accounts,
+  account,
+  transactions = [],
+  appwriteItemId,
+  user,
+  header,
+  type,
+}: RecentTransactionsProps) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+
+ const filteredAccounts = (accounts || []).filter(
+  (account) => account.subtype === "savings" || account.subtype === "checking"
+);
 
   return (
     <section className="QuickTransfer Main w-[350px]">
@@ -61,14 +74,26 @@ const CreditQuick = () => {
             </div>
             <div className="flex flex-col space-y-3 mt-2">
               <Label htmlFor="framework" className="balance-text-14 font-smallboldish">From</Label>
+              
               <Select>
                 <SelectTrigger id="framework" className="other-text-13 font-smallboldish rounded-sm bg-white">
-                  <SelectValue placeholder =" Plaid Savings (ID), (Amount) "/>
+                  {filteredAccounts.slice(0, 1).map((account) => (
+                    <SelectValue
+                      key={account.id}
+                      placeholder={` ${account.name} (${account.id}), (${account.availableBalance}) `}
+                    />
+                  ))}
                 </SelectTrigger>
                 <SelectContent position="popper" className="other-text-13 font-smallboldish bg-white">
-                  <SelectItem value="next">Plaid Savings (ID), (Amount)</SelectItem>
+                  {filteredAccounts.map((account) => (
+                    <SelectItem
+                      key={account.id}
+                      value={account.id}
+                    >{`${account.name} (${account.id}), (${account.availableBalance})`}</SelectItem>
+                  ))}
                 </SelectContent>
-              </Select>
+            </Select>
+
             </div>
               <div className="flex flex-col space-y-3 mt-2">
               <Label htmlFor="name" className="balance-text-14 font-smallboldish">Date</Label>

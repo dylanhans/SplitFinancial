@@ -253,6 +253,7 @@ declare interface RecentTransactionsProps {
   page: number;
   user: User;
   header?: string;
+  type?: 'savings' | 'checking' | 'credit' | 'Line' | 'Loan';
 }
 
 declare interface TransactionHistoryTableProps {

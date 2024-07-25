@@ -51,7 +51,7 @@ const { open, ready } = usePlaidLink(config);
                     width={24}
                     height={24}
                 />
-                <p className="hiddenl text-[16px] font-semiboldish text-black-2 xl:block">Connect Bank</p>
+                <p className="hiddenl text-[16px] font-smallbolder text-black-2 xl:block">Connect Bank</p>
             </Button>
         ): variant === 'bankaccount' ?(
             <Button onClick={()=>open()} variant="bankaccount" className="plaidlink-ghost">
@@ -61,7 +61,7 @@ const { open, ready } = usePlaidLink(config);
                     width={18}
                     height={18}
                 />
-                <p className="hiddenl text-15 font-semiboldish text-[#000000] xl:block">Open a Bank Account</p>
+                <p className="hiddenl text-15 font-smallbolder text-[#000000] xl:block">Open a Bank Account</p>
             </Button>
         ): variant === 'credit' ?(
             <Button onClick={()=>open()} variant="credit" className="plaidlink-ghost">
@@ -71,7 +71,7 @@ const { open, ready } = usePlaidLink(config);
                     width={18}
                     height={18}
                 />
-                <p className="hiddenl text-15 font-semiboldish text-[#000000] xl:block">Apply for a Credit Card</p>
+                <p className="hiddenl text-15 font-smallbolder text-[#000000] xl:block">Apply for a Credit Card</p>
             </Button>
         ): variant === 'loan/line' ?(
             <Button onClick={()=>open()} variant="loan/line" className="plaidlink-ghost">
@@ -81,7 +81,7 @@ const { open, ready } = usePlaidLink(config);
                     width={18}
                     height={18}
                 />
-                <p className="hiddenl text-15 font-semiboldish text-[#000000] xl:block">Apply for a Loan</p>
+                <p className="hiddenl text-15 font-smallbolder text-[#000000] xl:block">Apply for a Loan</p>
             </Button>
         ):(
             <Button onClick={()=>open()} className="plaidlink-default">

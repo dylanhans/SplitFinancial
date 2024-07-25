@@ -3,7 +3,11 @@ import { cn, formUrlQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PlaidLink from './PlaidLink'; // Assuming PlaidLink is correctly imported
 import { useState } from "react";
-
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
 interface RecentTransactionsProps {
   accounts: Account[];
   appwriteItemId: string;
@@ -40,15 +44,17 @@ export const BankListing = ({
   };
 
   return (
-
-    <div
-      className="banktab-item border-blue-600"
-    >
-      <p
-        className="text-12 line-clamp-1 flex-1 font-medium text-blue-600"
-      >
-        {account.name}
-      </p>
+    <div className="hover:bg-[#FDFEFF] cursor-pointer w-full">
+      <div className="w-full">
+        <p className="text-12 line-clamp-1 flex-1 font-medium text-blue-600">
+          {account.name}
+        </p>
+      </div>
+      <div>
+        <p className="text-10 w-full">
+          {account.subtype}
+        </p>
+      </div>
     </div>
 
   );

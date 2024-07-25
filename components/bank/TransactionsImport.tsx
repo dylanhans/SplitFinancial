@@ -77,7 +77,6 @@ const totalProcessingAmount = processingTransactions.reduce(
 );
 
 
-
   return (
     <section className="recent-transactions">
         <Tabs defaultValue={appwriteItemId} className="w-full">

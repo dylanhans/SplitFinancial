@@ -3,11 +3,14 @@ import CreditQuick from './CreditQuick'
 import CreditOffer from './CreditOffer';
 import AccountSidebar from './AccountSidebar';
 
-const SidebarCredit = ({type}: SidebarCreditProps) => {
+const SidebarCredit = ({type, account, accounts}: SidebarCreditProps) => {
 
   return (
     <div style={{ marginTop: '145px' }}>
-      <CreditQuick />
+      <CreditQuick 
+        account={account}
+        accounts={accounts}
+      />
       <div style={{ marginTop: '25px' }}>
         <AccountSidebar 
           type={type}
