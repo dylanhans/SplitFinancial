@@ -60,6 +60,11 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
         if (loggedOut) router.push('/sign-in');
       };
 
+      const filteredAccounts = accounts.filter(account => 
+        type === 'savings' ? account.subtype === 'savings' 
+        : type === 'checking' ? account.subtype === 'checking'
+        : false
+      );
 
   return (
     <>
@@ -78,7 +83,7 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
     <section className="bank-listings w-full">
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist w-full">
-            {accounts.slice(0, 1).map((account: Account) => (
+            {filteredAccounts.slice(0, 2).map((account) => (
                 <TabsTrigger key={account.id} value={account.appwriteItemId} className="flex items-start w-full">
                     <BankListing 
                         key={account.id}
@@ -89,31 +94,14 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
                         setFirstAccount={setFirstAccount}
                         />
 
-                        {/* <div className="banktab-item2 pt-2 bg-transparent border-blue-600">
-                                <p className="balance-text-14 line-clamp-1 flex-1 font-medium text-blue-600">
-                                    Make a Payment
-                                </p>
-                            </div>*/}
-
                             <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
                                 
                             </span>
-                            
+                    
                 </TabsTrigger>
                 ))}
             </TabsList>
             
-            {/*}
-            {accounts.map((account: Account)=> (
-                <TabsContent
-                value={account.appwriteItemId}
-                key={account.id}
-                className="content"
-            >
-            </TabsContent>
-            ))}
-        */}
-
         </Tabs>
         </section>
     </TableBody>

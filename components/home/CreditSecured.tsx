@@ -112,7 +112,7 @@ export const CreditSecured = () => {
             </div>
           </div>
           <video className="max-h-[600px] aspect-fixed" autoPlay loop muted>
-            <source type="video/mp4" src="/icons/card-animation.mp4" />
+            <source type="video/mp4" src="/icons/test-animation.mp4" />
             Your browser does not support the video tag.
           </video>
         </div>

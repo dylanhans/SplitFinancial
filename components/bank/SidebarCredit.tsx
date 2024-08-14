@@ -6,7 +6,7 @@ import AccountSidebar from './AccountSidebar';
 const SidebarCredit = ({type, account, accounts}: SidebarCreditProps) => {
 
   return (
-    <div style={{ marginTop: '145px' }}>
+    <div style={{ marginTop: '80px' }}>
       <CreditQuick 
         account={account}
         accounts={accounts}

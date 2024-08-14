@@ -19,6 +19,20 @@ import { formatAmount } from '@/lib/utils';
 const CardTable: React.FC<CardTableProps> = ({ account }) => {
   const availableCredit = 15000;
 
+  const imageSrc = account.subtype === 'savings'
+    ? '/icons/card2.png'
+    : account.subtype === 'checking'
+    ? '/icons/test-card.png'
+    : '';
+
+  const altText = account.subtype === 'savings'
+    ? 'savings card'
+    : account.subtype === 'checking'
+    ? 'credit card'
+    : '';
+  console.log("Account Type:", account.subtype);
+
+
   return (
     <div className="w-full rounded-lg">
       {/* First Row with 4 columns */}
@@ -26,12 +40,12 @@ const CardTable: React.FC<CardTableProps> = ({ account }) => {
         <ResizablePanel defaultSize={10} style={{ height: '100%'}}>
           <div className="flex h-full w-[150px] items-center justify-center ml-3">
             <div className="shadow-lg hover:shadow-lg">
-              <Image 
-                src="/icons/test-card.png"
-                alt="credit card"
-                width={175}
-                height={175}
-              />
+            <Image 
+              src={imageSrc}
+              alt={altText}
+              width={175}
+              height={175}
+            />
             </div>
           </div>
         </ResizablePanel>

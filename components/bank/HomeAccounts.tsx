@@ -33,7 +33,7 @@ const handleCheckedChange = (checked) => {
                         </div>
                             <div className="pending-transactions">
                                 <BankImport
-                                    type={("savings" || "checking")}
+                                    type="savings" // savings is chequing debit account
                                     header="Bank Accounts"
                                     accounts={accounts}
                                 />
@@ -55,7 +55,7 @@ const handleCheckedChange = (checked) => {
                         </div>
                             <div className="pending-transactions">
                                 <BankImport
-                                    type="credit"
+                                    type="checking" // checking is credit card account
                                     header="Credit Cards"
                                     accounts={accounts}
                                 />

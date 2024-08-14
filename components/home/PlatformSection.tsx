@@ -76,7 +76,7 @@ export const PlatformSection = () => {
                 className="mb-2 h-[280px] sm:h-[380px] md:h-[412px] w-full lg:w-[326px] bg-cover transition-[height] duration-300 bg-no-repeat bg-center md:bg-bottom rounded-xl no-underline hover:no-underline lg:h-[420px] lg:hover:h-[460px]"
                 style={{
                   backgroundImage:
-                    'url("https://static.production.neofinancial.com/marketing-web/homepage/home-feature-3.jpg")',
+                    'url("/icons/15.webp")',
                 }}
               >
                 <div className="flex flex-col p-[32px] ">

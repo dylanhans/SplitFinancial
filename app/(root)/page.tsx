@@ -25,15 +25,27 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
     ? `${loggedIn.firstName} ${loggedIn.lastName}`
     : 'Guest';
 
+    const currentHour = new Date().getHours();
+
+    // Determine the greeting based on the hour
+    let greeting;
+    if (currentHour < 12) {
+      greeting = 'Good Morning,';
+    } else if (currentHour < 18) {
+      greeting = 'Good Afternoon,';
+    } else {
+      greeting = 'Good Evening,';
+    }
+
   return (
       <section className="home">
         <div className="home-content">
           <header className="home-header">
             <HeaderBox
               type="greeting"
-              title="Good Evening,"
+              title={greeting}
               user={displayName || 'Guest'}
-              subtext="Access and manage your account and transactions efficiently."
+              subtext="Access and manage your account with ease."
             />
             {/*<TotalBalanceBox
               accounts={[accountsData]}

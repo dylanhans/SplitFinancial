@@ -7,18 +7,16 @@ export const Credit = () => {
       <div className="py-[80px]">
         <div className="px-6 md:px-0 md:mx-auto md:max-w-[520px] lg:max-w-[1016px]">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {/* Neo Credit Card */}
+            {/* 1 Credit Card */}
             <div className="flex flex-col rounded-xl bg-white p-1">
-              <Image
-                alt="Neo Credit"
-                loading="lazy"
-                width={280}
-                height={181}
-                src="/icons/credit-card-en.webp"
-                style={{ color: 'transparent' }}
+               <Image 
+                src="/icons/test-card.png"
+                alt="credit card"
+                width={175}
+                height={175}
               />
               <span className="text-2xl leading-8 font-semibold not-italic text mb-[12px] text-black py-6">
-                Neo Credit
+                Split Credit
               </span>
               <hr className="h-px border-0 bg-black" />
               <span className="text-xl leading-7 font-semibold not-italic text mb-[12px] text-black  pt-8">
@@ -114,18 +112,16 @@ export const Credit = () => {
               </div>
             </div>
 
-            {/* Neo Secured Credit Card */}
+            {/* 2 Secured Credit Card */}
             <div className="flex flex-col rounded-xl bg-white p-1">
-              <Image
-                alt="Neo Secured Credit"
-                loading="lazy"
-                width={280}
-                height={181}
-                src="/icons/credit-card-en.webp"
-                style={{ color: 'transparent' }}
+            <Image 
+                src="/icons/tester-card.png"
+                alt="credit card"
+                width={175}
+                height={175}
               />
               <span className="text-2xl leading-8 font-semibold not-italic text mb-[12px]  py-6">
-                Neo Secured Credit
+                Split Secured Credit
               </span>
               <hr className="h-px border-0 bg-black" />
               <span className="text-xl leading-7 font-semibold not-italic text mb-[12px]  pt-8">

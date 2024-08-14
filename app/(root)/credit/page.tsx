@@ -32,13 +32,13 @@ const Credit = async ({ searchParams: { id, page } }: SearchParamProps) => {
       <section className="home">
         <div className="home-content">
           <header className="home-header">
-            <HeaderBox
+            {/*<HeaderBox
               type="greeting"
               title="Welcome"
-              user={'Guest'}
+              user={displayName || 'Guest'}
               subtext="Access and manage your account and transactions efficiently."
             />
-            {/*<TotalBalanceBox
+            <TotalBalanceBox
               accounts={[accountsData]}
               totalBanks={accounts?.totalBanks}
               totalCurrentBalance={accounts?.totalCurrentBalance}

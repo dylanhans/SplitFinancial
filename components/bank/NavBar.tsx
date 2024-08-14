@@ -27,13 +27,6 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        category: 'Financing',
-        items: [
-          { label: 'High Interest', href: '/products/high-interest' },
-          { label: 'Money Card', href: '/products/money-card' },
-        ],
-      },
-      {
         category: 'Features',
         items: [
           { label: 'Managed', href: '/products/managed' },

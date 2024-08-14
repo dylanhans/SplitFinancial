@@ -37,7 +37,7 @@ export const Superpowers = () => {
                 Earn rewards, your way
               </h2>
               <span className="text-base leading-7 md:text-lg font-normal text-black not-italic">
-                Pay with Neo and earn instant rewards at thousands of your favourite brands.
+                Pay with Split and earn instant rewards at thousands of your favourite brands.
               </span>
             </div>
           </div>
