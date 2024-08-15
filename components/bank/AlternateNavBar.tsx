@@ -419,6 +419,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
           </Tabs>
           </div>
         </nav>
+        
     </div>
     </div>
     </div>

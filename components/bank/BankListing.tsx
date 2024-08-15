@@ -33,6 +33,12 @@ export const BankListing = ({
   const router = useRouter();
   const isActive = appwriteItemId === account?.appwriteItemId;
 
+  const newSubtype = account.subtype === 'checking' 
+  ? 'Visa' 
+  : account.subtype === 'savings' 
+    ? 'Chequing' 
+    : '';
+
   const handleBankChange = (account: Account) => {
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
@@ -44,18 +50,26 @@ export const BankListing = ({
   };
 
   return (
-    <div className="hover:bg-[#FDFEFF] cursor-pointer w-full">
-      <div className="w-full">
-        <p className="text-12 line-clamp-1 flex-1 font-medium text-blue-600">
-          {account.name}
+    <div className="hover:bg-[#FDFEFF] cursor-pointer w-full p-2">
+    <div className="flex flex-row items-start justify-between w-full">
+      <div className="flex flex-col items-start">
+        <p className="text-12 font-medium text-blue-600 mb-1">
+          {account.officialName}
+        </p>
+        <p className="text-10">
+          {newSubtype} <span className="ml-1">{account.appwriteItemId}</span>
         </p>
       </div>
-      <div>
-        <p className="text-10 w-full">
-          {account.subtype}
-        </p>
+      <div className="content-home flex items-center">
+      <div className="home-amounts mr-4">
+  {account.currentBalance.toFixed(2)}
+</div>
+        <div className="home-options ml-10">
+          ⋮
+        </div>
       </div>
     </div>
-
+  </div>
+  
   );
 };

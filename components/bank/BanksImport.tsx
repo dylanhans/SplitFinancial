@@ -84,7 +84,7 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist w-full">
             {filteredAccounts.slice(0, 2).map((account) => (
-                <TabsTrigger key={account.id} value={account.appwriteItemId} className="flex items-start w-full">
+                <TabsTrigger key={account.id} value={account.appwriteItemId} className="w-full">
                     <BankListing 
                         key={account.id}
                         account={account}
@@ -93,10 +93,6 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
                         user={user}
                         setFirstAccount={setFirstAccount}
                         />
-
-                            <span className="other-text-13 font-smallboldish pt-2 bg-transparent mr-4 border-none ml-auto">
-                                
-                            </span>
                     
                 </TabsTrigger>
                 ))}
