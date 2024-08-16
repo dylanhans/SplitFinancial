@@ -11,39 +11,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
   } from "@/components/ui/table"
   import { transactionCategoryStyles } from "@/constants"
   
-  import { cn, formatAmount, formatDateTime, getTransactionStatus, removePaymentCharacters, removeSpecialCharacters } from "@/lib/utils"
-import router from "next/router"
+  import { cn, formatAmount, formUrlQuery, formatDateTime, getTransactionStatus, removePaymentCharacters, removeSpecialCharacters } from "@/lib/utils"
 import { useState } from "react"
 import { logoutAccount } from "@/lib/actions/user.actions"
 import React from 'react'
 import { BankListing } from './BankListing'
-  
-  const CategoryBadge = ({ category }: CategoryBadgeProps) => {
-    const {
-      borderColor,
-      backgroundColor,
-      textColor,
-      chipBackgroundColor,
-     } = transactionCategoryStyles[category as keyof typeof transactionCategoryStyles] || transactionCategoryStyles.default
-     
-    return (
-      <div className={cn('category-badge', borderColor, chipBackgroundColor)}>
-        <div className={cn('size-2 rounded-full', backgroundColor)} />
-        <p className={cn('text-[12px] font-medium', textColor)}>{category}</p>
-      </div> 
-    )
-  } 
+import Image from "next/image";
+import { useSearchParams, useRouter } from "next/navigation";
+   
 
 const BankImport = ({
     accounts,
-    transactions = [],
+    account,
     appwriteItemId,
     user,
     header,
     type,
-}: RecentTransactionsProps) => {
-const rowsPerPage = 20;
-const totalPages = Math.ceil(transactions.length/rowsPerPage);
+}: BankImportProps) => {
+
 const [isChecked, setIsChecked] = React.useState(false);
 const [isAlertOpen, setIsAlertOpen] = useState(false);
 const [firstAccount, setFirstAccount] = useState<Account>(accounts[0]);
@@ -53,6 +38,9 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
       const handleTransactionClick = () => {
         setIsSheetOpen(true);
       };
+
+      const router = useRouter();
+      const searchParams = useSearchParams();
     
       const handleLogOut = async () => {
         const loggedOut = await logoutAccount();
@@ -65,6 +53,12 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
         : type === 'checking' ? account.subtype === 'checking'
         : false
       );
+      
+      const handleBankChange = (account: { appwriteItemId: any }) => {
+        const newUrl = `/account?id=${account.appwriteItemId}`;
+        router.push(newUrl, { scroll: false });
+      };
+      
 
   return (
     <>
@@ -84,7 +78,7 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
         <Tabs defaultValue={appwriteItemId} className="w-full">
             <TabsList className="recent-transactions-tablist w-full">
             {filteredAccounts.slice(0, 2).map((account) => (
-                <TabsTrigger key={account.id} value={account.appwriteItemId} className="w-full">
+                <TabsTrigger key={account.id} value={account.appwriteItemId} className="w-full" onClick={() => handleBankChange(account)}>
                     <BankListing 
                         key={account.id}
                         account={account}

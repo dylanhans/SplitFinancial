@@ -68,6 +68,10 @@
     font-weight: 450;
   }
 
+  .details{
+    font-size: 11px
+  }
+
   .w-\[325px\] {
     width: 340px;
 }

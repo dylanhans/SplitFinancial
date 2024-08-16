@@ -22,9 +22,7 @@ export default async function RootLayout({
         <AlternateNavBar 
           user={loggedIn}
         />
-        <Link href="/credit">
-            <p className="cursor-pointer text-blue-900">Credit</p>
-          </Link>
+
         <div className="flex h-screen w-[1250px] ml-[250px] font-inter">
           {/* Main content */}
           <div className="flex size-full flex-col w-3/4">

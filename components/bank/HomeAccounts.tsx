@@ -18,7 +18,6 @@ import BankImport from './BanksImport'
 
 const HomeAccounts = ({
     accounts,
-    transactions = [],
     appwriteItemId,
     user,
 }: HomeAccountsProps) => {
@@ -30,17 +29,12 @@ const savingsAccounts = accounts.filter(account => account.subtype === 'savings'
 const creditAccounts = accounts.filter(account => account.subtype === 'checking');
 const lineLoanAccounts = accounts.filter(account => account.subtype === 'loanline');
 
-
-const handleCheckedChange = (checked) => {
-    setIsChecked(checked);
-    if (checked) {
-      setIsAlertOpen(true);
-    }
-  };
   return (
     <section className="recent-transactions">
                 <div className="bank-accounts ">
                     <div className="flex items-center justify-between">
+                        
+                        {/* spacing */}
                         <div className="authorized-transactions-row flex-grow mt-8 pl-1 pr-10">
                         </div> 
                             
@@ -52,6 +46,8 @@ const handleCheckedChange = (checked) => {
                                         type="savings" // savings is chequing debit account
                                         header="Bank Accounts"
                                         accounts={accounts}
+                                        appwriteItemId={appwriteItemId}
+                                        user={user}
                                     />
                                     <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
                                 </>
@@ -78,6 +74,7 @@ const handleCheckedChange = (checked) => {
 
                 <div className="credit-accounts ">
                         <div className="flex items-center justify-between">
+                        
                         <div className="authorized-transactions-row flex-grow mt-8 pl-1 pr-10">
                             </div>
                             
@@ -90,6 +87,8 @@ const handleCheckedChange = (checked) => {
                                         type="checking" // savings is chequing debit account
                                         header="Credit Cards"
                                         accounts={accounts}
+                                        appwriteItemId={appwriteItemId}
+                                        user={user}
                                     />
                                     <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
                                 </>
@@ -116,6 +115,7 @@ const handleCheckedChange = (checked) => {
 
                 <div className="line-loan-accounts ">
                         <div className="flex items-center justify-between">
+                            
                             <div className="authorized-transactions-row flex-grow mt-8 pl-1 pr-10">
                             </div>
                             
@@ -128,6 +128,8 @@ const handleCheckedChange = (checked) => {
                                         type={"Line"||"Loan"} // savings is chequing debit account
                                         header="Lines & Loans"
                                         accounts={accounts}
+                                        appwriteItemId={appwriteItemId}
+                                        user={user}
                                     />
                                     <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
                                 </>

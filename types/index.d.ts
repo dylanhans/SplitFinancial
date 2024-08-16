@@ -162,7 +162,6 @@ declare interface HeaderBoxProps {
 
 declare interface SidebarCreditProps {
   type: "homepage" | "credit";
-
 }
 
 declare interface AccountSidebarProps {
@@ -244,6 +243,15 @@ declare interface RightSidebarProps {
 
 declare interface SiderbarProps {
   user: User;
+}
+
+declare interface BankImportProps {
+  accounts: Account[];
+  account: Account;
+  appwriteItemId: string;
+  header?: string;
+  user: User;
+  type?: 'savings' | 'checking' | 'credit' | 'Line' | 'Loan';
 }
 
 declare interface RecentTransactionsProps {
