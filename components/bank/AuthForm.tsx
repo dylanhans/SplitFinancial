@@ -27,6 +27,7 @@ import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
+import { Separator } from '@radix-ui/react-separator'
 
 
 const AuthForm = ({type}:{type: string}) => {
@@ -111,10 +112,10 @@ const AuthForm = ({type}:{type: string}) => {
                         ? 'Sign In'
                         : 'Sign Up'
                     }
-                    <p className="text-16 font-normal text-gray-600">
+                    <p className="text-16 mt-2 font-normal text-gray-600">
                         {user
                             ? 'Link your account to get started'
-                            : 'Please enter your details'
+                            : 'Enter your banking details below'
 }
                     </p>
                 </h1>
@@ -193,7 +194,7 @@ const AuthForm = ({type}:{type: string}) => {
             <CustomInput 
                 control={form.control}
                 name="email"
-                label="Email"
+                label="Client Card or Email"
                 placeholder="Enter your email"
             />
  
@@ -213,7 +214,7 @@ const AuthForm = ({type}:{type: string}) => {
             </div>
             </>
             )}
-            <div className=" flex flex-col gap-2 ">
+            <div className=" flex flex-col gap-2">
             <Button type="submit" className="form-btn " disabled={isLoading}>
                 {isLoading ?(
                     <>
@@ -222,24 +223,44 @@ const AuthForm = ({type}:{type: string}) => {
                         Loading...
                     </>
                 ):type==="sign-in"
-                ? 'Sign In' : 'Sign Up'}
+                ? 'Continue' : 'Sign Up'}
             </Button>
             </div>
         </form>
         </Form>
 
-        <footer className="flex justify-center gap-1">
+        <footer className="flex justify-center gap-1 flex-col">
                 <p className="text-14 font-normal text-gray-600">
                     {type==='sign-in'
                         ? "Don't have an account?"
                         : "Already have an account?"
                     }
-                </p>
-                <Link href={type==='sign-in' ? '/sign-up'
+                <span> <Link href={type==='sign-in' ? '/sign-up'
                 : '/sign-in'} className="form-link">
                     {type==='sign-in' ? 'Sign up'
                     : 'Sign in'}
                 </Link>
+                </span>
+                </p>
+                
+                <p className="text-14 mt-1 font-normal text-gray-600">
+                    {type==='sign-in'
+                        ? "Recover an Account"
+                        : ""
+                    }
+                </p>
+                <div className="sign-in-spacing mt-20">
+
+                </div>
+                <Separator className="flex-grow border-t border-gray-300 mt-5" /> {/* Line with full width */}
+                <div className="tradecopyright flex-col">
+                    <p className="text-12 mt-1 font-normal text-gray-600">
+                    Split Online Banking is provided by Split Financial Services.
+                    </p>
+                    <p className="text-12 mt-1 font-normal text-gray-600">
+                    Split Financial Services Website, © 2023-2024
+                    </p>
+                </div>
         </footer>
             </>
         )}

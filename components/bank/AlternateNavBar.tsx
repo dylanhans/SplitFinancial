@@ -359,7 +359,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                   className={`tab-item cursor-pointer relative ${activeTab === 'account' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
                   <TabsTrigger value="account">
-                    <a href="/" className="text-xl lg:text-sm">Accounts</a>
+                    <a href="/" className="text-xl lg:text-sm">Accounts Summary</a>
                   </TabsTrigger>
                 </li>
                 <li

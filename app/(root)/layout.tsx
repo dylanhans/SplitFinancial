@@ -1,6 +1,7 @@
 // layout.tsx
 import AlternateNavBar from "@/components/bank/AlternateNavBar";
 import SidebarCredit from "@/components/bank/SidebarCredit";
+import Footer2 from "@/components/MainLayout/footer2";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
@@ -34,6 +35,7 @@ export default async function RootLayout({
             />
           </div>
         </div>
+        <Footer2/>
       </main>
     );
   }
