@@ -92,7 +92,7 @@ const AuthForm = ({type}:{type: string}) => {
       
 
   return (
-    <section className="auth-form">
+    <section className="auth-form max-w-lg mx-auto">
         <header className="flex flex-col gap-5 md:gap-8">
             {/*<Link href="/" className="cursor-pointer flex items-center gap-1">
             <Image
@@ -129,7 +129,7 @@ const AuthForm = ({type}:{type: string}) => {
         ): (
             <>
                 <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-h-[700px] overflow-y-auto hide-scrollbar">
             
             {type==='sign-up' && (
                 <>
@@ -191,12 +191,12 @@ const AuthForm = ({type}:{type: string}) => {
                 </>
             )}
 
-            <CustomInput 
-                control={form.control}
-                name="email"
-                label="Client Card or Email"
-                placeholder="Enter your email"
-            />
+                <CustomInput 
+                    control={form.control}
+                    name="email"
+                    label={type === 'sign-up' ? 'Email' : 'Client Card or Email'}
+                    placeholder="Enter your email"
+                />
  
             <CustomInput 
                 control={form.control}
@@ -204,18 +204,19 @@ const AuthForm = ({type}:{type: string}) => {
                 label="Password"
                 placeholder="Enter your password"
             />
-            {type==='sign-up' && (
+
+            {/* {type==='sign-up' && (
             <>
             <div className="flex items-center justify-center space-x-2">
-                <Checkbox id="terms" />
+                <Checkbox id="terms" required/>
                 <label htmlFor="terms" className="cursor-pointer text-12">
                     Accept <span className="cursor-pointer text-bankGradient hover-card-trigger text-12">terms and conditions</span>
                 </label>
             </div>
             </>
-            )}
+            )} */}
             <div className=" flex flex-col gap-2">
-            <Button type="submit" className="form-btn " disabled={isLoading}>
+            <Button type="submit" className="form-btn mt-2" disabled={isLoading}>
                 {isLoading ?(
                     <>
                         <Loader2 size={20} 

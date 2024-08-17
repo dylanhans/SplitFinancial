@@ -348,8 +348,8 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
         {/* hide on scroll down  */}
             
         <div className="hidden lg:block">
-        <nav className="relative px-0 text-white lg:bg-[#323232] lg:px-6">
-          <div className="account-functions ml-[260px]">
+        <nav className="relative px-0 text-white bg-gradient-to-b from-[#232222] to-[#3f3e3e] lg:px-6">
+        <div className="account-functions ml-[260px]">
           <Tabs defaultValue="account" className="w-full" onValueChange={handleTabClick}>
             <TabsList>
               <ul className="flex space-x-2 lg:mx-auto lg:max-w-7xl lg:px-0" ref={tabsRef}>

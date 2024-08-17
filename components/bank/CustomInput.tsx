@@ -7,15 +7,15 @@ import { authformSchema } from '@/lib/utils'
 
 const formSchema = authformSchema('sign-up');
 
-
-interface CustomInput{
+interface CustomInputProps {
     control: Control<z.infer<typeof formSchema>>,
     name: FieldPath<z.infer<typeof formSchema>>,
     label: string,
-    placeholder: string
+    placeholder: string,
+    className?: string
 }
 
-const CustomInput = ({control, name, label, placeholder}: CustomInput) => {
+const CustomInput = ({ control, name, label, placeholder }: CustomInputProps) => {
   return (
         <FormField
             control={control}
@@ -29,9 +29,8 @@ const CustomInput = ({control, name, label, placeholder}: CustomInput) => {
                         <FormControl>
                             <Input
                                 placeholder={placeholder}
-                                className="input-class"
-                                type={name=='password' ? 'password' :
-                                'text'}
+                                className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
+                                type={name === 'password' ? 'password' : 'text'}
                                 {...field}
                             />
                         </FormControl>

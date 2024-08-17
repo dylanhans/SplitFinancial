@@ -128,6 +128,25 @@
     font-weight: 375
   }
 
+  .hide-scrollbar {
+    overflow: auto; /* Allows scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Hides scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+.hide-scrollbar {
+    scrollbar-width: none; /* Hides scrollbar */
+}
+
+/* Hide scrollbar for IE and Edge */
+.hide-scrollbar {
+    -ms-overflow-style: none; /* Hides scrollbar */
+}
+
   .ProgressRoot {
     position: relative;
     overflow: hidden;
@@ -251,6 +270,10 @@
 
   .recent-transactions {
     @apply flex w-full flex-col gap-6;
+  }
+
+  .input-class {
+    @apply rounded-sm shadow-sm font-smallboldish balance-text-16;
   }
 
   .recent-transactions-label {

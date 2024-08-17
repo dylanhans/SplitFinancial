@@ -127,18 +127,18 @@ export const NavBar: React.FC = () => {
     <div className="relative">
       {/* hide on scroll down  */}
       <div className="ease-in-out transition-all duration-500 max-h-0 max-h-[10rem] delay-500">
-        <div className="top cursor-pointer relative py-[12px] px-[24px] bg-[#e0cfba] max-h duration gap-[32px] flex items-center justify-between w-full ">
-          <Image src="/icons/fb.png" height={34} width={24} alt="logo" />
-          <span className="text-sm w-full leading-5 font-normal not-italic text-black text-center">
-            <span className="font-bold underline">Sign up now to claim</span> a $10,000 credit limit instantly approved
-          </span>
+      <div className="top cursor-pointer relative py-[12px] px-[24px] max-h duration gap-[32px] flex items-center justify-between w-full bg-gradient-to-r from-[#14315B] to-[#2757A1]">
+        <Image src="/icons/headerlogo.png" height={20} width={20} alt="logo" className="shadow-sm"/>
+        <span className="text-sm w-full leading-5 font-normal text-white text-center" style={{ transform: 'skewX(-5deg)' }}>
+          <span className="font-bold underline text-white" style={{ transform: 'skewX(-5deg)' }}>Sign up now to claim</span> a $5,000 credit limit instantly approved
+        </span>
         </div>
       </div>
       {/* hide on scroll down  */}
           
       <div className="hidden lg:block">
-        <nav className="relative px-0 pt-2 text-white lg:bg-[#1b1b1b] lg:px-6 lg:py-1">
-          <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
+      <nav className="relative px-0 pt-2 text-white bg-gradient-to-b from-[#2e2d2d] to-[#0f0f0f] lg:px-6 lg:py-1">
+      <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
             <li
               aria-label="Personal"
               className="tab-item cursor-pointer relative opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0"
