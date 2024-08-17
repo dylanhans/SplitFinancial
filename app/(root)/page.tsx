@@ -5,6 +5,16 @@ import TotalBalanceBox from '@/components/bank/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react';
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Split Financial Services - Summary",
+  description: "Finance payments for in-store purchases",
+  icons: {
+    icon: '/icons/testlogo4.jpeg',
+  }
+};
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);

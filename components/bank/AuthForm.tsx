@@ -112,7 +112,7 @@ const AuthForm = ({type}:{type: string}) => {
                         ? 'Sign In'
                         : 'Sign Up'
                     }
-                    <p className="text-16 mt-2 font-normal text-gray-600">
+                    <p className="text-16 mt-1 font-normal text-gray-600">
                         {user
                             ? 'Link your account to get started'
                             : 'Enter your banking details below'
@@ -209,7 +209,7 @@ const AuthForm = ({type}:{type: string}) => {
             <div className="flex items-center justify-center space-x-2">
                 <Checkbox id="terms" />
                 <label htmlFor="terms" className="cursor-pointer text-12">
-                    Accept <span className="underline text-12 text-blue-600">terms and conditions</span>
+                    Accept <span className="cursor-pointer text-bankGradient hover-card-trigger text-12">terms and conditions</span>
                 </label>
             </div>
             </>
@@ -243,13 +243,14 @@ const AuthForm = ({type}:{type: string}) => {
                 </span>
                 </p>
                 
-                <p className="text-14 mt-1 font-normal text-gray-600">
+                <p className="text-14 mt-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
                         ? "Recover an Account"
                         : ""
                     }
                 </p>
-                <div className="sign-in-spacing mt-20">
+                <div className={`bottom-spacing ${type === 'sign-in' ? 'mt-40' : ''}`}>
+
 
                 </div>
                 <Separator className="flex-grow border-t border-gray-300 mt-5" /> {/* Line with full width */}
@@ -260,6 +261,48 @@ const AuthForm = ({type}:{type: string}) => {
                     <p className="text-12 mt-1 font-normal text-gray-600">
                     Split Financial Services Website, © 2023-2024
                     </p>
+                <div className="mt-5"> 
+                    <div className="text-12 mt-5 flex items-center space-x-4 font-normal text-bankGradient">
+                        <p className="cursor-pointer hover-card-trigger flex items-center">
+                            Legal
+                            <span className="ml-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-external-link">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                                    <path d="M11 13l9 -9" />
+                                    <path d="M15 4h5v5" />
+                                </svg>
+                            </span>
+                        </p> 
+                        <p className="cursor-pointer hover-card-trigger flex items-center">
+                            Accessibility
+                            <span className="ml-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-external-link">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                                    <path d="M11 13l9 -9" />
+                                    <path d="M15 4h5v5" />
+                                </svg>
+                            </span>
+                        </p> 
+                        <p className="cursor-pointer hover-card-trigger flex items-center">
+                            Privacy & Security
+                            <span className="ml-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-external-link">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                                    <path d="M11 13l9 -9" />
+                                    <path d="M15 4h5v5" />
+                                </svg>
+                            </span>
+                        </p> 
+                    </div>
+
+                    <p className="text-12 mt-1 flex font-normal text-bankGradient">
+                        Advertising & Cookies 
+                    </p>
+                </div>
+
                 </div>
         </footer>
             </>

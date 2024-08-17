@@ -8,6 +8,16 @@ import NavBar from '@/components/bank/NavBar';
 import CreditQuick from '@/components/bank/CreditQuick';
 import Link from 'next/link';
 import RecentTransactions from '@/components/bank/TransactionsImport';
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Split Financial Services - Account",
+  description: "Finance payments for in-store purchases",
+  icons: {
+    icon: '/icons/testlogo4.jpeg',
+  }
+};
 
 const Credit = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);

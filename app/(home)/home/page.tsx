@@ -8,6 +8,18 @@ import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import React from 'react'
 
+import type { Metadata } from "next";
+import Footer1 from '@/components/MainLayout/footer1';
+
+
+export const metadata: Metadata = {
+  title: "Split Financial Services",
+  description: "Finance payments for in-store purchases",
+  icons: {
+    icon: '/icons/testlogo4.jpeg',
+  }
+};
+
 const Home = () => {
 
   return (
@@ -19,6 +31,7 @@ const Home = () => {
       <Superpowers />
       <Credit />
       <Canadians />
+      <Footer1 />
     </div>
   )
 }

@@ -6,7 +6,6 @@ import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 
-
 export default async function RootLayout({
   children,
 }: Readonly<{
