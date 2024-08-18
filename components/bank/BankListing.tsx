@@ -50,13 +50,13 @@ export const BankListing = ({
   };
 
   return (
-    <div className="hover:bg-[#FDFEFF] cursor-pointer w-full">
+  <div className="hover:bg-[#FDFEFF] cursor-pointer w-full">
     <div className="flex flex-row items-start justify-between w-full">
       <div className="flex flex-col items-start w-full">
-        <p className="text-13 font-medium text-blue-600 mb-1">
+        <p className="text-13 font-medium text-blue-600 mt-2">
           {account.officialName}
         </p>
-        <p className="details text-gray-700">
+        <p className="details text-gray-700 mb-2">
           {newSubtype} 
           <span className="ml-1">
             {account.subtype === 'checking' ? '4510 **** **** 7576' : account.appwriteItemId}
@@ -64,10 +64,10 @@ export const BankListing = ({
         </p>
       </div>
       <div className="content-home flex items-center">
-      <div className="home-amounts mr-4">
+      <div className="home-amounts mr-4 mt-3">
         {account.currentBalance.toFixed(2)} <span className="text-10">CAD </span>
       </div>
-        <div className="home-options ml-10">
+        <div className="home-options ml-10 mt-3">
           ⋮
         </div>
       </div>

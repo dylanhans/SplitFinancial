@@ -1,5 +1,6 @@
 // layout.tsx
 import AlternateNavBar from "@/components/bank/AlternateNavBar";
+import type { Metadata } from "next";
 import SidebarCredit from "@/components/bank/SidebarCredit";
 import Footer2 from "@/components/MainLayout/footer2";
 import { getLoggedInUser } from "@/lib/actions/user.actions";

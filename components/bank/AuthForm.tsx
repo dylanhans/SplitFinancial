@@ -103,20 +103,22 @@ const AuthForm = ({type}:{type: string}) => {
             />
             <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Split</h1>
             </Link>*/}
-
+            {/* text-24 lg:text-30 */}
             <div className="flex flex-col gap-1 md:gap-3">
-                <h1 className="text-24 lg:text-30 font-semibold text-gray-900">
+                <h1 className="font-title text-gray-900">
                     {user
                     ? 'Link Account'
                     : type==='sign-in'
                         ? 'Sign In'
                         : 'Sign Up'
                     }
-                    <p className="text-16 mt-1 font-normal text-gray-600">
-                        {user
-                            ? 'Link your account to get started'
-                            : 'Enter your banking details below'
-}
+                    <p className="font-subtitle mt-1 text-gray-600">
+                    {user
+                        ? 'Link your account to get started'
+                        : type === 'sign-in'
+                            ? 'Enter your banking details below'
+                            : "Let's get started with an application"
+                        }
                     </p>
                 </h1>
             </div>
@@ -129,7 +131,7 @@ const AuthForm = ({type}:{type: string}) => {
         ): (
             <>
                 <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-h-[700px] overflow-y-auto hide-scrollbar">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
             
             {type==='sign-up' && (
                 <>
@@ -165,13 +167,13 @@ const AuthForm = ({type}:{type: string}) => {
                         control={form.control}
                         name="state"
                         label="State"
-                        placeholder="ex: ON"
+                        placeholder="NY"
                     />
                     <CustomInput 
                         control={form.control}
                         name="postalCode"
                         label="Postal Code"
-                        placeholder="ex: L6X 0W6"
+                        placeholder="12345"
                     />
                     </div>
                     <div className="flex gap-4">
@@ -185,7 +187,7 @@ const AuthForm = ({type}:{type: string}) => {
                         control={form.control}
                         name="ssn"
                         label="SSN"
-                        placeholder="ex: 1234"
+                        placeholder="1234"
                     />
                     </div>
                 </>
@@ -224,7 +226,7 @@ const AuthForm = ({type}:{type: string}) => {
                         Loading...
                     </>
                 ):type==="sign-in"
-                ? 'Continue' : 'Sign Up'}
+                ? 'Next' : 'Continue'}
             </Button>
             </div>
         </form>
@@ -256,7 +258,7 @@ const AuthForm = ({type}:{type: string}) => {
                 </div>
                 <Separator className="flex-grow border-t border-gray-300 mt-5" /> {/* Line with full width */}
                 <div className="tradecopyright flex-col">
-                    <p className="text-12 mt-1 font-normal text-gray-600">
+                    <p className="text-12 mt-4 font-normal text-gray-600">
                     Split Online Banking is provided by Split Financial Services.
                     </p>
                     <p className="text-12 mt-1 font-normal text-gray-600">

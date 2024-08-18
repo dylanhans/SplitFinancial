@@ -62,7 +62,7 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <>
-      <Table className="w-full">
+      <Table className="w-full overflow-hidden">
   <TableHeader className="bg-[#fffcfc] w-full">
     <TableRow className="w-full">
       <TableHead className="px-2 border-b-[2px] border-black-2 mr-5 balance-text-16 font-smallbold w-full">{header}</TableHead>
@@ -72,30 +72,34 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
       <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
     </TableRow>
   </TableHeader>
-  <TableBody className="w-full">
+  <TableBody className="w-full overflow-hidden">
+    <section className="bank-listings w-full overflow-hidden">
+      <Tabs defaultValue={appwriteItemId} className="w-full">
+        <TabsList className="recent-transactions-tablist w-full">
+          {filteredAccounts.slice(0, 2).map((account) => (
+            <TabsTrigger 
+              key={account.id} 
+              value={account.appwriteItemId} 
+              className="w-full" 
+              onClick={() => handleBankChange(account)}
+            >
+              <BankListing 
+                key={account.id}
+                account={account}
+                appwriteItemId={appwriteItemId}
+                accounts={accounts}
+                user={user}
+                setFirstAccount={setFirstAccount}
+              />
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+    </section>
+  </TableBody>
+</Table>
 
-    <section className="bank-listings w-full">
-        <Tabs defaultValue={appwriteItemId} className="w-full">
-            <TabsList className="recent-transactions-tablist w-full">
-            {filteredAccounts.slice(0, 2).map((account) => (
-                <TabsTrigger key={account.id} value={account.appwriteItemId} className="w-full" onClick={() => handleBankChange(account)}>
-                    <BankListing 
-                        key={account.id}
-                        account={account}
-                        appwriteItemId={appwriteItemId}
-                        accounts={accounts}
-                        user={user}
-                        setFirstAccount={setFirstAccount}
-                        />
-                    
-                </TabsTrigger>
-                ))}
-            </TabsList>
-            
-        </Tabs>
-        </section>
-    </TableBody>
-    </Table>
+
     </>
   )
 }

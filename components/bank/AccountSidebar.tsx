@@ -17,27 +17,27 @@ const AccountSidebar = ({ type }: AccountSidebarProps) => {
                 <>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Financed Transactions</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Financed Transactions</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Automatic Payments</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Automatic Payments</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Change Credit Limit</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Change Credit Limit</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Dispute Credit Card Transaction</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Dispute Credit Card Transaction</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Add Authorized Users</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Add Authorized Users</p>
                     </div>
                   </li>
                 </>
@@ -45,27 +45,27 @@ const AccountSidebar = ({ type }: AccountSidebarProps) => {
                 <>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Pay Bills</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Pay Bills</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Transfer Funds</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Transfer Funds</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Send an Interac E-transfer</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Send an Interac E-transfer</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Add Payee</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Add Payee</p>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Manage Postdated Transactions</p>
+                      <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Manage Postdated Transactions</p>
                     </div>
                   </li>
                 </>
@@ -90,27 +90,27 @@ const AccountSidebar = ({ type }: AccountSidebarProps) => {
                   <>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Replace Card</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Replace Card</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Report a Lost or Stolen Card</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Report a Lost or Stolen Card</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Switch your Credit Card</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Switch your Credit Card</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Balance Protection Insurance</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Balance Protection Insurance</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Purchase Foreign Cash</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Purchase Foreign Cash</p>
                       </div>
                     </li>
                   </>
@@ -118,27 +118,27 @@ const AccountSidebar = ({ type }: AccountSidebarProps) => {
                   <>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Profile & Preferences</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Profile & Preferences</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Account Services</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Account Services</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Daily Transaction Limits</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Daily Transaction Limits</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">Change Account Type or Add Owners</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">Change Account Type or Add Owners</p>
                       </div>
                     </li>
                     <li>
                       <div>
-                        <p className="hover-card-trigger text-blue-900 cursor-pointer other-text-13">View Your Credit Score</p>
+                        <p className="hover-card-trigger text-bankGradient cursor-pointer other-text-13">View Your Credit Score</p>
                       </div>
                     </li>
                   </>
