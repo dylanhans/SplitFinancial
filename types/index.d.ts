@@ -196,7 +196,7 @@ declare interface PaginationProps {
 
 declare interface PlaidLinkProps {
   user: User;
-  variant?: "primary" | "ghost" | "credit" | "bankaccount" | "loan/line";
+  variant?: "primary" | "ghost" | "credit" | "bankaccount" | "loan/line" | "Invest";
   dwollaCustomerId?: string;
 }
 
@@ -251,7 +251,7 @@ declare interface BankImportProps {
   appwriteItemId: string;
   header?: string;
   user: User;
-  type?: 'savings' | 'checking' | 'credit' | 'Line' | 'Loan';
+  type?: 'savings' | 'checking' | 'credit' | 'Line' | 'Loan' | 'Invest';
 }
 
 declare interface RecentTransactionsProps {

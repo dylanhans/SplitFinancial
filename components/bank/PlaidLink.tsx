@@ -74,6 +74,16 @@ const { open, ready } = usePlaidLink(config);
                 />
                 <p className="hiddenl text-15 font-smallbolder text-[#000000] xl:block">Apply for a Credit Card</p>
             </Button>
+        ): variant === 'Invest' ?(
+            <Button onClick={()=>open()} variant="Invest" className="plaidlink-ghost">
+                <Image
+                    src="/icons/connect-bank.svg"
+                    alt="connect bank"
+                    width={18}
+                    height={18}
+                />
+                <p className="hiddenl text-15 font-smallbolder text-[#000000] xl:block">Purchase an Investment</p>
+            </Button>
         ): variant === 'loan/line' ?(
             <Button onClick={()=>open()} variant="loan/line" className="plaidlink-ghost">
                 <Image

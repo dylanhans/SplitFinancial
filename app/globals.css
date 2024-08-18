@@ -66,6 +66,10 @@
     font-weight: 450;
   }
 
+  .font-smallboldd {
+    font-weight: 500;
+  }
+
   .details{
     font-size: 11px
   }
@@ -84,6 +88,10 @@
   .font-littlebold{
     font-weight: 300;
     font-size: 11px;
+  }
+
+  .font-er{
+    font-weight: 300;
   }
 
   .balance-text-13{

@@ -28,6 +28,7 @@ const [firstAccount, setFirstAccount] = useState<Account>(accounts[0]);
 const savingsAccounts = accounts.filter(account => account.subtype === 'savings');
 const creditAccounts = accounts.filter(account => account.subtype === 'checking');
 const lineLoanAccounts = accounts.filter(account => account.subtype === 'loanline');
+const InvestAccounts = accounts.filter(account => account.subtype === 'invest');
 
   return (
     <section className="recent-transactions">
@@ -75,7 +76,7 @@ const lineLoanAccounts = accounts.filter(account => account.subtype === 'loanlin
                 <div className="credit-accounts ">
                         <div className="flex items-center justify-between">
                         
-                        <div className="authorized-transactions-row flex-grow mt-8 pl-1 pr-10">
+                        <div className="authorized-transactions-row flex-grow mt-5 pl-1 pr-10">
                             </div>
                             
                             
@@ -116,7 +117,7 @@ const lineLoanAccounts = accounts.filter(account => account.subtype === 'loanlin
                 <div className="line-loan-accounts ">
                         <div className="flex items-center justify-between">
                             
-                            <div className="authorized-transactions-row flex-grow mt-8 pl-1 pr-10">
+                            <div className="authorized-transactions-row flex-grow mt-5 pl-1 pr-10">
                             </div>
                             
                         </div>
@@ -150,6 +151,48 @@ const lineLoanAccounts = accounts.filter(account => account.subtype === 'loanlin
                                 variant="loan/line"
                                 user={user}
                             />
+                        </div>
+
+                        <div className="pending-transactions">
+                            {InvestAccounts.length > 0 ? (
+                                <>
+                                    <BankImport
+                                        type={"Invest"} // savings is chequing debit account
+                                        header="Investments"
+                                        accounts={accounts}
+                                        appwriteItemId={appwriteItemId}
+                                        user={user}
+                                    />
+                                    <Separator className="flex-grow border-t border-gray-300" /> {/* Line with full width */}
+                                </>
+                            ) : 
+                            <Table className="w-full mt-8">
+                                <TableHeader className="bg-[#fffcfc] w-full">
+                                    <TableRow className="w-full">
+                                    <TableHead className="px-2 border-b-[2px] border-black-2 mr-5 balance-text-16 font-smallbold w-full">Investments</TableHead>
+                                    <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+                                    <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+                                    <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+                                    <TableHead className="px-2 border-b-[2px] border-black-2 w-full"></TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                            </Table>
+                            }
+                            <PlaidLink 
+                                variant="Invest"
+                                user={user}
+                            />
+                        </div>
+                        <div className="tradecopyright flex-col mt-10">
+                            <p className="text-12 mt-4 font-er text-gray-600">
+                            <span className="font-smallbold">Bank Accounts, Credit Cards, Lines </span> and <span className="font-smallbold">Loans</span> are offered by Split Financial Services.
+                            </p>
+                            <p className="text-12 mt-4 font-er text-gray-600">
+                            <span className="font-smallbold">Investment </span> products and services may be offered by one or more of the following entities: Split Financial Services, Split Mutual Funds Inc.(“SMFI”), Split Direct Investing Inc. ("Split DI”), Split Securities Inc. ("SplitSC”), and Split SInvest Inc. These companies are separate corporate entities which are affiliated. SMFI is licensed as a financial services firm in the province of Ontario. Split DI and Split SC are Members of the Canadian Investor Protection Fund.
+                            </p>
+                            <p className="text-12 mt-4 font-er text-gray-600">
+                            The account balances provided are for informational purposes only and do not represent an official statement of your account holdings with the applicable entity. Please consult your official account statement for information and details on your actual account holdings.
+                            </p>
                         </div>
                 </div>
     </section>
