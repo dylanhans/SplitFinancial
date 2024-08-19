@@ -13,13 +13,13 @@ export default function RootLayout({
             <a className="logoimage" href="/home">
               <Image 
                 src="/icons/headerlogo.png"
-                alt="auth image"
+                alt="split logo"
                 width={60}
                 height={60}
               />
               
             </a>
-                <p className="font-signin text-white mt-2">
+                <p className="font-signin2 text-white mt-2">
                     Secure Sign-In
                 </p>
                 <p className="font-smallbolder balance-text-small mt-1  text-white">
@@ -29,6 +29,15 @@ export default function RootLayout({
                         <Loader2 size={20} 
                         className="animate-spin2 mt-10 text-[#006ac3]" /> &nbsp;
                 </>
+              <div className="supported-by">
+                <Image 
+                  src="/icons/sentry2.png"
+                  alt="supported by sentry"
+                  width={150}
+                  height={150}
+                  className="sentry"
+                />
+              </div>
           </div>
        </div>
         <div className="children-wrapper sliding-section">

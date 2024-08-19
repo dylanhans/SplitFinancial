@@ -98,6 +98,20 @@
     justify-content: center; /* Center content horizontally */
   }
   
+  .text-wrapper .logoimage {
+    position: relative;
+    top: -75px; /* Move the image 50px higher */
+  }
+  
+  .text-wrapper .font-signin2 {
+    position: relative;
+    top: -65px; /* Move the text 60px higher */
+  }
+  
+  .text-wrapper .font-smallbolder {
+    position: relative;
+    top: -65px; /* Move the text 70px higher */
+  }
   
   .pb-30 {
     padding-bottom: 7.5rem /* 160px */;
@@ -115,6 +129,31 @@
   .animate-spin2 {
     animation: spinAndFade 1.5s linear forwards;
 }
+
+.supported-by {
+  z-index: 1;
+  width: 100%;
+  position: absolute; /* Position the div absolutely within the relative parent */
+  bottom: 30px;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  display: flex;
+  opacity: 0; /* Initially hidden */
+  /* Animation */
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 3s; /* Delay before the animation starts */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* Start completely transparent */
+  }
+  100% {
+    opacity: 1; /* End fully opaque */
+  }
+}
+  
 
 @keyframes spinAndFade {
     0% {
@@ -260,6 +299,10 @@
     font-size: 16px;
   }
 
+  .font-signin2{
+    font-weight: 350;
+    font-size: 16px;
+  }
 
   .hide-scrollbar {
     overflow: auto; /* Allows scrolling */
@@ -569,7 +612,7 @@
   }
 
   .form-btn {
-    @apply bg-[#006ac3] text-white pt-1 pb-1 font-smallboldish balance-text-16;
+    @apply bg-[#006ac3] text-white pt-1 pb-1 font-smallboldish balance-text-16 hover:bg-[#0060b1];
   }
 
   .form-link {

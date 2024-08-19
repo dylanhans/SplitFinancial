@@ -332,10 +332,18 @@ export const NavBar: React.FC = () => {
               </div>
               <div className="hidden lg:block">
                 <div className="bg-transparent cursor-pointer text-contentDefaultInverse text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
-                  <a href="/" className="inline-block leading-none">Log In</a>
+                <a href="/sign-in" className="inline-block leading-none">
+                  <button>
+                    Log In
+                    </button>
+                  </a>
                 </div>
                 <div className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
-                  <a href="/sign-up"className="inline-block leading-none">Get Started</a>
+                <a href="/sign-up" className="inline-block leading-none">
+                  <button>
+                    Get Started
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

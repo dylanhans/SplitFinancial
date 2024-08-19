@@ -191,7 +191,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
   const handleLogOut = async () => {
     const loggedOut = await logoutAccount();
 
-    if (loggedOut) router.push('/sign-in');
+    if (loggedOut) router.push('/home');
   };
 
   
@@ -210,10 +210,11 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
           <div className="relative flex items-center justify-between space-x-xxxl px-6 lg:mx-auto lg:max-w-7xl lg:px-0">
             <div className="flex items-center space-x-xxl">
               <a
-                className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0"
+                className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0 cursor-pointer hover-card-trigger"
                 target="_self"
                 aria-label="Neo Financial"
-                href="/home"
+                onClick={handleLogOut}
+                href='/home'
               >
                 <img
                   src="/icons/logoimage.png"
@@ -332,7 +333,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <button onClick={handleLogOut} className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring flex justify-center items-center">
+                  <button onClick={handleLogOut} className="bg-[#ffff] text-[#000] cursor-pointer shadow-sm balance-text-13 font-smallbold px-4 py-2 rounded-sm flex justify-center items-center hover:bg-gray-200">
                     Sign Out
                   </button>
                 </div>

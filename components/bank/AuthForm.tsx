@@ -118,7 +118,7 @@ const AuthForm = ({type}:{type: string}) => {
             <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Split</h1>
             </Link>*/}
             {/* text-24 lg:text-30 */}
-            <div className="flex flex-col gap-1 md:gap-3">
+            <div className="flex ml-1 flex-col gap-1 md:gap-3">
                 <h1 className="font-title text-gray-900">
                     {user
                     ? 'Link Account'
@@ -247,7 +247,7 @@ const AuthForm = ({type}:{type: string}) => {
         </Form>
 
         <footer className="flex justify-center gap-1 flex-col">
-                <p className="text-14 font-normal text-gray-600">
+                <p className="text-14 ml-1 font-normal text-gray-600">
                     {type==='sign-in'
                         ? "Don't have an account?"
                         : "Already have an account?"
@@ -260,7 +260,7 @@ const AuthForm = ({type}:{type: string}) => {
                 </span>
                 </p>
                 
-                <p className="text-14 mt-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
+                <p className="text-14 mt-1 ml-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
                         ? "Recover an Account "
                         : ""
@@ -273,7 +273,7 @@ const AuthForm = ({type}:{type: string}) => {
                 </div>
                 {type==='sign-in' && (
             <>
-            <div className="flex mt-1.5 space-x-2">
+            <div className="flex ml-1 mt-1.5 space-x-2">
                 <Checkbox
                   id="terms"
                   onCheckedChange={handleCheckboxChange}
@@ -289,7 +289,7 @@ const AuthForm = ({type}:{type: string}) => {
             </>
             )}
                 <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
-                <div className="tradecopyright flex-col">
+                <div className="tradecopyright ml-1 flex-col">
                     <p className="text-12 mt-4 font-normal text-gray-600">
                     SFS Online Banking is provided by Split Financial Services.
                     </p>
