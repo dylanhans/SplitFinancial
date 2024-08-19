@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 
 export default function RootLayout({
@@ -8,19 +9,31 @@ export default function RootLayout({
     return (
       <main className="relative flex min-h-screen w-full font-inter overflow-hidden">
         <div className="auth-asset w-full full-screen-animation">
-          {/*<div>
+          <div className="text-wrapper flex flex-col w-full min-h-screen h-full relative pb-15">
+            <a className="logoimage" href="/home">
               <Image 
-                src="/icons/15.webp"
+                src="/icons/headerlogo.png"
                 alt="auth image"
-                width={1000}
-                height={1000}
+                width={60}
+                height={60}
               />
-          </div>*/}
-        </div>
-        <div className="children-wrapper sliding-section w-3/4">
+              
+            </a>
+                <p className="font-signin text-white mt-2">
+                    Secure Sign-In
+                </p>
+                <p className="font-smallbolder balance-text-small mt-1  text-white">
+                    SFS Online Banking
+                </p>
+                <>
+                        <Loader2 size={20} 
+                        className="animate-spin2 mt-10 text-[#006ac3]" /> &nbsp;
+                </>
+          </div>
+       </div>
+        <div className="children-wrapper sliding-section">
           {children}
         </div>
-      </main>
+    </main>
     );
   }
-  

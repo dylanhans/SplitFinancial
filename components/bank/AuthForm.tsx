@@ -262,7 +262,7 @@ const AuthForm = ({type}:{type: string}) => {
                 
                 <p className="text-14 mt-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
-                        ? "Recover an Account"
+                        ? "Recover an Account "
                         : ""
                     }
                 </p>
@@ -291,7 +291,7 @@ const AuthForm = ({type}:{type: string}) => {
                 <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
                 <div className="tradecopyright flex-col">
                     <p className="text-12 mt-4 font-normal text-gray-600">
-                    Split Online Banking is provided by Split Financial Services.
+                    SFS Online Banking is provided by Split Financial Services.
                     </p>
                     <p className="text-12 mt-1 font-normal text-gray-600">
                     Split Financial Services Website, © 2023-2024

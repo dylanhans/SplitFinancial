@@ -6,6 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { logoutAccount } from "@/lib/actions/user.actions"
+import router from "next/router"
+
 import {
   Select,
   SelectContent,
@@ -185,6 +188,12 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  const handleLogOut = async () => {
+    const loggedOut = await logoutAccount();
+
+    if (loggedOut) router.push('/sign-in');
+  };
+
   
 
   return (
@@ -323,9 +332,9 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring flex justify-center items-center">
-                    <a href="/sign-up" className="leading-none">Sign Out</a>
-                  </div>
+                  <button onClick={handleLogOut} className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring flex justify-center items-center">
+                    Sign Out
+                  </button>
                 </div>
               </div>
             </div>

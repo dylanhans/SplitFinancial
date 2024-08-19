@@ -89,11 +89,44 @@
     left: 0;
     height: 100%;
     z-index: 1;
-    background: white; /* Adjust this to your desired background */
+    /* background: url('/icons/testphoto2.png') no-repeat center center; */
+    background-size: cover; /* Ensures the background image covers the entire area */    
     animation: shrinkToHalf 1.5s ease-out forwards;
     animation-delay: 1.5s; /* Starts after the first div animation completes */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
   }
   
+  
+  .pb-30 {
+    padding-bottom: 7.5rem /* 160px */;
+}
+
+  .text-wrapper {
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    z-index: 2; /* Ensure the text stays on top of the background image */
+    align-items: center; /* Center the text vertically */
+    animation: moveTextToCenterOfLeftHalf 1.5s ease-out forwards;
+    animation-delay: 1.5s; /* Sync with the full-screen animation */
+  }
+
+  .animate-spin2 {
+    animation: spinAndFade 1.5s linear forwards;
+}
+
+@keyframes spinAndFade {
+    0% {
+        transform: rotate(0deg);
+        opacity: 1; /* Fully visible at the start */
+    }
+    100% {
+        transform: rotate(360deg);
+        opacity: 0; /* Fully invisible at the end */
+    }
+}
+
   .sliding-section {
     transform: translateX(100%);
     opacity: 0;
@@ -102,19 +135,33 @@
     top: 0;
     right: 0; /* Keeps it aligned to the right side of the screen */
     height: 100%;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: slideIn 1.5s ease-out forwards;
     animation-delay: 1.5s; /* Starts after the first div animation completes */
-
   }
   
   /* Keyframes for shrinking the first div */
   @keyframes shrinkToHalf {
+    from {
+      transform: translateX(25); /* Start in the center of the full screen */
+      width: 100%; /* Full width at the start */
+    }
     to {
-      width: 50%;
+      transform: translateX(-0%); /* Moves left by 25% of the full screen width */
+      width: 50%; /* Shrink to half the original width */
+    }
+  }
+  
+  /* Keyframes for moving the text to the center of the left half */
+  @keyframes moveTextToCenterOfLeftHalf {
+    from {
+      transform: translateX(0); /* Start in the center of the full screen */
+    }
+    to {
+      transform: translateX(-0%); /* Move left by 50% of the full screen width */
     }
   }
   
@@ -205,6 +252,11 @@
 
   .font-subtitle{
     font-weight: 400;
+    font-size: 16px;
+  }
+
+  .font-signin{
+    font-weight: 325;
     font-size: 16px;
   }
 
