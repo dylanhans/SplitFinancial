@@ -70,6 +70,62 @@
     font-weight: 500;
   }
 
+  .children-wrapper {
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideIn 1.5s ease-out forwards;
+    animation-delay: 1.5s; /* Starts after the first div animation completes */
+
+  }
+
+  .main {
+    overflow: hidden; /* Prevents overflow issues during animations */
+  }
+  
+  .full-screen-animation {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+    background: white; /* Adjust this to your desired background */
+    animation: shrinkToHalf 1.5s ease-out forwards;
+    animation-delay: 1.5s; /* Starts after the first div animation completes */
+  }
+  
+  .sliding-section {
+    transform: translateX(100%);
+    opacity: 0;
+    width: 50%; /* Ensure the sliding section takes up only half of the screen */
+    position: absolute;
+    top: 0;
+    right: 0; /* Keeps it aligned to the right side of the screen */
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideIn 1.5s ease-out forwards;
+    animation-delay: 1.5s; /* Starts after the first div animation completes */
+
+  }
+  
+  /* Keyframes for shrinking the first div */
+  @keyframes shrinkToHalf {
+    to {
+      width: 50%;
+    }
+  }
+  
+  /* Keyframes for sliding in the children section */
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
   .details{
     font-size: 11px
   }
@@ -100,6 +156,10 @@
 
   .balance-text-16{
     font-size: 16px;
+  }
+
+  .balance-text-small{
+    font-size: 12px;
   }
 
   .balance-text-14{

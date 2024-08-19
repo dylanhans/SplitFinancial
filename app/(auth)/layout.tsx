@@ -6,8 +6,8 @@ export default function RootLayout({
     children: React.ReactNode;
   }>) {
     return (
-      <main className="flex min-h-screen w-full justify-between font-inter">
-        <div className="auth-asset">
+      <main className="relative flex min-h-screen w-full font-inter overflow-hidden">
+        <div className="auth-asset w-full full-screen-animation">
           {/*<div>
               <Image 
                 src="/icons/15.webp"
@@ -17,7 +17,9 @@ export default function RootLayout({
               />
           </div>*/}
         </div>
-        {children}
+        <div className="children-wrapper sliding-section w-3/4">
+          {children}
+        </div>
       </main>
     );
   }

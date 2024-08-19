@@ -2,11 +2,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState } from 'react'
-
+import { useForm } from "react-hook-form";
 import { z } from "zod"
 import { TailSpin } from 'react-loader-spinner'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
@@ -34,10 +33,12 @@ const AuthForm = ({type}:{type: string}) => {
     const router = useRouter();
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
+    const [isTestAccount, setIsTestAccount] = useState(false);
+
 
     const formSchema = authformSchema(type);
 
-    // 1. Define your form.
+    // 1. Define form.
         const form = useForm<z.infer<typeof formSchema>>({
           resolver: zodResolver(formSchema),
           defaultValues: {
@@ -45,6 +46,8 @@ const AuthForm = ({type}:{type: string}) => {
             password: "",
           },
         })
+
+
       
         // 2. Define a submit handler.
         const onSubmit = async (data: z.infer<typeof formSchema>)=>{
@@ -90,6 +93,17 @@ const AuthForm = ({type}:{type: string}) => {
 
         }
       
+        const handleCheckboxChange = (checked) => {
+            setIsTestAccount(checked);
+        
+            if (checked) {
+              form.setValue("email", "neisha.hans1@gmail.com");
+              form.setValue("password", "Wonderland1");
+            } else {
+              form.setValue("email", "");
+              form.setValue("password", "");
+            }
+          };
 
   return (
     <section className="auth-form max-w-lg mx-auto">
@@ -193,19 +207,19 @@ const AuthForm = ({type}:{type: string}) => {
                 </>
             )}
 
-                <CustomInput 
-                    control={form.control}
-                    name="email"
-                    label={type === 'sign-up' ? 'Email' : 'Client Card or Email'}
-                    placeholder="Enter your email"
-                />
- 
-            <CustomInput 
+            <CustomInput
+                control={form.control}
+                name="email"
+                label={type === "sign-up" ? "Email" : "Client Card or Email"}
+                placeholder="Enter your email"
+              />
+
+              <CustomInput
                 control={form.control}
                 name="password"
                 label="Password"
                 placeholder="Enter your password"
-            />
+              />
 
             {/* {type==='sign-up' && (
             <>
@@ -252,11 +266,29 @@ const AuthForm = ({type}:{type: string}) => {
                         : ""
                     }
                 </p>
+                
                 <div className={`bottom-spacing ${type === 'sign-in' ? 'mt-40' : ''}`}>
 
 
                 </div>
-                <Separator className="flex-grow border-t border-gray-300 mt-5" /> {/* Line with full width */}
+                {type==='sign-in' && (
+            <>
+            <div className="flex mt-1.5 space-x-2">
+                <Checkbox
+                  id="terms"
+                  onCheckedChange={handleCheckboxChange}
+                />
+                <label
+                  htmlFor="terms"
+                  className="font-smallboldish balance-text-small text-gray-600"
+                >
+                  Test Account
+                </label>
+              </div>
+
+            </>
+            )}
+                <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
                 <div className="tradecopyright flex-col">
                     <p className="text-12 mt-4 font-normal text-gray-600">
                     Split Online Banking is provided by Split Financial Services.
