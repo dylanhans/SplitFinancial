@@ -213,6 +213,19 @@ declare interface AuthFormProps {
   type: "sign-in" | "sign-up";
 }
 
+declare interface AuthFormCreditProps {
+  subtype?: string;
+  title: string;
+  offer?: string;
+  description: string;
+  af: number;
+  cl: number;
+  car: number;
+  pr: number;
+  rewards?: string;
+  type: "savings" | "credit";
+}
+
 declare interface BankDropdownProps {
   accounts: Account[];
   setValue?: UseFormSetValue<any>;

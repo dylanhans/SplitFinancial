@@ -10,6 +10,7 @@ import React from 'react'
 
 import type { Metadata } from "next";
 import Footer1 from '@/components/MainLayout/footer1';
+import { HeroSection } from '@/components/home/HeroSection';
 
 
 export const metadata: Metadata = {
@@ -25,7 +26,6 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      {/* <HeroSection /> */}
       <CreditSecured />
       <PlatformSection />
       <Superpowers />

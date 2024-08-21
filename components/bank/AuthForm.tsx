@@ -105,7 +105,7 @@ const AuthForm = ({type}:{type: string}) => {
             if (checked) {
               form.setValue("email", "neisha.hans1@gmail.com");
               form.setValue("password", "Wonderland1");
-              form.setValue("state", "California");
+              form.setValue("state", "CA");
               form.setValue("city", "San Francisco");
               form.setValue("email", getRandomEmail());
               form.setValue("ssn", "1234");
@@ -180,7 +180,7 @@ const AuthForm = ({type}:{type: string}) => {
         {user ? (
         <div className="granted">
             <a className="testnav" href="/apply">
-                <Button>
+                <Button user={user}>
                     Test
                 </Button>
             </a>

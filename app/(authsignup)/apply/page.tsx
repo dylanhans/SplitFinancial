@@ -10,6 +10,7 @@ import React from 'react'
 
 import type { Metadata } from "next";
 import Footer1 from '@/components/MainLayout/footer1';
+import AuthFormCredit from '@/components/bank/AuthFormCredit';
 
 
 export const metadata: Metadata = {
@@ -24,13 +25,31 @@ const Apply = () => {
 
   return (
     <div>
-      {/* <HeroSection /> */}
-      <CreditSecured />
-      <PlatformSection />
-      <Superpowers />
-      <Credit />
-      <Canadians />
-      <Footer1 />
+      
+      <AuthFormCredit 
+        type="savings"
+        subtype="Cash Back"
+        title="Split Secured Credit"
+        description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
+        offer=""
+        af={50}
+        cl={1000}
+        car={22}
+        pr={22}
+        rewards=""
+
+      />
+
+      {/* <AuthFormCredit 
+        type="credit"
+        subtype=""
+        offer=""
+        af={50}
+        cl={1000}
+        car={22}
+        pr={22}
+        rewards=""
+      /> */}
     </div>
   )
 }

@@ -6,6 +6,9 @@ import Footer2 from "@/components/MainLayout/footer2";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
+import NavBar from "@/components/bank/NavBar";
+import Footer1 from "@/components/MainLayout/footer1";
+import ProgressNavBar from "@/components/bank/ProgressNavBar";
 
 export default async function RootLayout({
   children,
@@ -13,23 +16,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-   
-  const loggedIn = await getLoggedInUser();
-
-  if (!loggedIn) redirect('/sign-up')
 
 return (
     <main className="main-screen">
-      <AlternateNavBar 
-          user={loggedIn}
-        />
+      <ProgressNavBar />
       <div className="flex h-screen w-[1250px] ml-[250px] font-inter">
         {/* Main content */}
         <div className="flex size-full flex-col w-full">
           {children}
         </div>
       </div>
-      <Footer2/>
+      
     </main>
+    
   );
 }
