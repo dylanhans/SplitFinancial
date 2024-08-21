@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
 import { Separator } from '@radix-ui/react-separator'
+import AuthFormCredit from './AuthFormCredit';
 
 
 const AuthForm = ({type}:{type: string}) => {
@@ -34,6 +35,7 @@ const AuthForm = ({type}:{type: string}) => {
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
     const [isTestAccount, setIsTestAccount] = useState(false);
+    const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false); // Track sign-up success
 
 
     const formSchema = authformSchema(type);
@@ -69,11 +71,10 @@ const AuthForm = ({type}:{type: string}) => {
                     ssn: data.ssn!,
                     email: data.email ,
                     password: data.password,
-                }
-                const newUser = await signUp(userData);
-
-                setUser(newUser);
-                    
+                    };
+                    const newUser = await signUp(userData);
+                    setUser(newUser);
+                    setIsSignUpSuccessful(true); // Mark sign-up as successful
                 }
             
 
@@ -92,8 +93,43 @@ const AuthForm = ({type}:{type: string}) => {
           }
 
         }
+
+        function getRandomEmail() {
+            const randomString = Math.random().toString(36).substring(2, 11); // Generates a random string
+            return `${randomString}@example.com`;
+          }
       
-        const handleCheckboxChange = (checked) => {
+        const handleCheckboxChange2 = (checked) => {
+            setIsTestAccount(checked);
+        
+            if (checked) {
+              form.setValue("email", "neisha.hans1@gmail.com");
+              form.setValue("password", "Wonderland1");
+              form.setValue("state", "California");
+              form.setValue("city", "San Francisco");
+              form.setValue("email", getRandomEmail());
+              form.setValue("ssn", "1234");
+              form.setValue("postalCode", "12345");
+              form.setValue("firstName", "Dean");
+              form.setValue("lastName", "Smith");
+              form.setValue("dateOfBirth", "2001-06-24");
+              form.setValue("address1", "96 New Palace Place");
+            } else {
+              form.setValue("email", "");
+              form.setValue("password", "");
+              form.setValue("state", "");
+              form.setValue("city", "");
+              form.setValue("email", "");
+              form.setValue("ssn", "");
+              form.setValue("postalCode", "");
+              form.setValue("firstName", "");
+              form.setValue("lastName", "");
+              form.setValue("dateOfBirth", "");
+              form.setValue("address1", "");
+            }
+          };
+
+          const handleCheckboxChange = (checked) => {
             setIsTestAccount(checked);
         
             if (checked) {
@@ -118,17 +154,21 @@ const AuthForm = ({type}:{type: string}) => {
             <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Split</h1>
             </Link>*/}
             {/* text-24 lg:text-30 */}
+
             <div className="flex ml-1 flex-col gap-1 md:gap-3">
+                <div>
+                    {/* <AuthFormCredit /> */}
+                </div>
                 <h1 className="font-title text-gray-900">
                     {user
-                    ? 'Link Account'
+                    ? ''
                     : type==='sign-in'
                         ? 'Sign In'
                         : 'Sign Up'
                     }
                     <p className="font-subtitle mt-1 text-gray-600">
                     {user
-                        ? 'Link your account to get started'
+                        ? ''
                         : type === 'sign-in'
                             ? 'Enter your banking details below'
                             : "Let's get started with an application"
@@ -138,10 +178,16 @@ const AuthForm = ({type}:{type: string}) => {
             </div>
         </header>
         {user ? (
-            <div className="flex flex-col gap-4">
-                {/*Plaid Link*/}
-               <PlaidLink user={user} variant="primary"/>
-            </div>
+        <div className="granted">
+            <a className="testnav" href="/apply">
+                <Button>
+                    Test
+                </Button>
+            </a>
+          {/* <PlaidLink user={user} variant="primary" /> */}
+          {/* <AuthFormCredit /> */}
+        </div>
+            
         ): (
             <>
                 <Form {...form}>
@@ -259,10 +305,26 @@ const AuthForm = ({type}:{type: string}) => {
                 </Link>
                 </span>
                 </p>
+
+                <div className="flex ml-1 mt-1.5 space-x-2">
+                    <Checkbox
+                    id="terms"
+                    onCheckedChange={handleCheckboxChange2}
+                    />
+                    <label
+                    htmlFor="terms"
+                    className="font-smallboldish balance-text-small text-gray-600"
+                    >
+                    Test Account
+                    </label>
+                </div>
                 
                 <p className="text-14 mt-1 ml-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
-                        ? "Recover an Account "
+                        ? <>
+                        <p>Enrol in Online Banking</p>
+                        <p className="mt-1">Recover an Account</p>
+                         </>
                         : ""
                     }
                 </p>
@@ -291,10 +353,10 @@ const AuthForm = ({type}:{type: string}) => {
                 <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
                 <div className="tradecopyright ml-1 flex-col">
                     <p className="text-12 mt-4 font-normal text-gray-600">
-                    SFS Online Banking is provided by Split Financial Services.
+                    SF Online Banking is provided by Split Financial Services.
                     </p>
                     <p className="text-12 mt-1 font-normal text-gray-600">
-                    Split Financial Services Website, © 2023-2024
+                    Split Financial Website, © 2023-2024
                     </p>
                 <div className="mt-5"> 
                     <div className="text-12 mt-5 flex items-center space-x-4 font-normal text-bankGradient">

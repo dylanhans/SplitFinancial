@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   }
 };
 const Signup = async() => {
-  /*const loggedInUser = await getLoggedInUser();
-  console.log(loggedInUser)*/
 
   return (
     <section className="flex-center size-full max-sm:px-6"> 

@@ -78,6 +78,22 @@
 
   }
 
+  /* .children2-wrapper {
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideIn2 1.5s ease-out forwards;
+    animation-delay: 1.5s; /* Starts after the first div animation completes */
+
+
+  /* @keyframes slideIn2 {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  } */
+
+ 
+
   .main {
     overflow: hidden; /* Prevents overflow issues during animations */
   }
@@ -211,7 +227,8 @@
       opacity: 1;
     }
   }
-  
+ 
+
   .details{
     font-size: 11px
   }

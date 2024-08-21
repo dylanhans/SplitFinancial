@@ -3,8 +3,10 @@ import Image from "next/image";
 
 export default function RootLayout({
     children,
+    user, 
   }: Readonly<{
     children: React.ReactNode;
+    user: boolean;
   }>) {
     return (
       <main className="relative flex min-h-screen w-full font-inter overflow-hidden">
@@ -23,7 +25,7 @@ export default function RootLayout({
                     Secure Sign-In
                 </p>
                 <p className="font-smallbolder balance-text-small mt-1  text-white">
-                    SFS Online Banking
+                    SF Online Banking
                 </p>
                 <>
                         <Loader2 size={20} 
