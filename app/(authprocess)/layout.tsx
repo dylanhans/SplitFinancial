@@ -1,50 +1,84 @@
+import ProgressLoad from "@/components/bank/ProgressLoad";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 
 export default function RootLayout({
-    children,
-    user, 
-  }: Readonly<{
-    children: React.ReactNode;
-    user: boolean;
-  }>) {
-    return (
-      <main className="relative flex min-h-screen w-full font-inter overflow-hidden">
-        <div className="auth-asset w-full full-screen-animation">
-          <div className="text-wrapper flex flex-col w-full min-h-screen h-full relative pb-15">
-            <a className="logoimage" href="/home">
-              <Image 
-                src="/icons/headerlogo.png"
-                alt="split logo"
-                width={60}
-                height={60}
-              />
-              
-            </a>
-                <p className="font-signin2 text-white mt-2">
-                    Secure Sign-In
-                </p>
-                <p className="font-smallbolder balance-text-small mt-1  text-white">
-                    SF Online Banking
-                </p>
-                <>
-                        <Loader2 size={20} 
-                        className="animate-spin2 mt-10 text-[#006ac3]" /> &nbsp;
-                </>
-              <div className="supported-by">
-                <Image 
-                  src="/icons/sentry2.png"
-                  alt="supported by sentry"
-                  width={150}
-                  height={150}
-                  className="sentry"
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <main className="flex min-h-screen w-full justify-between font-inter relative">
+      {/* Header */}
+      <header className="absolute top-0 left-0 w-full h-[60px] bg-white text-white shadow-md flex items-center px-6 z-10">
+        <div className="flex-1">
+            <a
+                className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0"
+                target="_self"
+                aria-label="Split Financial"
+                href="/home"
+            >
+                <img
+                  src="/icons/logoimage.png"
+                  alt="Logo Image"
+                  height="20"
+                  width="66"
+                  data-testid="split-logo"
                 />
-              </div>
-          </div>
-       </div>
-        <div className="children-wrapper sliding-section">
-          {children}
+            </a>
         </div>
+      </header>
+
+      {/* Footer */}
+      <footer className="absolute bottom-0 left-0 w-full h-[60px] bg-[#323232] text-white flex items-center px-6 z-10 flex-1">
+        <div className="relative px-0 text-white lg:bg-[#323232] lg:px-6">
+            <div className="account-functions ml-[260px] flex items-center w-full space-x-4">
+                <p className="text-12 mt-1 font-normal text-white">
+                    Split Financial Services Website, © 2023-2024
+                </p>
+
+                <div className="flex items-right space-x-4 mt-1 text-white pl-[500px]">
+                    <p className="cursor-pointer hover-card-trigger flex underline items-center text-12 font-normal">
+                        Legal
+                        <span className="ml-2">|</span>
+                    </p> 
+                    <p className="cursor-pointer hover-card-trigger flex underline items-center text-12 font-normal">
+                        Accessibility
+                        <span className="ml-2">|</span>
+                    </p> 
+                    <p className="cursor-pointer hover-card-trigger flex underline items-center text-12 font-normal">
+                        Privacy & Security
+                        <span className="ml-2">|</span>
+                    </p>
+                    <p className="text-12 underline font-normal">
+                        Advertising & Cookies
+                    </p>
+                </div>
+            </div>
+        </div>
+      </footer>
+
+      {/* First section taking up 2/5 */}
+      <div className="w-2/5">
+        <div className="text-wrapper2 flex bg-[#f3f4f5] flex-col w-full min-h-screen h-full relative pb-15">
+          <a className="logoimage" href="/home">
+            <Image
+              src="/icons/test-card.png"
+              alt="test card"
+              width={300}
+              height={300}
+            />
+          </a>
+        </div>
+      </div>
+
+      {/* Children section taking up 3/5 */}
+      <div className="w-3/5 relative">
+        <div className="absolute top-[60px] left-0 w-full bg-gray-200">
+          <ProgressLoad />
+        </div>
+        {children}
+      </div>
     </main>
-    );
-  }
+);
+}

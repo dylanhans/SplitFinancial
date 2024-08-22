@@ -5,19 +5,19 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Split - Secure Sign In",
+  title: "Split - Secure Application",
   description: "Finance payments for in-store purchases",
   icons: {
     icon: '/icons/testlogo4.jpeg',
   }
 };
 
-const Signin = () => {
+const cardApplication = () => {
   return (
     <section className="flex-center size-full max-sm:px-6"> 
-      <AuthForm type="sign-in"/>
+      <AuthForm type="sign-up"/>
     </section>
   )
 }
 
-export default Signin
+export default cardApplication

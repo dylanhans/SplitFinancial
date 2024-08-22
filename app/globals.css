@@ -147,6 +147,13 @@
     animation-delay: 1.5s; /* Sync with the full-screen animation */
   }
 
+  .text-wrapper2 {
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    z-index: 2; /* Ensure the text stays on top of the background image */
+    align-items: center; /* Center the text vertically */
+  }
+
   .animate-spin2 {
     animation: spinAndFade 1.5s linear forwards;
 }
@@ -611,6 +618,10 @@
   /* Auth */
   .auth-asset {
     @apply flex h-screen w-full sticky top-0 items-center justify-end bg-[#000000] max-lg:hidden;
+  }
+
+  .auth-asset2 {
+    @apply flex h-screen w-full top-0 items-center bg-[#000000];
   }
   
   .full-width-navbar {

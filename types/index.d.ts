@@ -223,6 +223,7 @@ declare interface AuthFormCreditProps {
   car: number;
   pr: number;
   rewards?: string;
+  img: string;
   type: "savings" | "credit";
 }
 

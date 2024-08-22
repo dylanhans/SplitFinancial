@@ -24,33 +24,51 @@ export const metadata: Metadata = {
 const Apply = () => {
 
   return (
-    <div>
-      
-      <AuthFormCredit 
-        type="savings"
-        subtype="Cash Back"
-        title="Split Secured Credit"
-        description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
-        offer=""
-        af={110}
-        cl={1000}
-        car={22.99}
-        pr={20.99}
-        rewards=""
+    <main>
+      <div className="flex flex-row gap-x-8"> 
+        <AuthFormCredit 
+          type="savings"
+          subtype="Cash Back"
+          title="Split Secured Credit"
+          description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
+          offer=""
+          af={110}
+          cl={1000}
+          car={22.99}
+          pr={20.99}
+          rewards=""
+          img="/icons/tester-card.png"
+        />
 
-      />
+        <AuthFormCredit 
+          type="savings"
+          subtype="Student"
+          title="Split Credit"
+          description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
+          offer=""
+          af={110}
+          cl={1000}
+          car={22.99}
+          pr={20.99}
+          rewards=""
+          img="/icons/test-card.png"
+        />
 
-      {/* <AuthFormCredit 
-        type="credit"
-        subtype=""
-        offer=""
-        af={50}
-        cl={1000}
-        car={22}
-        pr={22}
-        rewards=""
-      /> */}
-    </div>
+<AuthFormCredit 
+          type="savings"
+          subtype="Savings"
+          title="Split High-Interest Savings"
+          description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
+          offer=""
+          af={110}
+          cl={1000}
+          car={22.99}
+          pr={20.99}
+          rewards=""
+          img="/icons/card2.png"
+        />
+      </div>
+    </main>
   )
 }
 

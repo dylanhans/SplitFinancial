@@ -293,37 +293,35 @@ const AuthForm = ({type}:{type: string}) => {
         </Form>
 
         <footer className="flex justify-center gap-1 flex-col">
-                <p className="text-14 ml-1 font-normal text-gray-600">
+                 <p className="text-14 ml-1 font-normal text-gray-600">
                     {type==='sign-in'
                         ? "Don't have an account?"
                         : "Already have an account?"
                     }
-                <span> <Link href={type==='sign-in' ? '/sign-up'
+                <span> <Link href={type==='sign-in' ? '/options'
                 : '/sign-in'} className="form-link">
-                    {type==='sign-in' ? 'Sign up'
+                    {type==='sign-in' ? 'Apply'
                     : 'Sign in'}
                 </Link>
                 </span>
                 </p>
 
-                <div className="flex ml-1 mt-1.5 space-x-2">
-                    <Checkbox
-                    id="terms"
-                    onCheckedChange={handleCheckboxChange2}
-                    />
-                    <label
-                    htmlFor="terms"
-                    className="font-smallboldish balance-text-small text-gray-600"
-                    >
-                    Test Account
-                    </label>
-                </div>
                 
-                <p className="text-14 mt-1 ml-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
+                <p className="text-14 ml-1 mt-1 font-normal hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
                         ? <>
+                        <Link href="/options">
                         <p>Enrol in Online Banking</p>
-                        <p className="mt-1">Recover an Account</p>
+                        </Link>
+                         </>
+                        : ""
+                    }
+                </p>
+
+                <p className="text-14 ml-1 font-normal mt-1 hover-card-trigger text-bankGradient cursor-pointer">
+                    {type==='sign-in'
+                        ? <>
+                        <p>Recover an Account</p>
                          </>
                         : ""
                     }

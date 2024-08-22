@@ -29,7 +29,6 @@ const Home = () => {
       <CreditSecured />
       <PlatformSection />
       <Superpowers />
-      <Credit />
       <Canadians />
       <Footer1 />
     </div>
