@@ -97,6 +97,11 @@
   .main {
     overflow: hidden; /* Prevents overflow issues during animations */
   }
+
+  .text-base2{
+    font-size: 15px; /* 16px */;
+    line-height: 1.5rem /* 24px */;
+  }
   
   .full-screen-animation {
     width: 100%;

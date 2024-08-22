@@ -32,10 +32,10 @@ const Apply = () => {
         title="Split Secured Credit"
         description="Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³"
         offer=""
-        af={50}
+        af={110}
         cl={1000}
-        car={22}
-        pr={22}
+        car={22.99}
+        pr={20.99}
         rewards=""
 
       />

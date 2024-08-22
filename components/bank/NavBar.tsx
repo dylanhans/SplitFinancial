@@ -326,7 +326,7 @@ export const NavBar: React.FC = () => {
 
                 {/* handle signup */}
                 <div className="flex-1 rounded border-2 border-web-borderOnBlack bg-surfaceDefault py-5 text-center text-xl font-bold text-contentDefault">
-                  Get Started
+                  Apply
                 </div>
 
               </div>
@@ -339,9 +339,9 @@ export const NavBar: React.FC = () => {
                   </a>
                 </div>
                 <div className="bg-[#ffff] text-[#000] cursor-pointer text-base px-4 py-2 rounded font-semibold focus:ring inline-block w-auto">
-                <a href="/sign-up" className="inline-block leading-none">
+                <a href="/options" className="inline-block leading-none">
                   <button>
-                    Get Started
+                    Apply
                     </button>
                   </a>
                 </div>

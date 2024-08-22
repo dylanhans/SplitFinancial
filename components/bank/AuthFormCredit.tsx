@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 import { Separator } from '@radix-ui/react-separator';
 import { Checkbox } from '../ui/checkbox';
+import Link from 'next/link';
 
 const AuthFormCredit  = ({
   type,
@@ -18,61 +19,58 @@ const AuthFormCredit  = ({
   return (
       <section>
         <div className="py-[80px]">
-          <div className="px-6 md:px-0 md:mx-auto lg:max-w-[350px] shadow-md rounded-sm w-full">
-            <div className="grid grid-cols-1 gap-2 w-full p-8">
+        <Link href="/cardapp">
+        <div className="px-6 md:px-0 md:mx-auto lg:max-w-[325px] shadow-lg rounded-sm w-full cursor-pointer">
+          <div className="grid grid-cols-1 gap-2 w-full pt-8 pb-8 pl-6 pr-6">
               {/* 1 Credit Card */}
               <div className="flex flex-col rounded-xl bg-white p-1">
                  <Image 
                   src="/icons/tester-card.png"
                   alt="credit card"
-                  width={175}
-                  height={175}
+                  width={190}
+                  height={190}
                 />
-                <span className="text-normal leading-8 font-semibold not-italic text text-black pt-4">
+                <span className="text-normal leading-8 font-semibold not-italic text text-[#333] pt-4">
                   {subtype.toUpperCase()}
                 </span>
-                <span className="text-xl leading-8 font-semibold not-italic text mb-2 text-black pt-2">
-                  {title}
+                <span className="text-xl leading-8 font-semibold not-italic text mb-2 text-[#333] pt-2">
+                {title}<span className="text-xs align-super">®</span>
                 </span>
                 <hr className="h-px border-0 bg-black" />
-                <span className="text-base leading-7 font-light text-[#697780] not-italic flex-1 pt-2">
+                <span className="text-base2 leading-7 font-light text-[#333] not-italic flex-1 pt-2">
                   {description}
                 </span>
                 {/* Seperator */}
-                <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
+                <Separator className="flex-grow border-t border-gray-300 mt-8" /> {/* Line with full width */}
 
                 {/* Fee Details */}
-            <div className="mt-5 grid grid-cols-2 gap-y-4">
-              <span className="text-base leading-6 font-normal not-italic text-black">
-                Annual Fee
-              </span>
-              <span className="text-base leading-6 font-normal not-italic text-gray-500">
-                {/* Replace with actual value */}
-                $95
-              </span>
+                <div className="mt-5 grid grid-cols-2 gap-y-4">
+                  <span className="text-[14px] font-semibold leading-6 not-italic text-[#333]">
+                    Annual Fee
+                  </span>
+                  <span className="text-[14px] leading-6 font-light not-italic text-[#333] text-right">
+                    ${af}
+                  </span>
 
-              <span className="text-base leading-6 font-normal not-italic text-black">
-                Purchase Rate
-              </span>
-              <span className="text-base leading-6 font-normal not-italic text-gray-500">
-                {/* Replace with actual value */}
-                15.99%
-              </span>
+                  <span className="text-[14px] font-semibold leading-6 not-italic text-[#333]">
+                    Purchase Rate
+                  </span>
+                  <span className="text-[14px] leading-6 font-light not-italic text-[#333] text-right">
+                    {pr}%
+                  </span>
 
-              <span className="text-base leading-6 font-normal not-italic text-black">
-                Cash Advance Rate
-              </span>
-              <span className="text-base leading-6 font-normal not-italic text-gray-500">
-                {/* Replace with actual value */}
-                22.99%
-              </span>
-            </div>
-
+                  <span className="text-[14px] font-semibold leading-6 not-italic text-[#333]">
+                    Cash Advance Rate
+                  </span>
+                  <span className="text-[14px] leading-6 font-light not-italic text-[#333] text-right">
+                    {car}%
+                  </span>
+                </div>
                 <button
-                    className="bg-transparent text-[#006aff] text-start text-base py-3 rounded font-semibold focus:ring inline-block w-auto"
+                    className="bg-transparent text-[#31719e] text-start text-base py-3 rounded font-semibold focus:ring inline-block w-auto"
                     disabled
                   >
-                  <span className="inline-block leading-none"> &gt; View Card Details</span>
+                  <span className="inline-block leading-none"> View Card Details &gt; </span>
                 </button>
                   <div className="flex ml-1 mt-1.5 space-x-2">
                     <Checkbox
@@ -81,7 +79,7 @@ const AuthFormCredit  = ({
                     />
                     <label
                     htmlFor="terms"
-                    className="font-smallboldish balance-text-small text-gray-600"
+                    className="font-smallboldish balance-text-small text-[#333]"
                     >
                     Compare
                     </label>
@@ -90,6 +88,7 @@ const AuthFormCredit  = ({
               
             </div>
           </div>
+          </Link>
         </div>
       </section>
     );
