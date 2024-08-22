@@ -85,7 +85,7 @@ const Footer1 = () => {
       <div className="tradecopyright flex-col">
                     
                     <p className="text-12 mt-1 font-normal text-white">
-                    Split Financial Services Website, © 2023-2024
+                    Split Financial Website, © 2023-2024
                     </p>
                 </div>
       </div>

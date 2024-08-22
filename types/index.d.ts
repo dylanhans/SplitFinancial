@@ -214,6 +214,9 @@ declare interface AuthFormProps {
 }
 
 declare interface AuthFormCreditProps {
+  id: string;
+  isChecked: boolean;
+  onCheckmarkClick: () => void;
   subtype?: string;
   title: string;
   offer?: string;

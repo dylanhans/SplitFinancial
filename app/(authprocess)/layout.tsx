@@ -34,7 +34,7 @@ export default function RootLayout({
         <div className="relative px-0 text-white lg:bg-[#323232] lg:px-6">
             <div className="account-functions ml-[260px] flex items-center w-full space-x-4">
                 <p className="text-12 mt-1 font-normal text-white">
-                    Split Financial Services Website, © 2023-2024
+                    Split Financial Website, © 2023-2024
                 </p>
 
                 <div className="flex items-right space-x-4 mt-1 text-white pl-[500px]">

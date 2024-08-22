@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Split Financial Services - Summary",
+  title: "Split Financial - Summary",
   description: "Finance payments for in-store purchases",
   icons: {
     icon: '/icons/testlogo4.jpeg',

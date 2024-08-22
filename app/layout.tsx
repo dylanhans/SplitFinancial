@@ -12,7 +12,7 @@ const ibm_Plex_Serif = IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "Split Financial Services",
+  title: "Split Financial",
   description: "Finance payments for in-store purchases",
   icons: {
     icon: '/icons/testlogo4.jpeg',

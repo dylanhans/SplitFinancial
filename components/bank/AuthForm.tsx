@@ -351,7 +351,7 @@ const AuthForm = ({type}:{type: string}) => {
                 <Separator className="flex-grow border-t border-gray-300 mt-4" /> {/* Line with full width */}
                 <div className="tradecopyright ml-1 flex-col">
                     <p className="text-12 mt-4 font-normal text-gray-600">
-                    SF Online Banking is provided by Split Financial Services.
+                    SF Online Banking is provided by Split Financial.
                     </p>
                     <p className="text-12 mt-1 font-normal text-gray-600">
                     Split Financial Website, © 2023-2024
