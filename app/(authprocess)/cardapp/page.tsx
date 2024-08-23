@@ -1,8 +1,8 @@
 
-import AuthForm from '@/components/bank/AuthForm'
 import React from 'react'
 
 import type { Metadata } from "next";
+import CardForm from '@/components/bank/CardForm';
 
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const cardApplication = () => {
   return (
     <section className="flex-center size-full max-sm:px-6"> 
-      <AuthForm type="sign-up"/>
+      <CardForm type="sign-up"/>
     </section>
   )
 }
