@@ -31,12 +31,12 @@ const Progress = React.forwardRef<
           style={{ transform: `translateX(-${100 - percentage}%)` }}
         />
       </ProgressPrimitive.Root>
-      <div
+      {/* <div
         className="absolute text-[12px] mt-1 bottom-[-20px] left-0 w-full text-center text-sm text-gray-700"
         style={{ width: `${percentage}%` }}
       >
         {percentage}%
-      </div>
+      </div> */}
     </div>
   );
 });

@@ -30,6 +30,8 @@ import { getNextAppStep} from '@/lib/actions/bank.actions';
 import Step1 from '../cardAppSteps/Step1';
 import Step2 from '../cardAppSteps/Step2';
 import Step3 from '../cardAppSteps/Step3';
+import Step4 from '../cardAppSteps/Step4';
+import ProgressLoad from './ProgressLoad';
 
 
 const CardForm = ({type}:{type: string}) => {
@@ -58,12 +60,17 @@ const CardForm = ({type}:{type: string}) => {
 
   //   }
   // };
+  
 
   const handleNextStep = () => {
-    setCurrentStep(prevStep => {
+    setCurrentStep((prevStep) => {
       const nextStep = prevStep + 1;
       return nextStep <= steps.length ? nextStep : prevStep; // Prevents going beyond the last step
     });
+  };
+
+  const handlePreviousStep = () => {
+    setCurrentStep((prevStep) => Math.max(prevStep - 1, 1)); // Ensures the step doesn't go below 1
   };
 
   const handleSigninRedirect = () => {
@@ -71,23 +78,28 @@ const CardForm = ({type}:{type: string}) => {
   };
 
 
-  const handlePreviousStep = () => {
-    setCurrentStep(prevStep => Math.max(prevStep - 1, 1)); // Ensures the step doesn't go below 1
-  };
-
     const steps = [
       { id: 1, component: <Step1 onClick={handleNextStep}/> },
       { id: 2, component: <Step3 onClick={handleNextStep} onRedirect={handleSigninRedirect}/> },
-      { id: 3, component: <Step2 onClick={handleNextStep} onBack={handlePreviousStep} type={type} /> },
+      { id: 4, component: <Step2 onClick={handleNextStep} onBack={handlePreviousStep} type={type} /> },
+      { id: 3, component: <Step4 onClick={handleNextStep} onBack={handlePreviousStep} type={type} /> },
       // Add more steps as needed
     ];
-      
+  
+  // Calculate progress based on the current step
+  const totalSteps = steps.length;
+  const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+
 
   return (
     <section className="auth-form max-w-lg mx-auto">
+      <div className="absolute top-[60px] left-0 w-full bg-gray-200">
+          <ProgressLoad progress={progress}          />
+      </div>
       {steps.map(step => (
       step.id === currentStep && step.component
       ))}    
+      
         </section>
   )
 }

@@ -296,6 +296,10 @@ declare interface RecentTransactionsProps {
   header?: string;
   type?: 'savings' | 'checking' | 'credit' | 'Line' | 'Loan';
 }
+declare module '*.html' {
+  const content: string;
+  export default content;
+}
 
 declare interface TransactionHistoryTableProps {
   transactions: Transaction[];

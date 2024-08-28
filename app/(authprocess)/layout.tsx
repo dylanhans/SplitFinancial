@@ -79,9 +79,6 @@ export default function RootLayout({
 
       {/* Children section taking up 3/5 */}
       <div className="w-3/5 relative">
-        <div className="absolute top-[60px] left-0 w-full bg-gray-200">
-          <ProgressLoad />
-        </div>
         {children}
       </div>
     </main>

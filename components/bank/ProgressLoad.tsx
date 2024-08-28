@@ -1,21 +1,30 @@
-'use client'
-import React from 'react'
-import { Progress } from "@/components/ui/progress2"
+'use client';
+import React, { useEffect, useState } from 'react';
+import { Progress } from '@/components/ui/progress2'; // Ensure this component supports transitions or you have custom CSS
 
-  
-const ProgressLoad = () => {
-    const [progress, setProgress] = React.useState(10);
-
-//   React.useEffect(() => {
-//     const timer = setTimeout(() => setProgress(66), 500);
-//     return () => clearTimeout(timer);
-//   }, []);
-
-  return (
-    <div>
-        <Progress value={progress} className="w-full rounded-none" />
-    </div>
-  )
+interface ProgressLoadProps {
+  progress: number;
 }
 
-export default ProgressLoad
+const ProgressLoad: React.FC<ProgressLoadProps> = ({ progress }) => {
+  const [currentProgress, setCurrentProgress] = useState(progress);
+
+  useEffect(() => {
+    // Use setTimeout to allow React to complete the DOM update before transitioning
+    const timer = setTimeout(() => setCurrentProgress(progress), 15);
+
+    return () => clearTimeout(timer); // Clean up timer on component unmount
+  }, [progress]);
+
+  return (
+    <div className="relative w-full">
+      <Progress 
+        value={currentProgress} 
+        className="w-full rounded-none transition-all duration-500 ease-in-out bg-background" 
+        style={{ width: `${currentProgress}%` }}
+      />
+    </div>
+  );
+};
+
+export default ProgressLoad;

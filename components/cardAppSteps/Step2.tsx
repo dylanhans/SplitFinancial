@@ -236,7 +236,7 @@ const Step2: React.FC<Step2Props> = ({ onClick, onBack, type }) => {
                 </button>
               </div>
                 {/* cancel application */}
-                <div className='cancel-app flex'>
+                <div className='cancel-app flex justify-between items-center w-full'>
                   {/* Clickable text for 'Cancel Application' */}
                   <button
                     type="button"
