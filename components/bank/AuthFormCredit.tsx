@@ -41,9 +41,9 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
                 <span className="text-normal leading-8 font-semibold text-[#333] pt-4">
                   {subtype.toUpperCase()}
                 </span>
-                <span className="text-xl leading-8 font-semibold text-[#333] mb-2 pt-2">
+                <p className="text-xl leading-8 font-semibold text-[#333] mb-2 pt-2">
                   {title}<span className="text-xs align-super">®</span>
-                </span>
+                </p>
                 <hr className="h-px border-0 bg-black" />
                 <span className="text-base2 leading-7 font-light text-[#333] pt-2">
                   {description}

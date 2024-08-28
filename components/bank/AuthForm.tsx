@@ -311,7 +311,7 @@ const AuthForm = ({type}:{type: string}) => {
                     {type==='sign-in'
                         ? <>
                         <Link href="/options">
-                        <p>Enrol in Online Banking</p>
+                        <span>Enrol in Online Banking</span>
                         </Link>
                          </>
                         : ""
@@ -321,7 +321,7 @@ const AuthForm = ({type}:{type: string}) => {
                 <p className="text-14 ml-1 font-normal mt-1 hover-card-trigger text-bankGradient cursor-pointer">
                     {type==='sign-in'
                         ? <>
-                        <p>Recover an Account</p>
+                        <span>Recover an Account</span>
                          </>
                         : ""
                     }

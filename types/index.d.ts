@@ -217,7 +217,7 @@ declare interface AuthFormCreditProps {
   id: string;
   isChecked: boolean;
   onCheckmarkClick: () => void;
-  subtype?: string;
+  subtype: string;
   title: string;
   offer?: string;
   description: string;
@@ -235,6 +235,22 @@ declare interface BankDropdownProps {
   setValue?: UseFormSetValue<any>;
   otherStyles?: string;
 }
+
+declare interface Step1Props {
+  onClick: () => void;
+}
+
+declare interface Step2Props {
+  onClick: () => void;
+  onBack: () => void;
+  type: string;
+}
+
+declare interface Step3Props {
+  onClick: () => void;
+  onRedirect: () => void;
+}
+
 
 declare interface BankTabItemProps {
   account: Account;
@@ -327,6 +343,12 @@ declare interface getAccountProps {
 
 declare interface getRecentPaymentProps{
   transactions: Transaction[];
+
+}
+
+declare interface getNextAppStepProps{
+  currStep: string;
+  completedSteps: CompletedSteps[];
 
 }
 

@@ -365,9 +365,24 @@
     font-size: 25px;
   }
 
+  .font-bigtitle{
+    font-weight: 350;
+    font-size: 32px;
+  }
+
+  .font-bigtitle2{
+    font-weight: 300;
+    font-size: 25px;
+  }
+
   .font-subtitle{
     font-weight: 400;
     font-size: 16px;
+  }
+
+  .font-sub{
+    font-weight: 275;
+    font-size: 18px;
   }
 
   .font-signin{
@@ -674,6 +689,23 @@
   .full-width-navbar {
     width: 100%;
   }
+
+  .social-icon {
+    width: 20px; /* 50% of the container's width */
+    height: 20px; /* Maintain the aspect ratio */
+}
+
+
+
+  .footer-right{
+    display: flex;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-box-flex: 1;
+  }
+
   /* Auth Form */
   .auth-form {
     @apply flex min-h-screen w-full max-w-[430px] flex-col justify-center gap-5 py-10 md:gap-8;
@@ -693,6 +725,11 @@
 
   .form-btn {
     @apply bg-[#006ac3] text-white pt-1 pb-1 font-smallboldish balance-text-16 hover:bg-[#0060b1];
+  }
+
+  .form-btnclient{
+    @apply bg-white text-[#006ac3] pt-1 pb-1 font-smallboldish rounded-none border border-[#006ac3] first-line:balance-text-16 hover:bg-[#0060b1] hover:text-white;
+
   }
 
   .form-link {

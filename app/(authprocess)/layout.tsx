@@ -11,7 +11,8 @@ export default function RootLayout({
     <main className="flex min-h-screen w-full justify-between font-inter relative">
       {/* Header */}
       <header className="absolute top-0 left-0 w-full h-[60px] bg-white text-white shadow-md flex items-center px-6 z-10">
-        <div className="flex-1">
+        <div className="flex-1 pl-[300px] inline-flex">
+          <div className="left-header">
             <a
                 className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0"
                 target="_self"
@@ -26,11 +27,15 @@ export default function RootLayout({
                   data-testid="split-logo"
                 />
             </a>
+          </div>
+          <div className="right-header pl-[900px]">
+            <p className="text-black-1">Comm Here</p>
+          </div>
         </div>
       </header>
 
       {/* Footer */}
-      <footer className="absolute bottom-0 left-0 w-full h-[60px] bg-[#323232] text-white flex items-center px-6 z-10 flex-1">
+      <footer className="absolute bottom-0 left-0 w-full h-[60px] bg-[#323232] text-white flex items-center px-6 z-10 flex-1 shadow-md">
         <div className="relative px-0 text-white lg:bg-[#323232] lg:px-6">
             <div className="account-functions ml-[260px] flex items-center w-full space-x-4">
                 <p className="text-12 mt-1 font-normal text-white">
@@ -65,8 +70,8 @@ export default function RootLayout({
             <Image
               src="/icons/test-card.png"
               alt="test card"
-              width={300}
-              height={300}
+              width={320}
+              height={320}
             />
           </a>
         </div>

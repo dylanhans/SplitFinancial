@@ -100,6 +100,18 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
   }
 }*/
 
+export const getNextAppStep = async ({
+  currStep,
+  completedSteps
+}: getNextAppStepProps) => {
+  try {
+    
+  } catch (error) {
+    console.error("An error occurred while proceeding your application:", error);
+  }
+
+}
+
 // Get one bank account
 export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
   try {

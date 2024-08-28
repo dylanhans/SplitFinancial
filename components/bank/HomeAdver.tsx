@@ -13,7 +13,7 @@ const HomeAdver = () => {
           className="flex flex-col items-center opacity-0 translate-y-20"
         >
           <a href="#highlights" className="btn">Buy</a>
-          <p className="font-normal text-black-1 text-xl">From $199/month or $999</p>
+          <span className="font-normal text-black-1 text-xl">From $199/month or $999</span>
         </div>
       </section>
     )
