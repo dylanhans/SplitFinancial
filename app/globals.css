@@ -705,6 +705,12 @@
     height: 20px; /* Maintain the aspect ratio */
 }
 
+  /* BUTTON */
+.chatbox__button {
+  text-align: right;
+  bottom: 15px;
+  right: 15px;
+}
 
 
   .footer-right{
@@ -719,6 +725,15 @@
   /* Auth Form */
   .auth-form {
     @apply flex min-h-screen w-full max-w-[430px] flex-col justify-center gap-5 py-10 md:gap-8;
+  }
+
+  .creditcard-promo {
+    @apply flex w-full max-h-[500px];
+  }
+
+  .card-form {
+    @apply flex min-h-screen w-full max-w-[625px] flex-col justify-center gap-5 py-20 md:gap-8;
+    transform: translateX(-20%); /* Adjust the value as needed */
   }
 
   .form-item {

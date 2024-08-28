@@ -25,9 +25,9 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
   
   return (
     <section>
-      <div className="py-[80px] relative">
+      <div className="py-[80px] relative ">
         <Separator className={`flex-grow mt-2 transition-color duration-300 ${isChecked ? ' border border-bankGradient opacity-100' : 'border opacity-100'}`} />
-         <Link href="/cardapp">
+         {/* <Link href="/cardapp"> */}
         <div className="px-6 md:px-0 md:mx-auto lg:max-w-[325px] shadow-lg rounded-sm w-full cursor-pointer" onClick={onCheckmarkClick}>
           <div className="relative">
             <div className="grid grid-cols-1 gap-2 w-full pt-8 pb-8 pl-6 pr-6">
@@ -85,7 +85,7 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
             </div>
           </div>
         </div>
-        </Link>
+        {/* </Link> */}
       </div>
     </section>
   );

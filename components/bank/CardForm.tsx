@@ -92,15 +92,17 @@ const CardForm = ({type}:{type: string}) => {
 
 
   return (
-    <section className="auth-form max-w-lg mx-auto">
+    <section className='w-full h-full'>
       <div className="absolute top-[60px] left-0 w-full bg-gray-200">
-          <ProgressLoad progress={progress}          />
+              <ProgressLoad progress={progress}          />
       </div>
-      {steps.map(step => (
-      step.id === currentStep && step.component
-      ))}    
-      
+        <section className="card-form mx-auto">
+          {steps.map(step => (
+          step.id === currentStep && step.component
+          ))}    
+          
         </section>
+   </section>
   )
 }
 

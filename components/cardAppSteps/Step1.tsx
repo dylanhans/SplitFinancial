@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 
 const Step1: React.FC<Step1Props> = ({ onClick }) => {
   return (
-    <header className="flex flex-col gap-5 md:gap-8 mt-10">
+    <header className="flex flex-col gap-2 md:gap-8 mt-2">
       {/* Conditionally render the "main class" div */}
     <div className={`transition-all duration-300 slide-up-enter slide-up-enter-active`}>
           {/* // currentAppStep ? 'slide-up-enter slide-up-enter-active' : 'slide-up-exit slide-up-exit-active' */}

@@ -13,7 +13,7 @@ const Step4: React.FC<Step1Props> = ({ onClick }) => {
             .then((data) => setContent(data));
     }, []);
   return (
-    <header className="flex flex-col gap-5 md:gap-8 mt-10">
+    <header className="flex flex-col gap-5 md:gap-8 mt-7">
       {/* Conditionally render the "main class" div */}
     <div className={`transition-all duration-300 slide-up-enter slide-up-enter-active`}>
           {/* // currentAppStep ? 'slide-up-enter slide-up-enter-active' : 'slide-up-exit slide-up-exit-active' */}
@@ -36,13 +36,20 @@ const Step4: React.FC<Step1Props> = ({ onClick }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
+                    
                     <p className="font-submore text-right text-blue-900 cursor-pointer">
-                        Print or save information
+                      {/* <img 
+                      src="/icons/print_icon.png"
+                      width={20}
+                      height={20}
+                      className='text-blue-900'
+                      /> */}
+                      Print or save information
                     </p>
                 </a>
                 </div>
-                <ScrollArea className="h-[300px] w-full text-[black] rounded-none border border-gray-300 opacity-70 p-4">
-                     <div dangerouslySetInnerHTML={{ __html: content }} />
+                <ScrollArea className="h-[300px] w-full text-[black] rounded-none border border-gray-300">
+                     <div dangerouslySetInnerHTML={{ __html: content }} className='p-4'/>
                 </ScrollArea>
             <p className="font-subbed mt-10 text-gray-700">
                 By clicking "Continue", you confirm that you have read the Information Box and agree to be considered for all the card options shown in the Information Box.
