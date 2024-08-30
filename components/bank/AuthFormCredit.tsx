@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image';
 import { Separator } from '@radix-ui/react-separator';
 import { Checkbox } from '../ui/checkbox';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 
 
 const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
@@ -22,6 +23,7 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
   img,
   title,
 }) => {
+
   
   return (
     <section>
@@ -41,6 +43,15 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
                 <span className="text-normal leading-8 font-semibold text-[#333] pt-4">
                   {subtype.toUpperCase()}
                 </span>
+                {/* {offer && (
+                  <li className='w-full'>
+                    <p className="p1 w-full"></p>
+                      <div className="snipe">
+                    
+                      </div>
+                    <p className="p1"></p>
+                  </li>
+                )} */}
                 <p className="text-xl leading-8 font-semibold text-[#333] mb-2 pt-2">
                   {title}<span className="text-xs align-super">®</span>
                 </p>
@@ -69,16 +80,32 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
                     {car}%
                   </span>
                 </div>
-                <div className="bg-transparent text-[#31719e] text-start text-base py-5 rounded font-semibold focus:ring inline-block w-auto">
-                  <Link href="/cardapp">
+                <div className="bg-transparent text-[#31719e] text-start text-base py-5 rounded font-semibold focus:ring flex justify-between items-center w-full">
+                  <Link href="/options/learn-card">
                     <p className="inline-block leading-none text-[15px] font-semibold cursor-pointer hover-card-trigger">
                       View Card Details
                       <span className="inline-block ml-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16" style={{ transform: 'translateY(1px)' }}>
-                          <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="13"
+                          height="13"
+                          fill="currentColor"
+                          className="bi bi-chevron-right"
+                          viewBox="0 0 16 16"
+                          style={{ transform: 'translateY(1px)' }}
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+                          />
                         </svg>
                       </span>
                     </p>
+                  </Link>
+                  <Link href="/cardapp">
+                  <Button type="submit" className={`form-btn3 text-right ${isChecked ? 'enabled1' : 'disabled1'}`}>
+                      Apply
+                    </Button>
                   </Link>
                 </div>
               </div>

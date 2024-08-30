@@ -219,7 +219,7 @@ declare interface AuthFormCreditProps {
   onCheckmarkClick: () => void;
   subtype: string;
   title: string;
-  offer?: string;
+  offer?: boolean;
   description: string;
   af: number;
   cl: number;
