@@ -7,77 +7,94 @@ import { Separator } from '@radix-ui/react-separator';
 const Footer1 = () => {
   return (
 <section>
-<div className="main-footer">
-    <nav className="relative p-5 text-white lg:bg-[#f5f6f7]">
-      <div className="account-functions pl-[235px]">
-      <Tabs defaultValue="account" className="w-full text-black-2" >
-        <TabsList>
-          <ul className="flex space-x-2 lg:mx-auto lg:max-w-7xl lg:px-0" >
-            <li
-              data-value="account"
-              aria-label="Personal"
-              className={`tab-item cursor-pointer relative`}
-            >
-              <TabsTrigger value="account">
-                <a href="/" className="text-xl lg:text-sm">Banking</a>
-              </TabsTrigger>
-            </li>
-            <li
-              data-value="transfer"
-              aria-label="Youth <18"
-              className={`tab-item cursor-pointer relative`}
-            >
-              <TabsTrigger value="transfer">
-                <a href="/payment-transfer" className="text-xl lg:text-sm">Credit Financing</a>
-              </TabsTrigger>
-            </li>
-            <li
-              data-value="history"
-              aria-label="Partners"
-              className={`tab-item cursor-pointer relative`}
-            >
-              <TabsTrigger value="history">
-                <a href="/transaction-history" className="text-xl lg:text-sm">Investing</a>
-              </TabsTrigger>
-            </li>
-            <li
-              data-value="products-services"
-              aria-label="Partners"
-              className={`tab-item cursor-pointer relative`}
-            >
-              <TabsTrigger value="products-services">
-                <a href="/accounts-page" className="text-xl lg:text-sm">Account Services</a>
-              </TabsTrigger>
-            </li>
-            <li
-              data-value="help"
-              aria-label="Youth <18"
-              className={`tab-item cursor-pointer relative`}
-            >
-              <TabsTrigger value="help">
-                <a href="/help" className="text-xl lg:text-sm">Solutions Centre</a>
-              </TabsTrigger>
-            </li>
-          </ul>
-          <div>
-            <Image 
+    <div className="main-footer">
+      <nav className="relative p-5 text-white lg:bg-[#f5f6f7]">
+        <div className="account-functions pl-[235px]">
+          <div className="w-full text-black-2">
+            <ul className="flex flex-wrap">
+              {/* Banking Section */}
+              <li className="section-item flex-1">
+                <h2 className="text-sm cursor-pointer relative">
+                  Banking
+                </h2>
+                <ul className="text-blue-900 text-12 font-normal pt-6 space-y-6">
+                  <li className='hover-card-trigger cursor-pointer'><a href="/banking-option1">Personal Banking Accounts</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/banking-option2">Credit Cards</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/banking-option3">Loans & Lines of Credit</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/banking-option3">Exchange Rates</a></li>
+
+                </ul>
+              </li>
+
+              {/* Credit Financing Section */}
+              <li className="section-item flex-1">
+                <h2 className="text-sm  cursor-pointer relative">
+                  Credit Financing
+                </h2>
+                <ul className="text-blue-900 text-12 font-normal pt-6 space-y-6">
+                  <li className='hover-card-trigger cursor-pointer'><a href="/credit-option1">Terms and Charges</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/credit-option2">Credit Score</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/credit-option3">Financing Agreement</a></li>
+                </ul>
+              </li>
+
+              {/* Investing Section */}
+              <li className="section-item flex-1">
+                <h2 className="text-sm  cursor-pointer relative">
+                  Investing
+                </h2>
+                <ul className="text-blue-900 text-12 font-normal pt-6 space-y-6">
+                  <li className='hover-card-trigger cursor-pointer'><a href="/investing-option1">Investing Option 1</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/investing-option2">Investing Option 2</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/investing-option3">Investing Option 3</a></li>
+                </ul>
+              </li>
+
+              {/* Account Services Section */}
+              <li className="section-item flex-1 ">
+                <h2 className="text-sm  cursor-pointer relative">
+                Account Services
+                </h2>
+                <ul className="text-blue-900 text-12 font-normal pt-6 space-y-6">
+                  <li className='hover-card-trigger cursor-pointer'><a href="/services-option1">Services Option 1</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/services-option2">Services Option 2</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/services-option3">Services Option 3</a></li>
+                </ul>
+              </li>
+
+              {/* Solutions Centre Section */}
+              <li className="section-item flex-1">
+                <h2 className="text-sm  cursor-pointer relative">
+                  Solutions Centre
+                </h2>
+                <ul className="text-blue-900 text-12 font-normal pt-6 space-y-6">
+                  <li className='hover-card-trigger cursor-pointer'><a href="/solutions-option1">Solutions Option 1</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/solutions-option2">Solutions Option 2</a></li>
+                  <li className='hover-card-trigger cursor-pointer'><a href="/solutions-option3">Solutions Option 3</a></li>
+                </ul>
+              </li>
+
+              {/* <li>
+                <Image 
+                  src="/icons/cdic.png"
+                  alt="auth image"
+                  width={60}
+                  height={60}
+                />
+              </li> */}
+            </ul>
+            <div className="pt-6">
+              <Image 
                 src="/icons/cdic.png"
                 alt="auth image"
                 width={60}
                 height={60}
-            />
+              />
+            </div>
           </div>
-        </TabsList>
-        <TabsContent value="account"></TabsContent>
-        <TabsContent value="transfer"></TabsContent>
-        <TabsContent value="history"></TabsContent>
-        <TabsContent value="products-services"></TabsContent>
-        <TabsContent value="help"></TabsContent>
-      </Tabs>
-      </div>
-    </nav>
-    
-</div>
+        </div>
+      </nav>
+    </div>
 
 <div className="lower-footer">
   <div className="relative px-0 text-white lg:bg-[#323232]">
@@ -105,7 +122,7 @@ const Footer1 = () => {
         </div>
       </div>
       <div className='footer-right pl-[700px] flex items-center'>
-  <ul className="social-links pr-[30px] flex space-x-4">
+  <ul className="social-links pr-[20px] flex space-x-4">
     <li>
       <a href="https://www.facebook.com/rbc">
         <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/social/scl-facebook-master-white.svg" alt="Facebook" className="social-icon"/>
@@ -132,12 +149,12 @@ const Footer1 = () => {
       </a>
     </li>
   </ul>
-  <Separator className="h-[30px] w-[1px] border-l border-gray-300 mx-4" />
+  <Separator className="h-[30px] w-[1px] border-l border-gray-300 px-2" />
   <div className="to-topp">
     <a href="#skip-nav" className="scroll-to flex items-center">
       <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/ui/ui-to-top-white.svg" width="15" height="20" alt="Top"/>
       <span>
-        <span className="offscreen pl-4">Top</span>
+        <span className="offscreen pl-2">Top</span>
       </span>
     </a>
   </div>

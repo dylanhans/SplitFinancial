@@ -25,17 +25,10 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
       <CreditSecured />
       <PlatformSection />
       <Superpowers />
       <Canadians />
-      <Footer1 />
-      <div className="chatbox__button fixed z-50">
-        <button>
-          <img src="/icons/headerlogo.png" height={50} width={50} alt="Split Assistant" className='rounded-md bg-gradient-to-r from-[#14315B] to-[#2757A1]' />
-        </button>
-      </div>
     </div>
   )
 }

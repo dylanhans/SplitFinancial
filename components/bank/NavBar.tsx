@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Drawer from '@/components/ui/drawer';
+import { useRouter } from 'next/navigation';
 
 interface NavItem {
   label: string;
@@ -12,6 +13,12 @@ interface NavItem {
     items: { label: string; href: string }[];
   }[];
 }
+
+const navUpper = [
+  { label: 'Personal', href: '/home' },
+  { label: 'Partners', href: '/partners' },
+  { label: 'Youth', href: '/youth' },
+];
 
 const navItems: NavItem[] = [
   {
@@ -105,9 +112,17 @@ export const NavBar: React.FC = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>('Personal');
+  const router = useRouter();
+
 
   const handleClick = (id: string) => {
     setOpenId(openId === id ? null : id);
+  };
+
+  const handleTabClick = (label: string, href: string) => {
+    setActiveTab(label);
+    router.push(href);
   };
 
   const handleOpen = () => {
@@ -137,39 +152,35 @@ export const NavBar: React.FC = () => {
       {/* hide on scroll down  */}
           
       <div className="hidden lg:block">
-      <nav className="relative px-0 pt-2 text-white bg-gradient-to-b from-[#2e2d2d] to-[#0f0f0f] lg:px-6 lg:py-1">
-      <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
-            <li
-              aria-label="Personal"
-              className="tab-item cursor-pointer relative opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0"
-            >
-              <div className="text-xl lg:text-sm">Personal</div>
-              <div
-                className="tab-indicator hidden lg:block"
-                style={{
-                  transition: 'left 0.3s ease 0s, width 0.3s ease 0s',
-                  position: 'absolute',
-                  bottom: '0px',
-                  height: '2px',
-                  backgroundColor: 'currentcolor',
-                  left: '2px',
-                  width: '100%',
-                  bottom: '-4px',
-                }}
-              ></div>
-            </li>
-            <li
-              aria-label="Partners"
-              className="tab-item cursor-pointer relative opacity-70 border-b-2 border-transparent lg:border-0"
-            >
-              <div className="text-xl lg:text-sm">Partners</div>
-            </li>
-            <li
-              aria-label="Youth <18"
-              className="tab-item cursor-pointer relative opacity-70 border-b-2 border-transparent lg:border-0"
-            >
-              <div className="text-xl lg:text-sm">Youth &lt;18</div>
-            </li>
+        <nav className="relative px-0 pt-2 text-white bg-gradient-to-b from-[#2e2d2d] to-[#0f0f0f] lg:px-6 lg:py-1">
+          <ul className="flex space-x-6 lg:mx-auto lg:max-w-7xl lg:px-0">
+            {navUpper.map((item) => (
+              <li
+                key={item.label}
+                aria-label={item.label}
+                className={`tab-item cursor-pointer relative border-b-2 lg:border-0 pb-2 lg:pb-0 ${
+                  activeTab === item.label ? 'opacity-100 border-web-borderOverlay transition-all duration-1500' : 'opacity-70 border-transparent transition-all duration-1500'
+                }`}
+                onClick={() => handleTabClick(item.label, item.href)}
+              >
+                <div className="text-xl lg:text-sm">{item.label}</div>
+                {activeTab === item.label && (
+                  <div
+                    className="tab-indicator hidden lg:block"
+                    style={{
+                      transition: 'left 0.7s ease, width 0.7s ease',
+                      position: 'absolute',
+                      bottom: '0px',
+                      height: '2px',
+                      backgroundColor: 'currentcolor',
+                      left: '2px',
+                      width: '100%',
+                      bottom: '-4px',
+                    }}
+                  ></div>
+                )}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

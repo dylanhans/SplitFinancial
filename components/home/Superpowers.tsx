@@ -6,6 +6,7 @@ export const Superpowers = () => {
       <div className="px-6 md:px-0 md:mx-auto md:max-w-[520px] lg:max-w-[1016px]">
         <div className="my-[80px">
           <div className="lg:gap-[80px] grid grid-cols-1 justify-items-center rounded-xl lg:grid-cols-2 py-[40px] pt-0">
+              
             <div className="pb-[40px] lg:pb-0 flex h-full flex-col justify-center lg:my-0 order-last lg:order-first">
               <h2 className="text-3xl leading-10 md:text-4xl text-black font-semibold not-italic mb-[12px]">
                 Give yourself budgeting superpowers
@@ -14,6 +15,7 @@ export const Superpowers = () => {
                 Understand your cash flow and spending with minimal effort thanks to AI-powered tools.
               </span>
             </div>
+            
             <div className="w-full rounded order-last lg:order-first object-cover order-first lg:order-last">
               <div className="aspect-square lg:min-h-[468px]">
                 <div className="block h-full w-full"></div>

@@ -11,16 +11,16 @@ import React from 'react'
 import type { Metadata } from "next";
 import Footer1 from '@/components/MainLayout/footer1';
 import { HeroSection } from '@/components/home/HeroSection';
-import Apply from '@/components/bank/Apply';
+import Layout from '../layout';
 
 
-const Options = () => {
+const Youth = () => {
 
   return (
     <div>
-      <Apply />
+      <CreditSecured />
     </div>
   )
 }
 
-export default Options
+export default Youth

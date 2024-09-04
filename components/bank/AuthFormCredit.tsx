@@ -5,6 +5,7 @@ import { Separator } from '@radix-ui/react-separator';
 import { Checkbox } from '../ui/checkbox';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 
 const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
@@ -24,36 +25,38 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
   title,
 }) => {
 
-  
+  const handleApplyClick = () => {
+    // Construct the URL with query parameters as a string
+    const url = `/cardapp/application?title=${encodeURIComponent(title)}&img=${encodeURIComponent(img)}`;
+    
+    router.push(url);
+  };
+
+  const router = useRouter();
+
+
   return (
     <section>
-      <div className="py-[80px] relative ">
-        <Separator className={`flex-grow mt-2 transition-color duration-300 ${isChecked ? ' border border-bankGradient opacity-100' : 'border opacity-100'}`} />
-         {/* <Link href="/cardapp"> */}
-        <div className="px-6 md:px-0 md:mx-auto lg:max-w-[325px] shadow-lg rounded-sm w-full cursor-pointer" onClick={onCheckmarkClick}>
+      <div className="py-[80px] relative">
+        <Separator
+          className={`flex-grow mt-2 transition-color duration-300 ${
+            isChecked ? ' border border-bankGradient opacity-100' : 'border opacity-100'
+          }`}
+        />
+        <div
+          className="px-6 md:px-0 md:mx-auto lg:max-w-[325px] shadow-lg rounded-sm w-full cursor-pointer"
+          onClick={onCheckmarkClick}
+        >
           <div className="relative">
             <div className="grid grid-cols-1 gap-2 w-full pt-8 pb-8 pl-6 pr-6">
               <div className="flex flex-col rounded-xl bg-white p-1">
-                <Image 
-                  src={img}
-                  alt="credit card"
-                  width={190}
-                  height={190}
-                />
+                <Image src={img} alt="credit card" width={190} height={190} />
                 <span className="text-normal leading-8 font-semibold text-[#333] pt-4">
                   {subtype.toUpperCase()}
                 </span>
-                {/* {offer && (
-                  <li className='w-full'>
-                    <p className="p1 w-full"></p>
-                      <div className="snipe">
-                    
-                      </div>
-                    <p className="p1"></p>
-                  </li>
-                )} */}
                 <p className="text-xl leading-8 font-semibold text-[#333] mb-2 pt-2">
-                  {title}<span className="text-xs align-super">®</span>
+                  {title}
+                  <span className="text-xs align-super">®</span>
                 </p>
                 <hr className="h-px border-0 bg-black" />
                 <span className="text-base2 leading-7 font-light text-[#333] pt-2">
@@ -102,43 +105,21 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
                       </span>
                     </p>
                   </Link>
-                  <Link href="/cardapp">
-                  <Button type="submit" className={`form-btn3 text-right ${isChecked ? 'enabled1' : 'disabled1'}`}>
-                      Apply
-                    </Button>
-                  </Link>
+                  <Button
+                    type="button"
+                    className={`form-btn3 text-right ${isChecked ? 'enabled1' : 'disabled1'}`}
+                    onClick={handleApplyClick}
+                  >
+                    Apply
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* </Link> */}
       </div>
     </section>
   );
 };
 
 export default AuthFormCredit;
-
-
-{/* <button
-                      className="bg-[#006aff] text-white cursor-pointer text-base px-5 py-3 rounded font-semibold focus:ring flex w-full"
-                      disabled
-                    >
-                      <div className="flex space-x-xxs flex-row gap-2" style={{ alignItems: 'center' }}>
-                        <span className="inline-block leading-none">Apply</span>
-                        <svg
-                          className="fill-black fill-white h-5 w-5 min-w-[1.25rem]"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 1 24 24"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.414 11h11.17l-4.882-4.882a1 1 0 0 1 0-1.413h.005a1 1 0 0 1 1.408 0L19.71 11.3a1 1 0 0 1 0 1.41l-6.595 6.59a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41l4.88-4.89H5.414a1 1 0 1 1 0-2z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                    </button> */}
