@@ -3,7 +3,6 @@ import React from 'react'
 
 import type { Metadata } from "next";
 import CardForm from '@/components/bank/CardForm';
-import ProgressLoad from '@/components/bank/ProgressLoad';
 
 
 export const metadata: Metadata = {
