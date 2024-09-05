@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 
-const Step1: React.FC<Step1Props> = ({ onClick }) => {
+const Step1: React.FC<Step1Props> = ({ onClick, card }) => {
   return (
     <header className="flex flex-col gap-2 md:gap-8 mt-2">
       {/* Conditionally render the "main class" div */}
@@ -16,7 +16,7 @@ const Step1: React.FC<Step1Props> = ({ onClick }) => {
               </p>
             </h1>
             <h1 className="font-bigtitle text-gray-900">
-              Split Secured Credit <span className="text-xs align-super">®</span>
+              {card.title} <span className="text-xs align-super">®</span>
             </h1>
           </div>
           <Button type="submit" onClick={onClick} className="form-btn mt-10">

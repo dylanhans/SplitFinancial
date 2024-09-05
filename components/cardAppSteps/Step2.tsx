@@ -81,7 +81,6 @@ const Step2: React.FC<Step2Props> = ({ onClick, onBack, type }) => {
           try {
             // Sign up with Appwrite & create plain link token
             
-            if(type==='sign-up'){
                 const userData = {
                     firstName: data.firstName!,
                     lastName: data.lastName!,
@@ -100,15 +99,7 @@ const Step2: React.FC<Step2Props> = ({ onClick, onBack, type }) => {
                 }
             
 
-            if(type==='sign-in'){
-                const response = await signIn({
-                    email:  data.email,
-                    password: data.password,
-                })
-                if(response) router.push('/')
-            } 
-
-          } catch (error) {
+          catch (error) {
             console.log(error);
           } finally {
             setIsLoading(false);
@@ -136,7 +127,6 @@ const Step2: React.FC<Step2Props> = ({ onClick, onBack, type }) => {
                 <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
             
-            {type==='sign-up' && (
                 <>
                     <div className="flex gap-4">
                     <CustomInput 
@@ -194,12 +184,11 @@ const Step2: React.FC<Step2Props> = ({ onClick, onBack, type }) => {
                     />
                     </div>
                 </>
-            )}
 
             <CustomInput
                 control={form.control}
                 name="email"
-                label={type === "sign-up" ? "Email" : "Client Card or Email"}
+                label="Email"
                 placeholder="Enter your email"
               />
 

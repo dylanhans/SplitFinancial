@@ -27,7 +27,7 @@ const AuthFormCredit: React.FC<AuthFormCreditProps> = ({
 
   const handleApplyClick = () => {
     // Construct the URL with query parameters as a string
-    const url = `/cardapp/application?title=${encodeURIComponent(title)}&img=${encodeURIComponent(img)}`;
+    const url = `/cardapp/application?id=${encodeURIComponent(id)}`;
     
     router.push(url);
   };

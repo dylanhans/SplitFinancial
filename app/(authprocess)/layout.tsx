@@ -1,4 +1,5 @@
 import ProgressLoad from "@/components/bank/ProgressLoad";
+import SignupCard from "@/components/bank/SignupCard";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 
@@ -66,14 +67,7 @@ export default function RootLayout({
       {/* First section taking up 2/5 */}
       <div className="w-2/5">
         <div className="text-wrapper2 flex bg-[#f3f4f5] flex-col w-full min-h-screen h-full relative pb-15">
-          <a className="logoimage" href="/home">
-            <Image
-              src="/icons/test-card.png"
-              alt="test card"
-              width={320}
-              height={320}
-            />
-          </a>
+          <SignupCard />
         </div>
       </div>
 

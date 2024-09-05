@@ -21,6 +21,58 @@ export const sidebarLinks = [
   },
 ];
 
+export const cardTypes = [
+  { category: 'Overall' },
+  { category: 'Standard' },
+  { category: 'Travel and Lifestyle' },
+  { category: 'Student' },
+  { category: 'Rewards' },
+  { category: 'Business' },
+];
+
+export type CardsById = Record<string, CardDetails>;
+
+// Define the cards array with the Card type
+export const cardsArray: CardsById = {
+  SSCRA: {
+    subtype: 'Rewards',
+    title: 'Split Secured Credit',
+    description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
+    img: '/icons/tester-card.png',
+    type: 'savings',
+    offer: true,
+    af: 110,
+    cl: 1000,
+    car: 22.99,
+    pr: 20.99,
+  },
+  SSCA: {
+    subtype: 'Student',
+    title: 'Split Credit',
+    description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
+    img: '/icons/test-card.png',
+    type: 'savings',
+    offer: true,
+    af: 110,
+    cl: 1000,
+    car: 22.99,
+    pr: 20.99,
+  },
+  SSHISA: {
+    subtype: 'Standard',
+    title: 'Split High-Interest Savings',
+    description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
+    img: '/icons/card2.png',
+    type: 'savings',
+    offer: false,
+    af: 110,
+    cl: 1000,
+    car: 22.99,
+    pr: 20.99,
+  },
+};
+
+
 // good_user / good_password - Bank of America
 export const TEST_USER_ID = "6627ed3d00267aa6fa3e";
 

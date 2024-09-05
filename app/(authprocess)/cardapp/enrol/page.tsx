@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const enrolApplication = () => {
   return (
     <section className="flex-center size-full max-sm:px-6"> 
-      <EnrolForm type="enrol"/>
+      <EnrolForm type="enrol-process"/>
     </section>
   )
 }

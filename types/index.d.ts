@@ -5,6 +5,23 @@ declare type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+
+// ===================CARDS=====================
+
+// Define the Card interface
+declare interface CardDetails {
+  subtype: string;
+  title: string;
+  description: string;
+  img: string;
+  type: string;
+  offer: boolean;
+  af: number;
+  cl: number;
+  car: number;
+  pr: number;
+}
+
 // ========================================
 
 declare type SignUpParams = {
@@ -238,12 +255,13 @@ declare interface BankDropdownProps {
 
 declare interface Step1Props {
   onClick: () => void;
+  card: CardDetails;
 }
 
 declare interface Step2Props {
   onClick: () => void;
   onBack: () => void;
-  type: string;
+  type: string
 }
 
 declare interface Step3Props {

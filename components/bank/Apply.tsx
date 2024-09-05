@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from '@/components/ui/separator';
 import AuthFormCredit from '@/components/bank/AuthFormCredit';
+import { cardsArray, cardTypes } from '@/constants';
 
 const Apply = () => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
@@ -23,56 +24,6 @@ const Apply = () => {
   const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
   const tabsRef = useRef<HTMLUListElement>(null);
 
-  const cardTypes = [
-    { category: 'Overall' },
-    { category: 'Standard' },
-    { category: 'Travel and Lifestyle' },
-    { category: 'Student' },
-    { category: 'Rewards' },
-    { category: 'Business' },
-  ];
-
-  const cards = [
-    {
-      id: 'card1',
-      subtype: 'Rewards',
-      title: 'Split Secured Credit',
-      description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
-      img: '/icons/tester-card.png',
-      type: 'savings',
-      offer: true,
-      af: 110,
-      cl: 1000,
-      car: 22.99,
-      pr: 20.99,
-    },
-    {
-      id: 'card2',
-      subtype: 'Student',
-      title: 'Split Credit',
-      description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
-      img: '/icons/test-card.png',
-      type: 'savings',
-      offer: true,
-      af: 110,
-      cl: 1000,
-      car: 22.99,
-      pr: 20.99,
-    },
-    {
-      id: 'card3',
-      subtype: 'Standard',
-      title: 'Split High-Interest Savings',
-      description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
-      img: '/icons/card2.png',
-      type: 'savings',
-      offer: false,
-      af: 110,
-      cl: 1000,
-      car: 22.99,
-      pr: 20.99,
-    },
-  ];
 
   useEffect(() => {
     const updateIndicator = () => {
@@ -162,27 +113,27 @@ const Apply = () => {
             <Separator className="flex-grow border-t border-gray-300" />
           </div>
           <div className="flex flex-row gap-x-8">
-            {cards
-              .filter((card) => activeTab === 'Overall' || card.subtype === activeTab)
-              .map((card) => (
-                <AuthFormCredit
-                  key={card.id}
-                  id={card.id}
-                  isChecked={selectedCard === card.id}
-                  onCheckmarkClick={() => handleCardSelect(card.id)}
-                  type={card.type}
-                  subtype={card.subtype}
-                  title={card.title}
-                  description={card.description}
-                  offer={card.offer}
-                  af={card.af}
-                  cl={card.cl}
-                  car={card.car}
-                  pr={card.pr}
-                  rewards=""
-                  img={card.img}
-                />
-              ))}
+          {Object.entries(cardsArray)
+            .filter(([id, card]) => activeTab === 'Overall' || card.subtype === activeTab)
+            .map(([id, card]) => (
+              <AuthFormCredit
+                key={id}
+                id={id}
+                isChecked={selectedCard === id}
+                onCheckmarkClick={() => handleCardSelect(id)}
+                type={card.type}
+                subtype={card.subtype}
+                title={card.title}
+                description={card.description}
+                offer={card.offer}
+                af={card.af}
+                cl={card.cl}
+                car={card.car}
+                pr={card.pr}
+                rewards="" // Assuming rewards are not defined in the example provided
+                img={card.img}
+              />
+            ))}
           </div>
         </div>
       </section>

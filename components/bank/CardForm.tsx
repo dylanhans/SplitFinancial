@@ -21,7 +21,7 @@ import CustomInput from './CustomInput'
 import { authformSchema } from '@/lib/utils'
 import { Control } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import PlaidLink from './PlaidLink'
 import { Separator } from '@radix-ui/react-separator'
@@ -32,6 +32,8 @@ import Step2 from '../cardAppSteps/Step2';
 import Step3 from '../cardAppSteps/Step3';
 import Step4 from '../cardAppSteps/Step4';
 import ProgressLoad from './ProgressLoad';
+import Step5 from '../cardAppSteps/Step5';
+import { cardsArray } from '@/constants';
 
 
 const CardForm = ({type}:{type: string}) => {
@@ -40,6 +42,11 @@ const CardForm = ({type}:{type: string}) => {
     const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false); // Track sign-up success
     const [currentStep, setCurrentStep] = useState(1); // Starts with the first step
     const completedSteps: string[] = [];
+    const searchParams = useSearchParams();
+  
+    const cardId = searchParams.get('id');
+    // Retrieve the card details using the 'id'
+    const card = cardId ? cardsArray[cardId] : null;
 
   // const handleNextStep = async (currStep: string, completedSteps: string[]) => {
   //   try {
@@ -79,10 +86,12 @@ const CardForm = ({type}:{type: string}) => {
 
 
     const steps = [
-      { id: 1, component: <Step1 onClick={handleNextStep}/> },
+      { id: 1, component: <Step1 onClick={handleNextStep} card={card}/> },
       { id: 2, component: <Step3 onClick={handleNextStep} onRedirect={handleSigninRedirect}/> },
-      { id: 4, component: <Step2 onClick={handleNextStep} onBack={handlePreviousStep} type={type} /> },
-      { id: 3, component: <Step4 onClick={handleNextStep} onBack={handlePreviousStep} type={type} /> },
+      { id: 4, component: <Step2 onClick={handleNextStep} onBack={handlePreviousStep} type={type}/> },
+      { id: 3, component: <Step4 onClick={handleNextStep} onBack={handlePreviousStep} /> },
+      { id: 5, component: <Step5 onClick={handleNextStep} onBack={handlePreviousStep} /> },
+
       // Add more steps as needed
     ];
   
