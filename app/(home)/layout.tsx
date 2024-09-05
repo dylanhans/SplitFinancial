@@ -3,6 +3,8 @@ import ProgressNavBar from "@/components/bank/ProgressNavBar";
 import Footer1 from "@/components/MainLayout/footer1";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+
+  
   return (
     <div className="flex flex-col min-h-screen">
       <NavBar 
