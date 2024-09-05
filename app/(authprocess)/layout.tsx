@@ -13,12 +13,12 @@ export default function RootLayout({
       {/* Header */}
       <header className="absolute top-0 left-0 w-full h-[60px] bg-white text-white shadow-md flex items-center px-6 z-10">
         <div className="flex-1 pl-[300px] inline-flex">
-          <div className="left-header">
+          <div className="left-header flex items-center">
             <a
                 className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0"
                 target="_self"
                 aria-label="Split Financial"
-                href="/home"
+                href="/"
             >
                 <img
                   src="/icons/logoimage.png"
@@ -29,8 +29,25 @@ export default function RootLayout({
                 />
             </a>
           </div>
-          <div className="right-header pl-[900px]">
-            <p className="text-black-1">Comm Here</p>
+          <div className="right-header flex items-center pl-[900px]">
+            <img 
+              src="/icons/icon-phone.svg" 
+              alt="Description of image" 
+              className="w-8 h-8 mr-3" 
+            />
+            <div className="flex flex-col">
+              <p className="text-gray-900 font-subbed">Need assistance?</p>
+              <div className="flex items-center">
+                <p className="text-[#006ac3] font-subbed inline">FAQs</p>
+                <span className="mx-1 text-[black] font-subbed">|</span> {/* Add some spacing with margin */}
+                <span className="number-call font-subbed text-gray-900">
+                  Call
+                  <span className="pl-1 number-call text-gray-900">
+                    1-800-769-2511
+                  </span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </header>

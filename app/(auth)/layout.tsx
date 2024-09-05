@@ -12,7 +12,7 @@ export default function RootLayout({
       <main className="relative flex min-h-screen w-full font-inter overflow-hidden">
         <div className="auth-asset w-full full-screen-animation">
           <div className="text-wrapper flex flex-col w-full min-h-screen h-full relative pb-15">
-            <a className="logoimage" href="/home">
+            <a className="logoimage" href="/">
               <Image 
                 src="/icons/headerlogo.png"
                 alt="split logo"

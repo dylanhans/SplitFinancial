@@ -89,7 +89,7 @@ const CardForm = ({type}:{type: string}) => {
       { id: 1, component: <Step1 onClick={handleNextStep} card={card}/> },
       { id: 2, component: <Step3 onClick={handleNextStep} onRedirect={handleSigninRedirect}/> },
       { id: 4, component: <Step2 onClick={handleNextStep} onBack={handlePreviousStep} type={type}/> },
-      { id: 3, component: <Step4 onClick={handleNextStep} onBack={handlePreviousStep} /> },
+      { id: 3, component: <Step4 onClick={handleNextStep} onBack={handlePreviousStep} card={card}/> },
       { id: 5, component: <Step5 onClick={handleNextStep} onBack={handlePreviousStep} /> },
 
       // Add more steps as needed

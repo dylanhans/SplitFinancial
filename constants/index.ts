@@ -45,6 +45,7 @@ export const cardsArray: CardsById = {
     cl: 1000,
     car: 22.99,
     pr: 20.99,
+    document: '/documents/SSCRA.html'
   },
   SSCA: {
     subtype: 'Student',
@@ -57,18 +58,23 @@ export const cardsArray: CardsById = {
     cl: 1000,
     car: 22.99,
     pr: 20.99,
+    document: '/documents/SSCA.html'
+
   },
   SSHISA: {
     subtype: 'Standard',
-    title: 'Split High-Interest Savings',
+    title: 'Split Preferred Credit',
     description: 'Earn up to $950 in value in the first 12 months, including up to 45,000 bonus Scene+ points and your first annual fee waived.³',
-    img: '/icons/card2.png',
+    img: '/icons/testcard2.png',
     type: 'savings',
     offer: false,
     af: 110,
     cl: 1000,
     car: 22.99,
     pr: 20.99,
+    note: 'To apply for this card, you must have a minimum personal income of $80,000 or minimum household income of $150,000 or minimum total investable assets of $400,000.',
+    document: '/documents/SSHISA.html'
+
   },
 };
 

@@ -4,14 +4,28 @@ import { Button } from '../ui/button'
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 
-const Step4: React.FC<Step1Props> = ({ onClick }) => {
-    const [content, setContent] = useState('');
+const Step4: React.FC<Step1Props> = ({ onClick, card }) => {
+  const [content, setContent] = useState<string>('');
 
-    useEffect(() => {
-        fetch('/documents/test_document.html')
-            .then((response) => response.text())
-            .then((data) => setContent(data));
-    }, []);
+  // Async function to fetch HTML content
+  const fetchHtmlContent = async (url: string) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.text();
+      setContent(data);
+    } catch (error) {
+      console.error('Error fetching HTML file:', error);
+    }
+  };
+
+  // Fetch content when the component mounts
+  if (card?.document) {
+    fetchHtmlContent(card.document);
+  }
+  
   return (
     <header className="flex flex-col gap-5 md:gap-8 mt-7">
       {/* Conditionally render the "main class" div */}
@@ -32,7 +46,7 @@ const Step4: React.FC<Step1Props> = ({ onClick }) => {
             </h1>
                 <div>
                 <a
-                    href="/documents/test_document.html" // Replace with the correct path to your HTML file
+                    href={card.document} // Replace with the correct path to your HTML file
                     target="_blank"
                     rel="noopener noreferrer"
                 >

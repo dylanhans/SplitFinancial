@@ -15,7 +15,7 @@ interface NavItem {
 }
 
 const navUpper = [
-  { label: 'Personal', href: '/home' },
+  { label: 'Personal', href: '/' },
   { label: 'Partners', href: '/partners' },
   { label: 'Youth', href: '/youth' },
 ];
@@ -192,7 +192,7 @@ export const NavBar: React.FC = () => {
                 className="absolute left-5 top-0.5 z-30 lg:relative lg:left-[unset] lg:top-[unset] lg:p-0"
                 target="_self"
                 aria-label="Split Financial"
-                href="/home"
+                href="/"
               >
                 <img
                   src="/icons/logoimage.png"

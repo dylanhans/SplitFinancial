@@ -20,6 +20,8 @@ declare interface CardDetails {
   cl: number;
   car: number;
   pr: number;
+  note?: string;
+  document: string;
 }
 
 // ========================================
@@ -243,6 +245,7 @@ declare interface AuthFormCreditProps {
   car: number;
   pr: number;
   rewards?: string;
+  note?: string;
   img: string;
   type: "savings" | "credit";
 }

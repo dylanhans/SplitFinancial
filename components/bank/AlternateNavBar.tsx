@@ -191,7 +191,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
   const handleLogOut = async () => {
     const loggedOut = await logoutAccount();
 
-    if (loggedOut) router.push('/home');
+    if (loggedOut) router.push('/');
   };
 
   
@@ -214,7 +214,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                 target="_self"
                 aria-label="Neo Financial"
                 onClick={handleLogOut}
-                href='/home'
+                href='/'
               >
                 <img
                   src="/icons/logoimage.png"
