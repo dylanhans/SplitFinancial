@@ -34,7 +34,7 @@ export const HeroSection = () => {
           src="/icons/home-hero-2-en.webp"
           style={{ position: 'absolute', height: '100%', width: '100%', inset: '0px', color: 'transparent' }}
         />
-        <div className="z-10 flex h-full flex-col overflow-hidden p-[40px] text-center text-contentOnColor lg:pt-[80px] ease-out transition-all duration-[1200ms] transform-gpu opacity-0 scale-95 animate-fadeIn">
+        <div className="z-10 flex h-full flex-col overflow-hidden p-[40px] text-center text-contentOnColor lg:pt-[80px] ease-out transition-all duration-700 transform-gpu opacity-0 scale-95 animate-fadeIn">
           <h1 className="whitespace-pre-line pb-[24px] text-5xl font-semibold sm:text-5xl md:text-7xl">
             The way money should be
           </h1>

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   }
 };
 
-const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
+const Summary = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string || 1);
 
   const loggedIn = await getLoggedInUser();
@@ -79,4 +79,4 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   );
 };
 
-export default Home;
+export default Summary;
