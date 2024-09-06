@@ -223,3 +223,27 @@ export const authformSchema = (type: string)=>z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
+
+export const applicationformSchema = z.object({
+  // sign up
+  address1: z.string().max(50), 
+  lastName:  z.string().min(3), 
+  firstName:  z.string().min(3), 
+  state: z.string().min(2).max(2), 
+  postalCode: z.string().min(3).max(6), 
+  dateOfBirth: z.string().min(3), 
+  ssn: z.string().min(3), 
+  city: z.string().max(50),
+  email: z.string().email(),
+  password: z.string().min(8),
+})
+
+export type appformSchema = z.infer<typeof applicationformSchema>;
+
+export const step4Schema = applicationformSchema.pick({
+  firstName: true,
+  lastName: true,
+});
+
+export type Step4Schema = z.infer<typeof step4Schema>;
+

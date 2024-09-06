@@ -27,10 +27,10 @@ import PlaidLink from './PlaidLink'
 import { Separator } from '@radix-ui/react-separator'
 import AuthFormCredit from './AuthFormCredit';
 import { getNextAppStep} from '@/lib/actions/bank.actions';
-import Step1 from '../cardAppSteps/Step1';
-import Step2 from '../cardAppSteps/Step2';
-import Step3 from '../cardAppSteps/Step3';
-import Step4 from '../cardAppSteps/Step4';
+import Step1 from '../cardAppSteps/S1';
+import Step2 from '../cardAppSteps/S4';
+import Step3 from '../cardAppSteps/S2';
+import Step4 from '../cardAppSteps/S3';
 import ProgressLoad from './ProgressLoad';
 
 

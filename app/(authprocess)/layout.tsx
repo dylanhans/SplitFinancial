@@ -38,11 +38,17 @@ export default function RootLayout({
             <div className="flex flex-col">
               <p className="text-gray-900 font-subbed">Need assistance?</p>
               <div className="flex items-center">
-                <p className="text-[#006ac3] font-subbed inline">FAQs</p>
+                <a
+                  href='/Application/FAQ' // Replace with the correct path to your HTML file
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="text-[#006ac3] font-subbed inline hover-card-trigger cursor-pointer">FAQs</p>
+                </a>
                 <span className="mx-1 text-[black] font-subbed">|</span> {/* Add some spacing with margin */}
                 <span className="number-call font-subbed text-gray-900">
                   Call
-                  <span className="pl-1 number-call text-gray-900">
+                  <span className="pl-1 number-call text-gray-900 font-smallbolder">
                     1-800-769-2511
                   </span>
                 </span>

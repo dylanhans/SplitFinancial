@@ -3,11 +3,11 @@ import { FormControl, FormField, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { Control, FieldPath } from 'react-hook-form'
 import { z } from 'zod'
-import { authformSchema } from '@/lib/utils'
+import { applicationformSchema, step4Schema, appformSchema } from '@/lib/utils'
 
-const formSchema = authformSchema('sign-up');
+const formSchema = applicationformSchema;
 
-interface CustomInputProps {
+interface ApplicationInputProps {
     control: Control<z.infer<typeof formSchema>>,
     name: FieldPath<z.infer<typeof formSchema>>,
     label: string,
@@ -16,7 +16,7 @@ interface CustomInputProps {
     id?: string; 
 }
 
-const CustomInput = ({ control, name, label, placeholder, id }: CustomInputProps) => {
+const ApplicationInput = ({ control, name, label, placeholder, id }: ApplicationInputProps) => {
     return (
       <FormField
         control={control}
@@ -32,7 +32,6 @@ const CustomInput = ({ control, name, label, placeholder, id }: CustomInputProps
                   id={id || name} // Use id prop if provided, otherwise fallback to name
                   placeholder={placeholder}
                   className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
-                  type={name === 'password' ? 'password' : 'text'}
                   {...field}
                 />
               </FormControl>
@@ -44,4 +43,4 @@ const CustomInput = ({ control, name, label, placeholder, id }: CustomInputProps
     );
   }
   
-  export default CustomInput;
+  export default ApplicationInput;
