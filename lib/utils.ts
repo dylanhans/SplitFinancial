@@ -4,6 +4,7 @@ import qs from "query-string";
 import { twMerge } from "tailwind-merge";
 import { z } from "zod";
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -75,6 +76,18 @@ export function formatAmount(amount: number): string {
 
   return formatter.format(amount);
 }
+
+export const titleOptions = [
+  { value: 'Mr.', label: 'Mr.' },
+  { value: 'Mrs.', label: 'Mrs.' },
+  { value: 'Miss', label: 'Miss' },
+  { value: 'Ms', label: 'Ms' },
+  { value: 'Mx', label: 'Mx' },
+  { value: 'Dr', label: 'Dr' },
+  { value: 'Prof', label: 'Prof' },
+  { value: 'Ind', label: 'Ind' },
+  { value: 'Prefer not to say', label: 'Prefer not to say' }
+];
 
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
@@ -224,6 +237,11 @@ export const authformSchema = (type: string)=>z.object({
   password: z.string().min(8),
 })
 
+export const phoneNumberSchema = z.string().regex(/^\d{3}-\d{3}-\d{4}$/, {
+  message: "Invalid phone number format. Please use XXX-XXX-XXXX.",
+});
+
+
 export const applicationformSchema = z.object({
   // sign up
   address1: z.string().max(50), 
@@ -232,18 +250,34 @@ export const applicationformSchema = z.object({
   state: z.string().min(2).max(2), 
   postalCode: z.string().min(3).max(6), 
   dateOfBirth: z.string().min(3), 
-  ssn: z.string().min(3), 
+  ssn: z.string().min(3).optional(),
   city: z.string().max(50),
   email: z.string().email(),
   password: z.string().min(8),
+  referTitle: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms', 'Mx', 'Dr', 'Prof', 'Ind', 'Prefer not to say']).optional(),  // Only allows these options
+  middleName: z.string().min(3).optional(),
+  phoneNumber: phoneNumberSchema,
 })
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
 
-export const step4Schema = applicationformSchema.pick({
+export const step4schema = applicationformSchema.pick({
   firstName: true,
   lastName: true,
+  ssn: true,
+  referTitle: true,
+  middleName: true,
+  dateOfBirth: true,
 });
 
-export type Step4Schema = z.infer<typeof step4Schema>;
+export type Step4Schema = z.infer<typeof step4schema>;
+
+export const step5schema = applicationformSchema.pick({
+  phoneNumber: true,
+  email: true
+});
+
+export type Step5Schema = z.infer<typeof step5schema>;
+
+
 

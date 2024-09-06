@@ -36,11 +36,10 @@ import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import { Separator } from '@radix-ui/react-separator'
 import { getNextAppStep} from '@/lib/actions/bank.actions';
 import CustomInput from '../bank/CustomInput';
-import ApplicationInput from '../bank/ApplicationInput';
-import { appformSchema, Step4Schema, step4schema, titleOptions } from '@/lib/utils';
-import ApplicationInputDropdown from '../bank/ApplicationInput-Dropdown';
+import ApplicationInput from '../bank/ApplicationInput-Dropdown';
+import { appformSchema, Step5Schema, step5schema } from '@/lib/utils';
 
-interface Step4Props {
+interface Step5Props {
   onClick: () => void;
   onBack: () => void;
   type: string;
@@ -48,45 +47,39 @@ interface Step4Props {
   setFormData: React.Dispatch<React.SetStateAction<appformSchema>>;
 }
 
-const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+
+const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormData }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   // Define form with step-specific schema
-  const form = useForm<Step4Schema>({
-    resolver: zodResolver(step4schema),
+  const form = useForm<Step5Schema>({
+    resolver: zodResolver(step5schema),
     defaultValues: {
-      firstName: formData.firstName || '',
-      lastName: formData.lastName || '',
-      ssn: formData.ssn || undefined,
-      referTitle: formData.referTitle || undefined, // use undefined for no selection
-      middleName: formData.middleName || '',
-      dateOfBirth: formData.dateOfBirth || '',
+      phoneNumber: formData.phoneNumber || undefined,
+      email: formData.email,
+
     },
   });
 
   // Define a submit handler.
-  const onSubmit: SubmitHandler<Step4Schema> = (data) => {
+  const onSubmit: SubmitHandler<Step5Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { firstName, lastName, ssn, referTitle, middleName, dateOfBirth } = data;
+      const { phoneNumber, email } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
         const applicationData = {
           ...prevData,
-          firstName,
-          lastName,
-          ssn,
-          referTitle,
-          middleName,
-          dateOfBirth,
+          phoneNumber,
+          email,
         };
         
         // Log the updated formData
-        console.log("Current Form Data:", applicationData);
+        console.log("Updated Form Data:", applicationData);
         
         return applicationData;
       });
@@ -117,73 +110,29 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
-        <div className='flex flex-col space-y-4'>
-          
-          {/* ReferTitle on its own row */}
-          <div className='flex gap-4'>
-            <ApplicationInputDropdown
-              control={form.control}
-              name="referTitle"
-              label="Title (optional)"
-              placeholder="Select"
-              id="referTitle"
-              options={titleOptions}
-            />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
+          <div className="flex col gap-4">
+              <ApplicationInput
+                control={form.control}
+                name="email"
+                label="Email"
+                placeholder="Enter your email"
+                id="email"
+              />
 
-            <ApplicationInput 
-              control={form.control}
-              name="middleName"
-              label="Middle Name (optional)"
-              placeholder=""
-              id="middleName"
-            />
+              <CustomInput
+                control={form.control}
+                name="email"
+                label={type === "sign-up" ? "Email" : "Client Card or Email"}
+                placeholder="Enter your email"
+              />
+            <div>
+            <Button type="submit" className="form-btn mt-10">
+              Continue
+            </Button>
+            </div>
           </div>
-
-          {/* First Name and Last Name on the same row */}
-          <div className="flex gap-4">
-            <ApplicationInput 
-              control={form.control}
-              name="firstName"
-              label="First Name"
-              placeholder="Jane"
-              id="firstName"
-            />
-            <ApplicationInput 
-              control={form.control}
-              name="lastName"
-              label="Last Name"
-              placeholder="Smith"
-              id="lastName"
-            />
-          </div>
-
-          {/* SSN and Date of Birth on the same row */}
-          <div className="flex gap-4">
-            <ApplicationInput 
-              control={form.control}
-              name="ssn"
-              label="Social Insurance Number (optional)"
-              placeholder="1234"
-              id="ssn"
-            />
-            <ApplicationInput 
-              control={form.control}
-              name="dateOfBirth"
-              label="Date of Birth"
-              placeholder="YYYY-MM-DD"
-              id="dob"
-            />
-          </div>
-
-        </div>
-
-        {/* Submit Button */}
-        <Button type="submit" className="form-btn mt-10">
-          Continue
-        </Button>
-      </form>
-
+        </form>
       </Form>
 
       <div className="flex flex-col gap-2">
@@ -237,7 +186,7 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
   );
 };
 
-export default Step4;
+export default Step5;
 
 // / 2. Define a submit handler.
         // const onSubmit = async (data: z.infer<typeof formSchema>)=>{

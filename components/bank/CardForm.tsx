@@ -36,6 +36,7 @@ import S2 from '../cardAppSteps/S2';
 import S3 from '../cardAppSteps/S3';
 import S4 from '../cardAppSteps/S4';
 import S5 from '../cardAppSteps/S5';
+import S6 from '../cardAppSteps/S6';
 
 type StepKey = 's1' | 's2' | 's3' | 's4' | 's5';
 
@@ -59,7 +60,16 @@ const formMachine = createMachine({
         BACK: 's3',
       },
     },
-    s5: { on: { BACK: 's4' } },
+    s5: {
+      on: {
+        NEXT: 's6', // Default next step after s4
+        UNIQUE: 's6', // If a specific option is selected, move to step 5
+        BACK: 's4',
+      },
+    },
+    s6: { 
+      on: { 
+        BACK: 's5' } },
     redirect: { type: 'final' }, // Example of a redirect state (sign-in)
   },
 });
@@ -84,7 +94,8 @@ const CardForm = ({ type }: { type: string }) => {
     s2: <S2 onClick={handleNextStep} onRedirect={handleSigninRedirect} />,
     s3: <S3 onClick={handleNextStep} onBack={handlePreviousStep} card={card} />,
     s4: <S4 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} />,
-    s5: <S5 onClick={handleNextStep} formData={formData} setFormData={setFormData} />,
+    s5: <S5 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} />,
+    s6: <S6 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} />,
   };
 
   // Ensure current.value is treated as a StepKey
