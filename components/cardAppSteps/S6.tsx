@@ -28,7 +28,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Input } from "@/components/ui/input"
-// import { authformSchema } from '@/lib/utils'
 import { Control } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -36,10 +35,11 @@ import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 import { Separator } from '@radix-ui/react-separator'
 import { getNextAppStep} from '@/lib/actions/bank.actions';
 import CustomInput from '../bank/CustomInput';
-import ApplicationInput from '../bank/ApplicationInput-Dropdown';
-import { appformSchema, Step5Schema, step5schema } from '@/lib/utils';
+import ApplicationInput from '../bank/ApplicationInput';
+import { appformSchema, Step5Schema, step5schema, Step6Schema, step6schema } from '@/lib/utils';
+import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
 
-interface Step5Props {
+interface Step6Props {
   onClick: () => void;
   onBack: () => void;
   type: string;
@@ -48,34 +48,32 @@ interface Step5Props {
 }
 
 
-const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   // Define form with step-specific schema
-  const form = useForm<Step5Schema>({
-    resolver: zodResolver(step5schema),
+  const form = useForm<Step6Schema>({
+    resolver: zodResolver(step6schema),
     defaultValues: {
-      phoneNumber: formData.phoneNumber || undefined,
-      email: formData.email,
-
+      phoneNumber: formData.phoneNumber,
+      code: formData.code || undefined,
     },
   });
 
   // Define a submit handler.
-  const onSubmit: SubmitHandler<Step5Schema> = (data) => {
+  const onSubmit: SubmitHandler<Step6Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { phoneNumber, email } = data;
+      const { code } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
         const applicationData = {
           ...prevData,
-          phoneNumber,
-          email,
+          code,
         };
         
         // Log the updated formData
@@ -99,7 +97,6 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleContinue = () => {
     setIsAlertOpen(false); // Close the dialog
-    setIsChecked(true);
     router.push('/options');
   };
 
@@ -112,20 +109,13 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
           <div className="flex col gap-4">
-              <ApplicationInput
+              <ApplicationPhoneVerify
                 control={form.control}
-                name="email"
-                label="Email"
-                placeholder="Enter your email"
-                id="email"
-              />
-
-              <CustomInput
-                control={form.control}
-                name="email"
-                label={type === "sign-up" ? "Email" : "Client Card or Email"}
-                placeholder="Enter your email"
-              />
+                name="code"
+                label="Code"
+                placeholder="Code"
+                id="code"
+                />
             <div>
             <Button type="submit" className="form-btn mt-10">
               Continue

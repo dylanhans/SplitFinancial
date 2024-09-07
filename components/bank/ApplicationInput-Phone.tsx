@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormControl, FormField, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
-import { Control, FieldPath } from 'react-hook-form'
+import { Control, FieldPath, useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 import { applicationformSchema, appformSchema } from '@/lib/utils'
 import InputMask from 'react-input-mask';
@@ -19,6 +19,10 @@ interface ApplicationInputPhoneProps {
 }
 
 const ApplicationInputPhone = ({ control, name, label, placeholder = "Enter your Phone Number", id }: ApplicationInputPhoneProps) => {
+  const { formState: { errors } } = useFormContext();
+
+  const isPhoneNumberValid = !errors.phoneNumber;
+  
   return (
     <FormField
       control={control}
@@ -32,16 +36,11 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "Enter your
             <FormControl>
               <InputMask
                 id={id || name}
-                mask="999-999-9999" // Mask pattern for phone number
+                mask="999-999-9999"
                 placeholder={placeholder}
-                className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
+                className="input-class"
                 {...field}
-                value={field.value || ""} // Ensure the value is set to "" if field.value is undefined
-              >
-                {(inputProps: any) => (
-                  <input {...inputProps} />
-                )}
-              </InputMask>
+              />
             </FormControl>
             <FormMessage className="form-message mt-2" />
           </div>

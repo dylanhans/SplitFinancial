@@ -257,6 +257,7 @@ export const applicationformSchema = z.object({
   referTitle: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms', 'Mx', 'Dr', 'Prof', 'Ind', 'Prefer not to say']).optional(),  // Only allows these options
   middleName: z.string().min(3).optional(),
   phoneNumber: phoneNumberSchema,
+  code: z.number().min(6).max(6),
 })
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
@@ -274,10 +275,17 @@ export type Step4Schema = z.infer<typeof step4schema>;
 
 export const step5schema = applicationformSchema.pick({
   phoneNumber: true,
-  email: true
+  email: true,
 });
 
 export type Step5Schema = z.infer<typeof step5schema>;
+
+export const step6schema = applicationformSchema.pick({
+  phoneNumber: true,
+  code: true,
+});
+
+export type Step6Schema = z.infer<typeof step6schema>;
 
 
 

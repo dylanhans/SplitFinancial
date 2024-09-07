@@ -128,6 +128,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
                 id="email"
               />
             <div>
+            
             <Button type="submit" className="form-btn mt-10">
               Continue
             </Button>
