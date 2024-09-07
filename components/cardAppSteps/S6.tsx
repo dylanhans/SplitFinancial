@@ -38,6 +38,7 @@ import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, Step5Schema, step5schema, Step6Schema, step6schema } from '@/lib/utils';
 import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
+import OTPLogin from '../bank/OTPLogin';
 
 interface Step6Props {
   onClick: () => void;
@@ -61,7 +62,7 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
       phoneNumber: formData.phoneNumber,
       code: formData.code || undefined,
     },
-  });
+  }); 
 
   // Define a submit handler.
   const onSubmit: SubmitHandler<Step6Schema> = (data) => {
@@ -109,13 +110,16 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
           <div className="flex col gap-4">
-              <ApplicationPhoneVerify
+              {/* <ApplicationPhoneVerify
                 control={form.control}
                 name="code"
                 label="Code"
                 placeholder="Code"
                 id="code"
-                />
+                /> */}
+              <OTPLogin 
+              
+              />
             <div>
             <Button type="submit" className="form-btn mt-10">
               Continue
