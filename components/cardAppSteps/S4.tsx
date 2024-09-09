@@ -60,7 +60,7 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
     defaultValues: {
       firstName: formData.firstName || '',
       lastName: formData.lastName || '',
-      ssn: formData.ssn || undefined,
+      ssn: formData.ssn || '',
       referTitle: formData.referTitle || undefined, // use undefined for no selection
       middleName: formData.middleName || '',
       dateOfBirth: formData.dateOfBirth || '',
@@ -164,7 +164,7 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
               control={form.control}
               name="ssn"
               label="Social Insurance Number (optional)"
-              placeholder="1234"
+              placeholder=""
               id="ssn"
             />
             <ApplicationInput 

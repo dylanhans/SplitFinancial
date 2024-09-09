@@ -244,22 +244,23 @@ export const phoneNumberSchema = z.string().regex(/^\+1 \d{3}-\d{3}-\d{4}$/, {
 
 export const applicationformSchema = z.object({
   // sign up
-  address: z.string().max(50), 
-  lastName:  z.string().min(3), 
-  firstName:  z.string().min(3), 
-  province: z.string().min(2).max(2), 
-  postalCode: z.string().min(3).max(6), 
-  dateOfBirth: z.string().min(3), 
-  unitNum: z.string().min(1).optional(),
-  ssn: z.string().min(3).optional(),
-  city: z.string().max(50),
-  email: z.string().email(),
-  password: z.string().min(8),
-  referTitle: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms', 'Mx', 'Dr', 'Prof', 'Ind', 'Prefer not to say']).optional(),  // Only allows these options
-  middleName: z.string().min(3).optional(),
-  phoneNumber: phoneNumberSchema,
-  code: z.number().min(6).max(6),
-})
+  address: z.string().max(50, { message: "Address cannot exceed 50 characters." }), 
+  lastName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the last name." }), 
+  firstName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the first name." }), 
+  province: z.string().min(2, { message: "Province code must be exactly 2 characters." }).max(2, { message: "Province code must be exactly 2 characters." }), 
+  postalCode: z.string().min(3, { message: "Please enter at least 3 characters for the postal code." }).max(6, { message: "Postal code cannot exceed 6 characters." }), 
+  dateOfBirth: z.string().min(3, { message: "Please enter at least 3 characters for the date of birth." }), 
+  unitNum: z.string().min(1, { message: "Unit number must contain at least 1 character." }).optional(),
+  ssn: z.string().min(9, { message: "SSN must be exactly 9 digits." }).max(9, { message: "SSN must be exactly 9 digits." }).optional().or(z.literal('')),
+  city: z.string().max(50, { message: "City name cannot exceed 50 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  password: z.string().min(8, { message: "Password must be at least 8 characters long." }),
+  referTitle: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms', 'Mx', 'Dr', 'Prof', 'Ind', 'Prefer not to say']).optional(),
+  middleName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the middle name." }).optional().or(z.literal('')),
+  phoneNumber: phoneNumberSchema,  // Assuming phoneNumberSchema already has validation
+  code: z.number().min(100000, { message: "Code must be exactly 6 digits." }).max(999999, { message: "Code must be exactly 6 digits." }),
+});
+
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
 

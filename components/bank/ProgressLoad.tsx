@@ -17,7 +17,7 @@ const ProgressLoad: React.FC<ProgressLoadProps> = ({ progress }) => {
   }, [progress]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full border-l border-[#0060b1]">
       <Progress 
         value={currentProgress} 
         className="w-full rounded-none transition-all duration-500 ease-in-out bg-background" 

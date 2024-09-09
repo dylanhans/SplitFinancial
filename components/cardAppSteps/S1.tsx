@@ -12,7 +12,7 @@ const Step1: React.FC<Step1Props> = ({ onClick, card }) => {
           {/* // currentAppStep ? 'slide-up-enter slide-up-enter-active' : 'slide-up-exit slide-up-exit-active' */}
         <div className="main class">
           <div className="flex ml-1 flex-col gap-1">
-            <div className='language-select flex justify-end'>
+            <div className='language-select flex justify-end mb-20'>
               <LangSelect />
             </div>
             <h1 className="font-bigtitle2 text-gray-900">

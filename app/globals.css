@@ -761,8 +761,8 @@
   }
 
   .card-form {
-    @apply flex min-h-screen w-full max-w-[625px] flex-col justify-center gap-5 py-20 md:gap-8;
-    transform: translateX(-20%); /* Adjust the value as needed */
+    @apply flex h-full w-full max-w-[625px] flex-col justify-center items-center gap-5 md:gap-8;
+    transform: translate(-20%, -10%); /* Shift left by 20% and up by 20% */
   }
 
   .form-item {

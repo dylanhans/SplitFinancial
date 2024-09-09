@@ -95,9 +95,9 @@ export default function RootLayout({
       </div>
 
       {/* Children section taking up 3/5 */}
-      <div className="w-3/5 relative">
+      <section className="w-3/5 relative">
         {children}
-      </div>
+      </section>
     </main>
 );
 }

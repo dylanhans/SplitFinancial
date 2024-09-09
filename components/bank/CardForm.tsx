@@ -105,7 +105,7 @@ const CardForm = ({ type }: { type: string }) => {
   const progress = ((currentStepIndex - 1) / (totalSteps - 1)) * 100;
 
   return (
-    <section className='w-full h-full'>
+    <section className="Card">
       <div className="absolute top-[60px] left-0 w-full bg-gray-200">
         <ProgressLoad progress={progress} />
       </div>

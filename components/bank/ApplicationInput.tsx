@@ -3,7 +3,7 @@ import { FormControl, FormField, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { Control, FieldPath } from 'react-hook-form'
 import { z } from 'zod'
-import { applicationformSchema, step4Schema, appformSchema } from '@/lib/utils'
+import { applicationformSchema, step4schema, appformSchema } from '@/lib/utils'
 
 const formSchema = applicationformSchema;
 
@@ -35,7 +35,8 @@ const ApplicationInput = ({ control, name, label, placeholder, id }: Application
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="form-message mt-2"/>
+              <FormMessage className="text-[#B5071B] mt-2"
+              />
             </div>
           </div>
         )}

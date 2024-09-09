@@ -9,8 +9,7 @@ import {
   import { useRouter } from 'next/navigation'
   import { Input } from "@/components/ui/input"
   import { Button } from "@/components/ui/button"
-import { ConfirmationResult, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { auth } from '@/firebase'
+import { ConfirmationResult, getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { z } from 'zod'
 
 interface OtpLoginProps {
@@ -27,6 +26,7 @@ interface OtpLoginProps {
     const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
     const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
     const [isPending, startTransition] = useTransition();
+    const auth = getAuth(); // Ensure auth is initialized here
 
     const handlePhoneNumber = (phoneNum: string): string => {
       try {
@@ -49,7 +49,7 @@ interface OtpLoginProps {
   
     const [isRecaptchaInitialized, setIsRecaptchaInitialized] = useState(false);
 
-    // Initialize RecaptchaVerifier
+    // Automatically Initialize RecaptchaVerifier
   useEffect(() => {
     const recaptchaVerifier = new RecaptchaVerifier(
       auth,
@@ -108,6 +108,9 @@ interface OtpLoginProps {
         return setError("RecaptchaVerifier is not initialized.");
       }
       try {
+        console.log('auth:', auth);
+        console.log('pNumber:', pNumber);
+        console.log('recaptchaVerifier:', recaptchaVerifier);
         const result = await signInWithPhoneNumber(auth, pNumber, recaptchaVerifier);
         setConfirmationResult(result);
         setSuccess("OTP sent successfully.");
@@ -118,6 +121,8 @@ interface OtpLoginProps {
           setError("Invalid phone number. Please check the number.");
         } else if (err.code === "auth/too-many-requests") {
           setError("Too many requests. Please try again later.");
+        }else if (err.code === "auth/invalid-app-credential") {
+          setError("Invalid App Credential. Please try again later.");
         } else {
           setError("Failed to send OTP. Please try again.");
         }

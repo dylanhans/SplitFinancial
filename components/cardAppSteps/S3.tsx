@@ -27,15 +27,16 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
   }
   
   return (
-    <header className="flex flex-col gap-5 md:gap-8 mt-7">
+    <div className="flex flex-col gap-5 md:gap-8 mt-12">
       {/* Conditionally render the "main class" div */}
     <div className={`transition-all duration-300 slide-up-enter slide-up-enter-active`}>
           {/* // currentAppStep ? 'slide-up-enter slide-up-enter-active' : 'slide-up-exit slide-up-exit-active' */}
-        <div className="main class">
+        <div className="main class pt-40">
           <div className="flex ml-1 flex-col gap-1 md:gap-3">
-            <h1 className="font-bigtitle2 text-gray-900">
+            <p className="font-bigtitle2 text-gray-900">
             Please review the following information.
-              <p className="font-subbed mt-10 text-gray-900">
+            </p>
+              <p className="font-subbed text-gray-900">
               The Information Box below shows details about the credit card you selected to apply 
               for and in some cases details for other credit cards. When you apply we'll consider 
               you for these cards based on your eligibility. At the end of this application 
@@ -43,7 +44,6 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
               card, or more than one card. If we present you a card option in place of, or in addition to, the one 
               you selected to apply for, please choose the card that best suits your needs.
               </p>
-            </h1>
             <div className='flex justify-end'>
               <a
                 href={card.document} // Replace with the correct path to your HTML file
@@ -75,7 +75,7 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
           </Button>
        </div>
     </div>
-    </header>
+    </div>
   )
 }
 

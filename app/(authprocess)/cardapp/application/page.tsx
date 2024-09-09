@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const cardApplication = () => {
   return (
-    <section className="flex-center size-full max-sm:px-6"> 
+    <section className="flex-center size-full"> 
       <CardForm type="application-process"/>
     </section>
   )
