@@ -11,6 +11,7 @@ import {
   import { Button } from "@/components/ui/button"
 import { ConfirmationResult, getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { z } from 'zod'
+import { auth } from '@/firebase'
 
 interface OtpLoginProps {
     phoneNum: string;  // phoneNum will be a string based on the schema
@@ -26,7 +27,6 @@ interface OtpLoginProps {
     const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
     const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
     const [isPending, startTransition] = useTransition();
-    const auth = getAuth(); // Ensure auth is initialized here
 
     const handlePhoneNumber = (phoneNum: string): string => {
       try {
@@ -65,7 +65,7 @@ interface OtpLoginProps {
     return () => {
       recaptchaVerifier.clear();
     };
-  }, []);
+  }, [auth]);
 
   // Request OTP after RecaptchaVerifier is initialized
   useEffect(() => {
@@ -102,6 +102,7 @@ interface OtpLoginProps {
       });
     };
   
+
     const requestOtp = async () => {
       setResendCountdown(60);
       if (!recaptchaVerifier) {
@@ -137,6 +138,7 @@ interface OtpLoginProps {
   
     return (
       <div className="flex flex-col justify-center items-center">
+        <div id="recaptcha-container" />
         {confirmationResult && (
           <InputOTP maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
             <InputOTPGroup>
@@ -163,7 +165,7 @@ interface OtpLoginProps {
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-500">{success}</p>}
         </div>
-        <div id="recaptcha-container" />
+        
         {isPending && loadingIndicator}
       </div>
     );
