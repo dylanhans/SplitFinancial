@@ -59,8 +59,11 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   const form = useForm<Step6Schema>({
     resolver: zodResolver(step6schema),
     defaultValues: {
-      phoneNumber: formData.phoneNumber,
-      code: formData.code || undefined,
+      address: formData.address || '',
+      city: formData.city || '',
+      province: formData.province || '',
+      postalCode: formData.postalCode || '',
+      unitNum: formData.unitNum || '',
     },
   }); 
 
@@ -68,13 +71,17 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   const onSubmit: SubmitHandler<Step6Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { code } = data;
+      const { address, city, province, postalCode, unitNum } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
         const applicationData = {
           ...prevData,
-          code,
+          address,
+          city,
+          province,
+          postalCode,
+          unitNum,
         };
         
         // Log the updated formData
@@ -110,13 +117,44 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
           <div className="flex col gap-4">
-              {/* <ApplicationPhoneVerify
+            <ApplicationInput 
                 control={form.control}
-                name="code"
-                label="Code"
-                placeholder="Code"
-                id="code"
-                /> */}
+                name="address"
+                label="Address"
+                placeholder="Enter your specific address"
+                id="address"
+            />
+            <ApplicationInput 
+                control={form.control}
+                name="city"
+                label="City"
+                placeholder="Enter your city"
+                id="city"
+            />
+              <div className="flex gap-4">
+            <ApplicationInput 
+                control={form.control}
+                name="province"
+                label="Province"
+                placeholder="ON"
+                id="province"
+            />
+            <ApplicationInput 
+                control={form.control}
+                name="postalCode"
+                label="Postal Code"
+                placeholder="12345"
+                id="postalCode"
+            />
+
+              <ApplicationInput 
+                control={form.control}
+                name="unitNum"
+                label="Unit Number"
+                placeholder="39"
+                id="unitNum"
+              />
+            </div>
               
             <div>
             <Button type="submit" className="form-btn mt-10">

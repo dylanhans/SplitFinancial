@@ -282,14 +282,8 @@ export const step5schema = applicationformSchema.pick({
 
 export type Step5Schema = z.infer<typeof step5schema>;
 
+
 export const step6schema = applicationformSchema.pick({
-  phoneNumber: true,
-  code: true,
-});
-
-export type Step6Schema = z.infer<typeof step6schema>;
-
-export const step7schema = applicationformSchema.pick({
   city: true,
   postalCode: true,
   province: true,
@@ -297,6 +291,6 @@ export const step7schema = applicationformSchema.pick({
   unitNum: true,
 });
 
-export type Step7Schema = z.infer<typeof step6schema>;
+export type Step6Schema = z.infer<typeof step6schema>;
 
 

@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod"
 import { TailSpin } from 'react-loader-spinner'
@@ -56,6 +56,12 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [otpStatus, setOtpStatus] = useState(false);
+
+  const handleOtpStatus = () => {
+    // Handle the status passed from OtpLogin
+    setOtpStatus(true);
+  };
 
   // Define form with step-specific schema
   const form = useForm<Step5Schema>({
@@ -119,7 +125,9 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
                 name="phoneNumber" // Ensure this matches the field name in your schema
                 label="Phone"
                 id="phoneNumber"
+                otpStatus={otpStatus} // Pass otpStatus as a prop
               />
+
               <ApplicationInput
                 control={form.control}
                 name="email"
@@ -134,6 +142,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
                 <OTPLogin 
                   phoneNum={form.getValues("phoneNumber")} // Pass the phoneNumber from the form state
                   onClick={onClick}
+                  otpStatus={handleOtpStatus}
                 />
               </div> 
             )}

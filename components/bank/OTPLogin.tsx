@@ -16,13 +16,14 @@ import { auth } from '@/firebase'
 interface OtpLoginProps {
     phoneNum: string;  // phoneNum will be a string based on the schema
     onClick: () => void;
+    otpStatus: () => void;
   }
   
-  const OtpLogin: React.FC<OtpLoginProps> = ({ onClick, phoneNum }) => {
+  const OtpLogin: React.FC<OtpLoginProps> = ({ onClick, phoneNum, otpStatus }) => {
     const router = useRouter();
     const [otp, setOtp] = useState("");
     const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState("");
+    // const [success, setSuccess] = useState("");
     const [resendCountdown, setResendCountdown] = useState(0);
     const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
     const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
@@ -44,7 +45,15 @@ interface OtpLoginProps {
         return '';
       }
     };
-  
+    
+    useEffect(() => {
+      let timer: NodeJS.Timeout;
+      if (resendCountdown > 0) {
+        timer = setTimeout(() => setResendCountdown(resendCountdown - 1), 1000);
+      }
+      return () => clearTimeout(timer);
+    }, [resendCountdown]);
+
     const pNumber = handlePhoneNumber(phoneNum);
   
     const [isRecaptchaInitialized, setIsRecaptchaInitialized] = useState(false);
@@ -86,7 +95,7 @@ interface OtpLoginProps {
       startTransition(async () => {
         setError("");
         if (!confirmationResult) {
-          setError("Please request OTP first.");
+          console.log("Please request OTP first.");
           return;
         }
         try {
@@ -97,7 +106,7 @@ interface OtpLoginProps {
           }
         } catch (error) {
           console.error(error);
-          setError("Failed to verify OTP. Please check the OTP.");
+          console.log("Failed to verify OTP. Please check the OTP.");
         }
       });
     };
@@ -113,28 +122,29 @@ interface OtpLoginProps {
         console.log('pNumber:', pNumber);
         console.log('recaptchaVerifier:', recaptchaVerifier);
         const result = await signInWithPhoneNumber(auth, pNumber, recaptchaVerifier);
+        otpStatus();
         setConfirmationResult(result);
-        setSuccess("OTP sent successfully.");
+        // setSuccess("OTP sent successfully.");
       } catch (err: any) {
         console.error(err);
         setResendCountdown(0);
         if (err.code === "auth/invalid-phone-number") {
-          setError("Invalid phone number. Please check the number.");
+          console.log("Invalid phone number. Please check the number.");
         } else if (err.code === "auth/too-many-requests") {
-          setError("Too many requests. Please try again later.");
+          console.log("Too many requests. Please try again later.");
         }else if (err.code === "auth/invalid-app-credential") {
-          setError("Invalid App Credential. Please try again later.");
+          console.log("Invalid App Credential. Please try again later.");
         } else {
-          setError("Failed to send OTP. Please try again.");
+          console.log("Failed to send OTP. Please try again.");
         }
       }
     };
   
-    const loadingIndicator = (
-      <div role="status" className="flex justify-center">
-        {/* Loading spinner */}
-      </div>
-    );
+    // const loadingIndicator = (
+    //   <div role="status" className="flex justify-center">
+    //     {/* Loading spinner */}
+    //   </div>
+    // );
   
     return (
       <div className="flex flex-col justify-center items-center">
@@ -161,12 +171,12 @@ interface OtpLoginProps {
             ? "Sending OTP"
             : "Send OTP"}
         </p>
-        <div className="p-10 text-center">
+        {/* <div className="p-10 text-center">
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-500">{success}</p>}
-        </div>
+        </div> */}
         
-        {isPending && loadingIndicator}
+        {/* {isPending && loadingIndicator} */}
       </div>
     );
   };

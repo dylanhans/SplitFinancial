@@ -16,10 +16,11 @@ interface ApplicationInputPhoneProps {
   label: string;
   placeholder?: string;
   className?: string;
+  otpStatus: boolean; // Add this prop
   id?: string;
 }
 
-const ApplicationInputPhone = ({ control, name, label, placeholder = "+1 XXX-XXX-XXXX", id }: ApplicationInputPhoneProps) => {
+const ApplicationInputPhone = ({ control, name, label, placeholder = "+1 XXX-XXX-XXXX", id, otpStatus }: ApplicationInputPhoneProps) => {
   const { formState: { errors } } = useFormContext();
 
   return (
@@ -37,9 +38,9 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "+1 XXX-XXX
                 id={id || name}
                 mask="+1 999-999-9999"
                 placeholder={placeholder}
-                className="input-class"
-                value={field.value} // Ensure this is set to field.value
-                onChange={(e) => field.onChange(e.target.value)} // Update form field
+                className={`input-class ${otpStatus ? 'bg-green-200' : ''}`} // Apply conditional styling
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
               />
             </FormControl>
             <FormMessage className="form-message mt-2" />
