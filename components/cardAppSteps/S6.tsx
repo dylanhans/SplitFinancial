@@ -39,6 +39,8 @@ import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, Step5Schema, step5schema, Step6Schema, step6schema } from '@/lib/utils';
 import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
 import OTPLogin from '../bank/OTPLogin';
+import { StandaloneSearchBox } from '@react-google-maps/api';
+import { MapsLoad } from '@/googlecloud';
 
 interface Step6Props {
   onClick: () => void;
@@ -49,12 +51,13 @@ interface Step6Props {
 }
 
 
-const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+  const { isLoaded, inputref, searchBoxRef, handleOnPlacesChanged } = MapsLoad();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-
+  
   // Define form with step-specific schema
   const form = useForm<Step6Schema>({
     resolver: zodResolver(step6schema),
@@ -116,6 +119,16 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
+        {isLoaded && (
+              <div>
+                <StandaloneSearchBox
+                  onLoad={(ref) => searchBoxRef.current = ref}
+                  onPlacesChanged={handleOnPlacesChanged}
+                >
+                  <input ref={inputref} placeholder="Search location" />
+                </StandaloneSearchBox>
+              </div>
+            )}
           <div className="flex col gap-4">
             <ApplicationInput 
                 control={form.control}
@@ -124,6 +137,7 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
                 placeholder="Enter your specific address"
                 id="address"
             />
+            
             <ApplicationInput 
                 control={form.control}
                 name="city"
@@ -216,7 +230,7 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   );
 };
 
-export default Step5;
+export default Step6;
 
 // / 2. Define a submit handler.
         // const onSubmit = async (data: z.infer<typeof formSchema>)=>{
