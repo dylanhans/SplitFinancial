@@ -7,22 +7,21 @@ import { applicationformSchema, appformSchema } from '@/lib/utils'
 import InputMask from 'react-input-mask';
 
 
+
 const formSchema = applicationformSchema;
 
 interface ApplicationInputPhoneProps {
   control: Control<z.infer<typeof formSchema>>;
   name: FieldPath<z.infer<typeof formSchema>>;
   label: string;
-  placeholder?: string; // Made optional since it's not used in <select>
+  placeholder?: string;
   className?: string;
   id?: string;
 }
 
-const ApplicationInputPhone = ({ control, name, label, placeholder = "Enter your Phone Number", id }: ApplicationInputPhoneProps) => {
+const ApplicationInputPhone = ({ control, name, label, placeholder = "+1 XXX-XXX-XXXX", id }: ApplicationInputPhoneProps) => {
   const { formState: { errors } } = useFormContext();
 
-  const isPhoneNumberValid = !errors.phoneNumber;
-  
   return (
     <FormField
       control={control}
@@ -36,10 +35,11 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "Enter your
             <FormControl>
               <InputMask
                 id={id || name}
-                mask="999-999-9999"
+                mask="+1 999-999-9999"
                 placeholder={placeholder}
                 className="input-class"
-                {...field}
+                value={field.value} // Ensure this is set to field.value
+                onChange={(e) => field.onChange(e.target.value)} // Update form field
               />
             </FormControl>
             <FormMessage className="form-message mt-2" />
@@ -48,6 +48,6 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "Enter your
       )}
     />
   );
-}
+};
 
 export default ApplicationInputPhone;

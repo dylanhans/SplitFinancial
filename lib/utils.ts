@@ -237,19 +237,20 @@ export const authformSchema = (type: string)=>z.object({
   password: z.string().min(8),
 })
 
-export const phoneNumberSchema = z.string().regex(/^\d{3}-\d{3}-\d{4}$/, {
-  message: "Invalid phone number format. Please use XXX-XXX-XXXX.",
+export const phoneNumberSchema = z.string().regex(/^\+1 \d{3}-\d{3}-\d{4}$/, {
+  message: "Invalid phone number format. Please use +1 XXX-XXX-XXXX.",
 });
 
 
 export const applicationformSchema = z.object({
   // sign up
-  address1: z.string().max(50), 
+  address: z.string().max(50), 
   lastName:  z.string().min(3), 
   firstName:  z.string().min(3), 
-  state: z.string().min(2).max(2), 
+  province: z.string().min(2).max(2), 
   postalCode: z.string().min(3).max(6), 
   dateOfBirth: z.string().min(3), 
+  unitNum: z.string().min(1).optional(),
   ssn: z.string().min(3).optional(),
   city: z.string().max(50),
   email: z.string().email(),
@@ -287,5 +288,14 @@ export const step6schema = applicationformSchema.pick({
 
 export type Step6Schema = z.infer<typeof step6schema>;
 
+export const step7schema = applicationformSchema.pick({
+  city: true,
+  postalCode: true,
+  province: true,
+  address: true,
+  unitNum: true,
+});
+
+export type Step7Schema = z.infer<typeof step6schema>;
 
 

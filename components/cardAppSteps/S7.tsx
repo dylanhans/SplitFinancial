@@ -36,11 +36,10 @@ import { Separator } from '@radix-ui/react-separator'
 import { getNextAppStep} from '@/lib/actions/bank.actions';
 import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
-import { appformSchema, Step5Schema, step5schema, Step6Schema, step6schema } from '@/lib/utils';
-import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
-import OTPLogin from '../bank/OTPLogin';
+import { appformSchema, Step7Schema, step7schema } from '@/lib/utils';
+import ApplicationInputPhone from '../bank/ApplicationInput-Phone';
 
-interface Step6Props {
+interface Step7Props {
   onClick: () => void;
   onBack: () => void;
   type: string;
@@ -49,32 +48,33 @@ interface Step6Props {
 }
 
 
-const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormData }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   // Define form with step-specific schema
-  const form = useForm<Step6Schema>({
-    resolver: zodResolver(step6schema),
+  const form = useForm<Step7Schema>({
+    resolver: zodResolver(step7schema),
     defaultValues: {
-      phoneNumber: formData.phoneNumber,
-      code: formData.code || undefined,
+      phoneNumber: formData.phoneNumber || undefined,
+      email: formData.email || '',
     },
-  }); 
+  });
 
   // Define a submit handler.
-  const onSubmit: SubmitHandler<Step6Schema> = (data) => {
+  const onSubmit: SubmitHandler<Step7Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { code } = data;
+      const { phoneNumber, email } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
         const applicationData = {
           ...prevData,
-          code,
+          phoneNumber,
+          email,
         };
         
         // Log the updated formData
@@ -98,6 +98,7 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleContinue = () => {
     setIsAlertOpen(false); // Close the dialog
+    setIsChecked(true);
     router.push('/options');
   };
 
@@ -110,15 +111,23 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
           <div className="flex col gap-4">
-              {/* <ApplicationPhoneVerify
+              <ApplicationInputPhone
                 control={form.control}
-                name="code"
-                label="Code"
-                placeholder="Code"
-                id="code"
-                /> */}
-              
+                name="phoneNumber" // Ensure this matches the field name in your schema
+                label="Phone"
+                placeholder="Enter your Phone Number"
+                id="phoneNumber"
+              />
+
+              <ApplicationInput
+                control={form.control}
+                name="email"
+                label="Email"
+                placeholder="Enter your email"
+                id="email"
+              />
             <div>
+            
             <Button type="submit" className="form-btn mt-10">
               Continue
             </Button>
@@ -178,7 +187,7 @@ const Step5: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   );
 };
 
-export default Step5;
+export default Step7;
 
 // / 2. Define a submit handler.
         // const onSubmit = async (data: z.infer<typeof formSchema>)=>{

@@ -39,6 +39,7 @@ import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, Step5Schema, step5schema } from '@/lib/utils';
 import ApplicationInputPhone from '../bank/ApplicationInput-Phone';
+import OTPLogin from '../bank/OTPLogin';
 
 interface Step5Props {
   onClick: () => void;
@@ -54,12 +55,13 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Define form with step-specific schema
   const form = useForm<Step5Schema>({
     resolver: zodResolver(step5schema),
     defaultValues: {
-      phoneNumber: formData.phoneNumber || undefined,
+      phoneNumber: formData.phoneNumber || '',
       email: formData.email || '',
     },
   });
@@ -83,9 +85,9 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
         
         return applicationData;
       });
+      setIsSubmitted(true);
+      console.log("Phone # Passed:", form.getValues("phoneNumber"));
 
-      onClick();
-      // console.log("Form Data:", { firstName, lastName });
     } catch (error) {
       console.log(error);
     } finally {
@@ -111,15 +113,13 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
-          <div className="flex col gap-4">
+        <div className="flex col gap-4">
               <ApplicationInputPhone
                 control={form.control}
                 name="phoneNumber" // Ensure this matches the field name in your schema
                 label="Phone"
-                placeholder="Enter your Phone Number"
                 id="phoneNumber"
               />
-
               <ApplicationInput
                 control={form.control}
                 name="email"
@@ -127,13 +127,19 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
                 placeholder="Enter your email"
                 id="email"
               />
-            <div>
             
+        </div>
+            {isSubmitted && (         
+              <div className=''>  
+                <OTPLogin 
+                  phoneNum={form.getValues("phoneNumber")} // Pass the phoneNumber from the form state
+                  onClick={onClick}
+                />
+              </div> 
+            )}
             <Button type="submit" className="form-btn mt-10">
               Continue
             </Button>
-            </div>
-          </div>
         </form>
       </Form>
 
