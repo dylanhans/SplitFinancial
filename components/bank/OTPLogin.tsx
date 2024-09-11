@@ -110,7 +110,7 @@ interface OtpLoginProps {
         } catch (error) {
           console.error(error);
           console.log("Failed to verify OTP. Please check the OTP.");
-          setErrorMessage("Invalid")
+          setErrorMessage("Invalid code")
         }
       });
     };
@@ -151,44 +151,58 @@ interface OtpLoginProps {
     // );
   
     return (
-      <div className='verify flex justify-center items-center'>
+      <div className='verify flex justify-center items-center w-full'>
   {confirmationResult && (
-    <div className="otp-logged flex flex-col justify-center items-center bg-gray-100 p-5">
+    <div className="otp-logged flex flex-col justify-center items-center shadow-sm rounded-sm p-4">
       <div className="conresult text-center">
-        <p className="mt-5 text-md font-semibold">
-          Verify mobile number
-        </p>
-        <p className="mb-4">
-          Enter the 6-digit code we sent to {phoneNum}
-        </p>
+  <p className="text-md font-semibold">
+    Verify mobile number
+  </p>
+  <p className="mb-4">
+    Enter the 6-digit code we sent to {phoneNum}
+  </p>
 
-        {/* Center the OTP input */}
-        <div className="flex justify-center">
-          <InputOTP className="flex gap-2 justify-center items-center" maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
-          <InputOTPGroup className="flex gap-2">
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={0} />
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={1} />
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={2} />
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={3} />
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={4} />
-              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={5} />
-            </InputOTPGroup>
-          </InputOTP>
-        </div>
-      </div>
+  {/* Center the OTP input and error message within the same container */}
+  <div className="flex flex-col items-center">
+    {/* OTP input */}
+    <div className="flex justify-center w-72">
+      <InputOTP className="flex gap-2 justify-center items-center" maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
+        <InputOTPGroup className="flex gap-2">
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={0} />
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={1} />
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={2} />
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={3} />
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={4} />
+          <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={5} />
+        </InputOTPGroup>
+      </InputOTP>
+    </div>
 
-      <p className="mt-5 text-red-500">
-        {errorMessage && (
-          <span>{errorMessage}</span>
-        )}
+    {/* Error message aligned to the left with the same width */}
+    <div className="w-80 p-1 text-red-500 text-xs text-left">
+      {errorMessage && (
+        <span>{errorMessage}</span>
+      )}
+    </div>
+
+    <div className=' w-full flex flex-col text-left'>
+      <p className="text-md ">
+        Code sent to phone
       </p>
+      <p className='text-xs'>
+        You should get a code within 20 seconds.
+      </p>
+    </div>
+  </div>
+</div>
 
-      <p className="mt-5 text-center">
+
+      <p className="mt-5 text-center text-xs text-gray-400">
         {resendCountdown > 0 ? (
           `Resend code in 00:${String(resendCountdown).padStart(2, '0')}`
         ) : (
           <button 
-            className="text-blue-500 underline" 
+            className="underline" 
             onClick={requestOtp} 
             disabled={resendCountdown > 0}
           >

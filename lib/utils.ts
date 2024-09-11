@@ -282,7 +282,7 @@ export const applicationformSchema = z.object({
   address: z.string().max(50, { message: "Address cannot exceed 50 characters." }), 
   lastName: z.string().min(3, { message: "Please enter a minimum of 3 characters" }), 
   firstName: z.string().min(3, { message: "Please enter a minimum of 3 characters" }), 
-  province: z.enum(['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT', 'NT']).optional().or(z.literal('')),
+  province: z.enum(['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Nunavut', 'Ontario', 'PEI', 'Quebec', 'Saskatchewan', 'Yukon', 'NWT']),
   postalCode: z.string().min(6, { message: "Please enter at least 6 characters" }).max(6), 
   dateOfBirth: dateOfBirthSchema, 
   unitNum: z.string().min(1, { message: "Unit number must contain at least 1 character." }).optional().or(z.literal('')),
@@ -300,6 +300,7 @@ export const applicationformSchema = z.object({
   phoneType: z.enum(["mobile", "landline"]),
   phoneOptional: phoneNumberSchema.optional().or(z.literal('')), 
 });
+
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
 

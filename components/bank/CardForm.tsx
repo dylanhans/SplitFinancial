@@ -51,8 +51,9 @@ import S3 from '../cardAppSteps/S3';
 import S4 from '../cardAppSteps/S4';
 import S5 from '../cardAppSteps/S5';
 import S6 from '../cardAppSteps/S6';
+import S7 from '../cardAppSteps/S7';
 
-type StepKey = 's1' | 's2' | 's3' | 's4' | 's5';
+type StepKey = 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7';
 
 interface Steps {
   [key: string]: JSX.Element;
@@ -81,9 +82,16 @@ const formMachine = createMachine({
         BACK: 's4',
       },
     },
-    s6: { 
+    s6: {
+      on: {
+        NEXT: 's7', // Default next step after s4
+        UNIQUE: 's6', // If a specific option is selected, move to step 5
+        BACK: 's5',
+      },
+    },
+    s7: { 
       on: { 
-        BACK: 's5' } },
+        BACK: 's6' } },
     redirect: { type: 'final' }, // Example of a redirect state (sign-in)
   },
 });
@@ -204,6 +212,8 @@ const CardForm = ({ type }: { type: string }) => {
     s4: <S4 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s5: <S5 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s6: <S6 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
+    s7: <S7 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
+
   };
 
   const currentStepIndex = Object.keys(steps).indexOf(currentStepKey) + 1;
