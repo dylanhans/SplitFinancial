@@ -1,5 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
+import { CountryCode } from "plaid";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
 import { z } from "zod";
@@ -88,6 +89,32 @@ export const titleOptions = [
   { value: 'Ind', label: 'Ind' },
   { value: 'Prefer not to say', label: 'Prefer not to say' }
 ];
+
+export const unitTypeOptions = [
+  { value: 'Apt.', label: 'Apt.' },
+  { value: 'Floor', label: 'Floor' },
+  { value: 'PH', label: 'PH' },
+  { value: 'Room', label: 'Room' },
+  { value: 'Suite', label: 'Suite' },
+  { value: 'Unit', label: 'Unit' },
+];
+
+export const provinceOptions = [
+  { value: 'Alberta', label: 'AB' },
+  { value: 'British Columbia', label: 'BC' },
+  { value: 'Manitoba', label: 'MB' },
+  { value: 'New Brunswick', label: 'NB' },
+  { value: 'Newfoundland and Labrador', label: 'NL' },
+  { value: 'Nova Scotia', label: 'NS' },
+  { value: 'Nunavut', label: 'NU' },
+  { value: 'Ontario', label: 'ON' },
+  { value: 'PEI', label: 'PE' },            // Prince Edward Island
+  { value: 'Quebec', label: 'QC' },
+  { value: 'Saskatchewan', label: 'SK' },
+  { value: 'Yukon', label: 'YT' },
+  { value: 'NWT', label: 'NT' },            // Northwest Territories
+];
+
 
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 
@@ -238,29 +265,40 @@ export const authformSchema = (type: string)=>z.object({
 })
 
 export const phoneNumberSchema = z.string().regex(/^\+1 \d{3}-\d{3}-\d{4}$/, {
-  message: "Invalid phone number format. Please use +1 XXX-XXX-XXXX.",
+  message: "Please enter a valid phone number",
 });
 
+const dateOfBirthSchema = z.string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, { message: "Invalid Format" })
+  .refine(date => {
+    // Optional: Additional validation to check if the date is valid
+    const [year, month, day] = date.split('-').map(Number);
+    const dateObj = new Date(year, month - 1, day);
+    return dateObj.getFullYear() === year && dateObj.getMonth() === month - 1 && dateObj.getDate() === day;
+  }, { message: "Invalid date" });
 
 export const applicationformSchema = z.object({
   // sign up
   address: z.string().max(50, { message: "Address cannot exceed 50 characters." }), 
-  lastName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the last name." }), 
-  firstName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the first name." }), 
-  province: z.string().min(2, { message: "Province code must be exactly 2 characters." }).max(2, { message: "Province code must be exactly 2 characters." }), 
-  postalCode: z.string().min(3, { message: "Please enter at least 3 characters for the postal code." }).max(6, { message: "Postal code cannot exceed 6 characters." }), 
-  dateOfBirth: z.string().min(3, { message: "Please enter at least 3 characters for the date of birth." }), 
-  unitNum: z.string().min(1, { message: "Unit number must contain at least 1 character." }).optional(),
+  lastName: z.string().min(3, { message: "Please enter a minimum of 3 characters" }), 
+  firstName: z.string().min(3, { message: "Please enter a minimum of 3 characters" }), 
+  province: z.enum(['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT', 'NT']).optional().or(z.literal('')),
+  postalCode: z.string().min(6, { message: "Please enter at least 6 characters" }).max(6), 
+  dateOfBirth: dateOfBirthSchema, 
+  unitNum: z.string().min(1, { message: "Unit number must contain at least 1 character." }).optional().or(z.literal('')),
   ssn: z.string().min(9, { message: "SSN must be exactly 9 digits." }).max(9, { message: "SSN must be exactly 9 digits." }).optional().or(z.literal('')),
   city: z.string().max(50, { message: "City name cannot exceed 50 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   password: z.string().min(8, { message: "Password must be at least 8 characters long." }),
   referTitle: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms', 'Mx', 'Dr', 'Prof', 'Ind', 'Prefer not to say']).optional(),
-  middleName: z.string().min(3, { message: "Please enter a minimum of 3 characters for the middle name." }).optional().or(z.literal('')),
+  middleName: z.string().min(3, { message: "Please enter a minimum of 3 characters" }).optional().or(z.literal('')),
   phoneNumber: phoneNumberSchema,  // Assuming phoneNumberSchema already has validation
-  code: z.number().min(100000, { message: "Code must be exactly 6 digits." }).max(999999, { message: "Code must be exactly 6 digits." }),
+  address2: z.string().max(50, { message: "Address cannot exceed 50 characters." }).optional().or(z.literal('')),
+  unitType: z.enum(['Apt.', 'Floor', 'PH', 'Room', 'Suite', 'Unit']).optional().or(z.literal('')),
+  poBox: z.string().min(1, { message: "P.O Box code must be at least 1 character." }).max(10).optional().or(z.literal('')), 
+  country: z.string().default('Canada'),
+  phoneType: z.enum(["mobile", "landline"]),
 });
-
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
 
@@ -278,6 +316,7 @@ export type Step4Schema = z.infer<typeof step4schema>;
 export const step5schema = applicationformSchema.pick({
   phoneNumber: true,
   email: true,
+  phoneType: true,
 });
 
 export type Step5Schema = z.infer<typeof step5schema>;
@@ -289,6 +328,10 @@ export const step6schema = applicationformSchema.pick({
   province: true,
   address: true,
   unitNum: true,
+  address2: true,
+  unitType: true,
+  poBox: true,
+  country: true,
 });
 
 export type Step6Schema = z.infer<typeof step6schema>;

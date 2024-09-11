@@ -94,6 +94,11 @@ const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleCancelApplication = () => {
     setIsAlertOpen(true);
+  
+    // Clear saved form data and step on cancel
+    localStorage.removeItem('formData');
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('furthestStep');
   };
 
   const handleContinue = () => {

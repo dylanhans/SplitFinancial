@@ -17,20 +17,21 @@ const Step1: React.FC<Step1Props> = ({ onClick, card }) => {
             </div>
             <h1 className="font-bigtitle2 text-gray-900">
               It's easy to apply! Get a response in less than 60 seconds.
-              <p className="font-sub mt-10 text-gray-900">
+            </h1>
+              <p className="font-sub mt-10 text-gray-900 mb-5">
                 You've chosen…
               </p>
-            </h1>
+            
             <h1 className="font-bigtitle text-gray-900">
               {card.title} <span className="text-xs align-super">®</span>
             </h1>
             {card.note && (
-              <p className="font-sub text-gray-900">
+              <p className="font-sub text-gray-900 pt-5 pb-5">
                 {card.note}
               </p>
             )}
           </div>
-          <div className='flex justify-end'>
+          <div className='flex justify-end pt-3'>
             <Button type="submit" onClick={onClick} className="form-btn mt-10">
               Get started
             </Button>

@@ -16,23 +16,30 @@ const LangSelect = () => {
   <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-blue-600 font-subbed flex items-center">
+        <NavigationMenuTrigger className="flex items-center">
           <img 
             src="/icons/flag.svg" 
             alt="Canada Flag" 
-            className="mr-1 w-[50%] h-[50%]" 
+            className="mr-1 p-0.25 w-[30%] h-[50%]" 
           />
-          (EN)
+          <p className='text-[#006ac3] font-submore'>
+            (EN)
+          </p>
         </NavigationMenuTrigger>
-        <NavigationMenuContent className='bg-white w-full'>
-          <NavigationMenuLink className="text-blue-600 font-subbed flex items-center">
+        <NavigationMenuContent className='bg-white w-[25px] h-[25px]'>
+        <NavigationMenuLink 
+          className="flex w-full items-center no-underline hover:bg-[#f3f4f5] p-1"
+          href="#"
+          >
           <img 
             src="/icons/flag.svg" 
             alt="Canada Flag" 
             className="mr-1 w-[50%] h-[50%]" 
           />
-          (FR)
-          </NavigationMenuLink>
+          <p className='text-[#006ac3] font-submore'>
+            (FR)
+          </p>
+        </NavigationMenuLink>
         </NavigationMenuContent>
       </NavigationMenuItem>
     </NavigationMenuList>

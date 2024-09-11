@@ -14,34 +14,35 @@ interface ApplicationInputProps {
     placeholder: string,
     className?: string
     id?: string; 
+    readOnly?: boolean; // Add readOnly prop
 }
 
-const ApplicationInput = ({ control, name, label, placeholder, id }: ApplicationInputProps) => {
-    return (
-      <FormField
-        control={control}
-        name={name}
-        render={({ field }) => (
-          <div className="form-item">
-            <FormLabel className="form-label">
-              {label}
-            </FormLabel>
-            <div className='flex w-full flex-col'>
-              <FormControl>
-                <Input
-                  id={id || name} // Use id prop if provided, otherwise fallback to name
-                  placeholder={placeholder}
-                  className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-[#B5071B] mt-2"
+const ApplicationInput = ({ control, name, label, placeholder, id, readOnly = false}: ApplicationInputProps) => {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <div className="form-item">
+          <FormLabel className="form-label">
+            {label}
+          </FormLabel>
+          <div className="flex w-full flex-col">
+            <FormControl>
+              <Input
+                id={id || name} // Use id prop if provided, otherwise fallback to name
+                placeholder={placeholder}
+                className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
+                {...field}
+                readOnly={readOnly} // Make the field read-only if true
               />
-            </div>
+            </FormControl>
+            <FormMessage className="text-[#B5071B] mt-2" />
           </div>
-        )}
-      />
-    );
-  }
-  
-  export default ApplicationInput;
+        </div>
+      )}
+    />
+  );
+};
+
+export default ApplicationInput;

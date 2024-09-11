@@ -34,29 +34,42 @@ const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div"> & { index: number }
 >(({ index, className, ...props }, ref) => {
-  const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
+  const inputOTPContext = React.useContext(OTPInputContext);
+  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
 
   return (
     <div
       ref={ref}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-        isActive && "z-10 ring-2 ring-ring ring-offset-background",
+        "relative flex h-10 w-10 items-center justify-center text-sm transition-all duration-400",
         className
       )}
       {...props}
     >
-      {char}
+      <span
+        className={cn(
+          "block transition-opacity duration-400", // Transition for opacity change
+          char ? "opacity-100" : "opacity-0", // Fade in/out based on presence of character
+          "absolute inset-0 flex items-center justify-center" // Ensure character is centered
+        )}
+      >
+        {char}
+      </span>
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
         </div>
       )}
+      <div className={cn(
+        "absolute bottom-0 left-0 w-full h-[2px] bg-[#006ac3] transition-all duration-400",
+        isActive ? "opacity-100" : "opacity-0" // Fade in/out effect
+      )}
+      />
     </div>
-  )
-})
-InputOTPSlot.displayName = "InputOTPSlot"
+  );
+});
+InputOTPSlot.displayName = "InputOTPSlot";
+
 
 const InputOTPSeparator = React.forwardRef<
   React.ElementRef<"div">,

@@ -5,8 +5,19 @@ import React, { useState } from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod"
 import { TailSpin } from 'react-loader-spinner'
+import { Input } from "@/components/ui/input"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {
   Form,
   FormControl,
@@ -27,7 +38,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Input } from "@/components/ui/input"
 import { Control } from 'react-hook-form'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -36,11 +46,13 @@ import { Separator } from '@radix-ui/react-separator'
 import { getNextAppStep} from '@/lib/actions/bank.actions';
 import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
-import { appformSchema, Step5Schema, step5schema, Step6Schema, step6schema } from '@/lib/utils';
+import { appformSchema, provinceOptions, Step5Schema, step5schema, Step6Schema, step6schema, unitTypeOptions } from '@/lib/utils';
 import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
 import OTPLogin from '../bank/OTPLogin';
 import { StandaloneSearchBox } from '@react-google-maps/api';
 import { MapsLoad } from '@/googlecloud';
+import { Label } from '@radix-ui/react-label';
+import ApplicationInputDropdown from '../bank/ApplicationInput-Dropdown';
 
 interface Step6Props {
   onClick: () => void;
@@ -67,6 +79,10 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
       province: formData.province || '',
       postalCode: formData.postalCode || '',
       unitNum: formData.unitNum || '',
+      address2: formData.address2 || '',
+      unitType: formData.unitType || undefined,
+      poBox: formData.poBox || '',
+      country: 'Canada',
     },
   }); 
 
@@ -74,7 +90,7 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   const onSubmit: SubmitHandler<Step6Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { address, city, province, postalCode, unitNum } = data;
+      const { address, city, province, postalCode, unitNum, address2, unitType, poBox, country } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
@@ -85,6 +101,10 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
           province,
           postalCode,
           unitNum,
+          address2,
+          unitType,
+          poBox,
+          country,
         };
         
         // Log the updated formData
@@ -104,6 +124,11 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleCancelApplication = () => {
     setIsAlertOpen(true);
+  
+    // Clear saved form data and step on cancel
+    localStorage.removeItem('formData');
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('furthestStep');
   };
 
   const handleContinue = () => {
@@ -118,66 +143,190 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
-        {isLoaded && (
-              <div>
-                <StandaloneSearchBox
-                  onLoad={(ref) => searchBoxRef.current = ref}
-                  onPlacesChanged={handleOnPlacesChanged}
-                >
-                  <input ref={inputref} placeholder="Search location" />
-                </StandaloneSearchBox>
-              </div>
-            )}
-          <div className="flex col gap-4">
-            <ApplicationInput 
-                control={form.control}
-                name="address"
-                label="Address"
-                placeholder="Enter your specific address"
-                id="address"
-            />
-            
-            <ApplicationInput 
-                control={form.control}
-                name="city"
-                label="City"
-                placeholder="Enter your city"
-                id="city"
-            />
-              <div className="flex gap-4">
-            <ApplicationInput 
-                control={form.control}
-                name="province"
-                label="Province"
-                placeholder="ON"
-                id="province"
-            />
-            <ApplicationInput 
-                control={form.control}
-                name="postalCode"
-                label="Postal Code"
-                placeholder="12345"
-                id="postalCode"
-            />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 h-full pt-40 overflow-y-auto hide-scrollbar">
+          
 
-              <ApplicationInput 
-                control={form.control}
-                name="unitNum"
-                label="Unit Number"
-                placeholder="39"
-                id="unitNum"
+    
+<Tabs defaultValue="autocomplete" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="autocomplete">Address</TabsTrigger>
+        <TabsTrigger value="manual">Enter manually</TabsTrigger>
+      </TabsList>
+      <TabsContent value="autocomplete">
+        <Card>
+          <CardContent className="p-4 space-y-4">
+          {isLoaded && (
+          <div className="search-box-container w-full">
+            <StandaloneSearchBox
+              onLoad={(ref) => searchBoxRef.current = ref}
+              onPlacesChanged={handleOnPlacesChanged}
+            >
+              <input 
+                ref={inputref} 
+                placeholder="Enter your specific address" 
+                className="search-input"
               />
-            </div>
-              
-            <div>
-            <Button type="submit" className="form-btn mt-10">
-              Continue
-            </Button>
-            </div>
+            </StandaloneSearchBox>
           </div>
-        </form>
-      </Form>
+          )}
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="manual">
+        <Card>
+          <CardContent className="p-4 space-y-6">
+             {/* Grid layout for Address, City, Province, Postal Code, and Unit Number */}
+      {/* Address and City in the same row */}
+      <div className="grid">
+        <ApplicationInput 
+          control={form.control}
+          name="address"
+          label="Home Address"
+          placeholder="72 Newmarket Drive"
+          id="address"
+          className="flex-1" // Ensures that the input takes available space
+        />
+      </div>
+
+      <div className="grid">
+        <ApplicationInput 
+          control={form.control}
+          name="address2"
+          label="Home Address 2 (optional)"
+          placeholder="RR 4"
+          id="address2"
+          className="flex-1" // Ensures that the input takes available space
+        />
+        
+      </div>
+
+      <div className="grid grid-cols-2 gap-6">
+
+        <ApplicationInput 
+          control={form.control}
+          name="unitNum"
+          label="Unit number (optional)"
+          placeholder=""
+          id="unitNum"
+          className="flex-1" // Ensures that the input takes available space
+        />
+
+        <ApplicationInputDropdown 
+          control={form.control}
+          name="unitType"
+          label="Unit type (optional)"
+          placeholder=""
+          id="unitType"
+          options={unitTypeOptions}
+          className="flex-1" // Ensures that the input takes available space
+        />
+      </div>
+
+
+      {/* Province and Postal Code in the same row */}
+      <div className="grid grid-cols-2 gap-6">
+
+      < ApplicationInput 
+          control={form.control}
+          name="city"
+          label="City"
+          placeholder="Enter your city"
+          id="city"
+          className="flex-1" // Ensures that the input takes available space
+        />
+
+        <ApplicationInputDropdown
+          control={form.control}
+          name="province"
+          label="Province"
+          placeholder=""
+          id="province"
+          options={provinceOptions}
+          className="flex-1" // Ensures that the input takes available space
+        />
+        
+      </div>
+      <div className="grid grid-cols-2 gap-6">
+        <ApplicationInput 
+            control={form.control}
+            name="postalCode"
+            label="Postal Code"
+            placeholder="L7K 0B5"
+            id="postalCode"
+            className="flex-1" // Ensures that the input takes available space
+          />
+
+          <ApplicationInput 
+            control={form.control}
+            name="country"
+            label="Country"
+            placeholder=""
+            id="country"
+            className="flex-1" // Ensures that the input takes available space
+            readOnly // Makes the field read-only
+          />
+      </div>
+
+      {/* Unit Number on its own row */}
+      <div className="grid grid-cols-2 gap-6">
+        <ApplicationInput 
+          control={form.control}
+          name="poBox"
+          label="P.O. Box (optional)"
+          placeholder=""
+          id="poBox"
+          className="flex-1" // Ensures that the input takes available space
+        />
+      </div>
+
+    
+
+    {/* Cancel Application and Continue Button */}
+    <div className="cancel-app flex justify-between items-center w-full mt-10">
+      <button
+        type="button"
+        onClick={handleCancelApplication}
+        className="text-[#006ac3] hover:text-blue-800"
+      >
+        Cancel Application
+      </button>
+
+      <Button
+        type="submit"
+        className="form-btnclient2"
+      >
+        Continue
+      </Button>
+    </div>
+          </CardContent>
+          
+        </Card>
+      </TabsContent>
+    </Tabs>
+
+    {/* Confirmation dialog */}
+    <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+      <AlertDialogContent className="bg-white">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. By cancelling this application, you will lose all input data and will have to restart the application completely.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={handleCloseDialog}>
+            No, take me back
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={handleContinue}>
+            Yes, I am sure
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </form>
+</Form>
+
+
 
       <div className="flex flex-col gap-2">
         <button
@@ -200,31 +349,6 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
           </svg>
           Back
         </button>
-
-        <button
-          type="button"
-          onClick={handleCancelApplication}
-          className="text-[#006ac3] mt-10"
-        >
-          Cancel Application
-        </button>
-
-    
-
-        <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. By cancelling this application you will lose all input data and will have to restart the application completely.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={handleCloseDialog}>No, take me back</AlertDialogCancel>
-              <AlertDialogAction onClick={handleContinue}>Yes, I am sure</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
     </div>
   );

@@ -70,9 +70,7 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
                 By clicking "Continue", you confirm that you have read the Information Box and agree to be considered for all the card options shown in the Information Box.
             </p>
           </div>
-          <Button type="submit" onClick={onClick} className="form-btn mt-10">
-            Continue
-          </Button>
+          
        </div>
     </div>
     </div>

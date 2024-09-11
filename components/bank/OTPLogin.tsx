@@ -23,6 +23,7 @@ interface OtpLoginProps {
     const router = useRouter();
     const [otp, setOtp] = useState("");
     const [error, setError] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     // const [success, setSuccess] = useState("");
     const [resendCountdown, setResendCountdown] = useState(0);
     const [recaptchaVerifier, setRecaptchaVerifier] = useState<RecaptchaVerifier | null>(null);
@@ -34,7 +35,6 @@ interface OtpLoginProps {
         const cleanedPhoneNum = phoneNum
           .replace(/\s+/g, '')  // Remove all spaces
           .replace(/-/g, '');   // Remove all dashes
-        console.log("Formatted #: ", cleanedPhoneNum);
         return cleanedPhoneNum;
       } catch (error) {
         if (error instanceof z.ZodError) {
@@ -83,13 +83,15 @@ interface OtpLoginProps {
     }
   }, [isRecaptchaInitialized]);
 
-  
     useEffect(() => {
       const hasEnteredAllDigits = otp.length === 6;
       if (hasEnteredAllDigits) {
         verifyOtp();
+      } else if (otp.length < 6 && errorMessage) {
+        // Clear error message if otp length is less than 6
+        setErrorMessage(null);
       }
-    }, [otp]);
+    }, [otp, errorMessage]);
   
     const verifyOtp = async () => {
       startTransition(async () => {
@@ -102,11 +104,13 @@ interface OtpLoginProps {
           const result = await confirmationResult.confirm(otp);
           if (result.user) {
             console.log("Successful");
+            setErrorMessage(null);
             onClick();
           }
         } catch (error) {
           console.error(error);
           console.log("Failed to verify OTP. Please check the OTP.");
+          setErrorMessage("Invalid")
         }
       });
     };
@@ -118,9 +122,9 @@ interface OtpLoginProps {
         return setError("RecaptchaVerifier is not initialized.");
       }
       try {
-        console.log('auth:', auth);
-        console.log('pNumber:', pNumber);
-        console.log('recaptchaVerifier:', recaptchaVerifier);
+        // console.log('auth:', auth);
+        // console.log('pNumber:', pNumber);
+        // console.log('recaptchaVerifier:', recaptchaVerifier);
         const result = await signInWithPhoneNumber(auth, pNumber, recaptchaVerifier);
         otpStatus();
         setConfirmationResult(result);
@@ -147,37 +151,57 @@ interface OtpLoginProps {
     // );
   
     return (
-      <div className="flex flex-col justify-center items-center">
-        <div id="recaptcha-container" />
-        {confirmationResult && (
-          <InputOTP maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
+      <div className='verify flex justify-center items-center'>
+  {confirmationResult && (
+    <div className="otp-logged flex flex-col justify-center items-center bg-gray-100 p-5">
+      <div className="conresult text-center">
+        <p className="mt-5 text-md font-semibold">
+          Verify mobile number
+        </p>
+        <p className="mb-4">
+          Enter the 6-digit code we sent to {phoneNum}
+        </p>
+
+        {/* Center the OTP input */}
+        <div className="flex justify-center">
+          <InputOTP className="flex gap-2 justify-center items-center" maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
+          <InputOTPGroup className="flex gap-2">
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={0} />
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={1} />
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={2} />
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={3} />
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={4} />
+              <InputOTPSlot className="border-b-2 border-gray-300 text-center w-12 h-12" index={5} />
             </InputOTPGroup>
           </InputOTP>
-        )}
-        <p className="mt-5">
-          {resendCountdown > 0
-            ? `Resend OTP in ${resendCountdown}`
-            : isPending
-            ? "Sending OTP"
-            : "Send OTP"}
-        </p>
-        {/* <div className="p-10 text-center">
-          {error && <p className="text-red-500">{error}</p>}
-          {success && <p className="text-green-500">{success}</p>}
-        </div> */}
-        
-        {/* {isPending && loadingIndicator} */}
+        </div>
       </div>
+
+      <p className="mt-5 text-red-500">
+        {errorMessage && (
+          <span>{errorMessage}</span>
+        )}
+      </p>
+
+      <p className="mt-5 text-center">
+        {resendCountdown > 0 ? (
+          `Resend code in 00:${String(resendCountdown).padStart(2, '0')}`
+        ) : (
+          <button 
+            className="text-blue-500 underline" 
+            onClick={requestOtp} 
+            disabled={resendCountdown > 0}
+          >
+            Resend code
+          </button>
+        )}
+      </p>
+    </div>
+  )}
+
+  <div id="recaptcha-container" className='opacity-0 cursor-none'/>
+</div>
+
     );
   };
   

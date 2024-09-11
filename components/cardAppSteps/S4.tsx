@@ -39,6 +39,8 @@ import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, Step4Schema, step4schema, titleOptions } from '@/lib/utils';
 import ApplicationInputDropdown from '../bank/ApplicationInput-Dropdown';
+import ApplicationInputInfo from '../bank/ApplicationInput-Info';
+import ApplicationInputdob from '../bank/ApplicationInput-dob';
 
 interface Step4Props {
   onClick: () => void;
@@ -46,9 +48,11 @@ interface Step4Props {
   type: string;
   formData: appformSchema;
   setFormData: React.Dispatch<React.SetStateAction<appformSchema>>;
+  currentStep: string;    // Add currentStep prop
+  furthestStep: number;   // Add furthestStep pro
 }
 
-const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormData, currentStep, furthestStep }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -86,7 +90,11 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
         };
         
         // Log the updated formData
-        console.log("Current Form Data:", applicationData);
+        // console.log("Current Form Data:", applicationData);
+        localStorage.setItem('formData', JSON.stringify(applicationData));
+        localStorage.setItem('currentStep', currentStep);  // Use currentStep prop
+        localStorage.setItem('furthestStep', furthestStep.toString()); // Use furthestStep prop
+
         
         return applicationData;
       });
@@ -102,6 +110,11 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleCancelApplication = () => {
     setIsAlertOpen(true);
+  
+    // Clear saved form data and step on cancel
+    localStorage.removeItem('formData');
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('furthestStep');
   };
 
   const handleContinue = () => {
@@ -117,74 +130,114 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
-        <div className='flex flex-col space-y-4'>
-          
-          {/* ReferTitle on its own row */}
-          <div className='flex gap-4'>
-            <ApplicationInputDropdown
-              control={form.control}
-              name="referTitle"
-              label="Title (optional)"
-              placeholder="Select"
-              id="referTitle"
-              options={titleOptions}
-            />
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
+    
+    <div className="grid grid-cols-2 gap-4">
+      {/* ReferTitle and Middle Name */}
+        <ApplicationInputDropdown
+          control={form.control}
+          name="referTitle"
+          label="Title (optional)"
+          placeholder="Select"
+          id="referTitle"
+          options={titleOptions}
+          className="w-full"
+        />
+        <ApplicationInputInfo
+          control={form.control}
+          name="middleName"
+          label="Middle Name (optional)"
+          placeholder=""
+          id="middleName"
+          className="w-full"
+          tooltip="While adding your middle name is optional, providing it may help us verify your identity and differentiate you from customers with a similar name."
+        />
+      </div>
 
-            <ApplicationInput 
-              control={form.control}
-              name="middleName"
-              label="Middle Name (optional)"
-              placeholder=""
-              id="middleName"
-            />
-          </div>
+      {/* First Name and Last Name */}
+      <div className="grid grid-cols-2 gap-4">
+        <ApplicationInputInfo
+            control={form.control}
+            name="firstName"
+            label="First Name"
+            placeholder="Jane"
+            id="firstName"
+            className="w-full"
+            tooltip="Enter your legal first name only as it appears on your government issued ID. This helps us find your information quickly and verify your identity."
+          />
+        <ApplicationInputInfo
+          control={form.control}
+          name="lastName"
+          label="Last Name"
+          placeholder="Smith"
+          id="lastName"
+          className="w-full"
+          tooltip="Enter your legal last name only as it appears on your government issued ID. This helps us find your information quickly and verify your identity."
+        />
+      </div>
 
-          {/* First Name and Last Name on the same row */}
-          <div className="flex gap-4">
-            <ApplicationInput 
-              control={form.control}
-              name="firstName"
-              label="First Name"
-              placeholder="Jane"
-              id="firstName"
-            />
-            <ApplicationInput 
-              control={form.control}
-              name="lastName"
-              label="Last Name"
-              placeholder="Smith"
-              id="lastName"
-            />
-          </div>
+      {/* SSN and Date of Birth */}
+      <div className="grid grid-cols-2 gap-4">
+      <ApplicationInputInfo
+          control={form.control}
+          name="ssn"
+          label="Social Insurance Number (optional)"
+          placeholder=""
+          id="ssn"
+          className="w-full"
+          tooltip="Providing your Social Insurance Number (SIN) is optional. If you provide your SIN, we may use it as an aid to verify your identity with external providers and keep your information separate from customers with a similar name."
+        />
+        <ApplicationInput
+          control={form.control}
+          name="dateOfBirth"
+          label="Date of Birth"
+          placeholder="YYYY-MM-DD"
+          id="dob"
+          className="w-full"
+        />
+      </div>
 
-          {/* SSN and Date of Birth on the same row */}
-          <div className="flex gap-4">
-            <ApplicationInput 
-              control={form.control}
-              name="ssn"
-              label="Social Insurance Number (optional)"
-              placeholder=""
-              id="ssn"
-            />
-            <ApplicationInput 
-              control={form.control}
-              name="dateOfBirth"
-              label="Date of Birth"
-              placeholder="YYYY-MM-DD"
-              id="dob"
-            />
-          </div>
+    {/* Cancel Application and Continue Button */}
+    <div className="cancel-app flex justify-between items-center w-full mt-10">
+      <button
+        type="button"
+        onClick={handleCancelApplication}
+        className="text-[#006ac3] hover:text-blue-800"
+      >
+        Cancel Application
+      </button>
 
-        </div>
+      {/* Confirmation dialog */}
+      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+        <AlertDialogContent className="bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. By cancelling this application, you will lose all input data and will have to restart the application completely.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCloseDialog}>
+              No, take me back
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleContinue}>
+              Yes, I am sure
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-        {/* Submit Button */}
-        <Button type="submit" className="form-btn mt-10">
-          Continue
-        </Button>
-      </form>
+      <Button
+        type="submit"
+        className="form-btnclient2"
+      >
+        Continue
+      </Button>
+    </div>
+  </form>
+</Form>
 
-      </Form>
+
 
       <div className="flex flex-col gap-2">
         <button
@@ -207,31 +260,7 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
           </svg>
           Back
         </button>
-
-        <button
-          type="button"
-          onClick={handleCancelApplication}
-          className="text-[#006ac3] mt-10"
-        >
-          Cancel Application
-        </button>
-
-    
-
-        <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. By cancelling this application you will lose all input data and will have to restart the application completely.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={handleCloseDialog}>No, take me back</AlertDialogCancel>
-              <AlertDialogAction onClick={handleContinue}>Yes, I am sure</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+         
       </div>
     </div>
   );

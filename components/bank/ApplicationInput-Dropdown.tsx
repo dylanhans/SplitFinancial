@@ -31,7 +31,7 @@ const ApplicationInputDropDown = ({ control, name, label, placeholder = "Select"
             <FormControl>
               <select
                 id={id || name} // Use id prop if provided, otherwise fallback to name
-                className="input-class" // Ensure this class is defined in your CSS or Tailwind configuration
+                className="input-class h-10 text-gray-900 font-smallboldish balance-text-16 px-3 py-2 text-sm" // Ensure this class is defined in your CSS or Tailwind configuration
                 {...field}
                 value={field.value || ""} // Ensure the value is set to "" if field.value is undefined
               >

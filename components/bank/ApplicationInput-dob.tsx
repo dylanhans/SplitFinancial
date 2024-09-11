@@ -16,12 +16,17 @@ interface ApplicationInputPhoneProps {
   label: string;
   placeholder?: string;
   className?: string;
-  otpStatus: boolean; // Add this prop
   id?: string;
 }
 
-const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, otpStatus }: ApplicationInputPhoneProps) => {
+const ApplicationInputdob = ({ control, name, label, placeholder, id }: ApplicationInputPhoneProps) => {
   const { formState: { errors } } = useFormContext();
+
+  const formatDate = (value: string) => {
+    // Example function to format date input
+    const date = new Date(value);
+    return isNaN(date.getTime()) ? value : date.toISOString().split('T')[0];
+  };
 
   return (
     <FormField
@@ -34,22 +39,13 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, o
           </FormLabel>
           <div className='flex w-full flex-col'>
             <FormControl>
-              <div className="relative">
-                <InputMask
-                  id={id || name}
-                  mask="+1 999-999-9999"
-                  placeholder={placeholder}
-                  className={`input-class h-10 text-gray-900 font-smallboldish balance-text-16 px-3 py-2 text-sm ${otpStatus ? 'pr-10' : ''}`} // Add padding-right if otpStatus is true
-                  value={field.value}
-                  onChange={(e) => field.onChange(e.target.value)}
-                />
-                {otpStatus && (
-                  <CheckCircleIcon
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#006ac3]" // Position and style the icon
-                    style={{ height: '20px', width: '20px' }} // Adjust size as needed
-                  />
-                )}
-              </div>
+              <Input
+                id={id || name}
+                placeholder={placeholder}
+                className={`input-class h-10 text-gray-900 font-smallboldish balance-text-16 px-3 py-2 text-sm`}
+                value={formatDate(field.value)}
+                onChange={(e) => field.onChange(formatDate(e.target.value))}
+              />
             </FormControl>
             <FormMessage className="text-[#B5071B] mt-2" />
           </div>
@@ -59,4 +55,4 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, o
   );
 };
 
-export default ApplicationInputPhone;
+export default ApplicationInputdob;

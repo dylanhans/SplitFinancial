@@ -7,6 +7,8 @@ import { z } from "zod"
 import { TailSpin } from 'react-loader-spinner'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   Form,
   FormControl,
@@ -40,6 +42,7 @@ import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, Step5Schema, step5schema } from '@/lib/utils';
 import ApplicationInputPhone from '../bank/ApplicationInput-Phone';
 import OTPLogin from '../bank/OTPLogin';
+import ApplicationInputInfo from '../bank/ApplicationInput-Info';
 
 interface Step5Props {
   onClick: () => void;
@@ -69,6 +72,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
     defaultValues: {
       phoneNumber: formData.phoneNumber || '',
       email: formData.email || '',
+      phoneType: formData.phoneType || 'mobile'
     },
   });
 
@@ -76,7 +80,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   const onSubmit: SubmitHandler<Step5Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { phoneNumber, email } = data;
+      const { phoneNumber, email, phoneType } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
@@ -84,15 +88,12 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
           ...prevData,
           phoneNumber,
           email,
+          phoneType,
         };
-        
-        // Log the updated formData
-        console.log("Updated Form Data:", applicationData);
         
         return applicationData;
       });
       setIsSubmitted(true);
-      console.log("Phone # Passed:", form.getValues("phoneNumber"));
 
     } catch (error) {
       console.log(error);
@@ -103,6 +104,11 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
 
   const handleCancelApplication = () => {
     setIsAlertOpen(true);
+  
+    // Clear saved form data and step on cancel
+    localStorage.removeItem('formData');
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('furthestStep');
   };
 
   const handleContinue = () => {
@@ -118,39 +124,97 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
-        <div className="flex col gap-4">
-              <ApplicationInputPhone
-                control={form.control}
-                name="phoneNumber" // Ensure this matches the field name in your schema
-                label="Phone"
-                id="phoneNumber"
-                otpStatus={otpStatus} // Pass otpStatus as a prop
-              />
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
+      {/* Grid for Phone and Email */}
+      <div className="grid">
+      <ApplicationInputInfo
+          control={form.control}
+          name="email"
+          label="Email"
+          placeholder="Enter your email"
+          id="email"
+          tooltip="By providing your email address, we will be able to let you know the status of your new account application as well as offer assistance, and send reminders for applications you may not have completed. If your application is approved, then your email will be used in accordance with your credit card agreement. RBC Royal Bank will never use unencrypted, regular email to ask for confidential information like your account number, PIN or password."
+        />
 
-              <ApplicationInput
-                control={form.control}
-                name="email"
-                label="Email"
-                placeholder="Enter your email"
-                id="email"
-              />
-            
-        </div>
-            {isSubmitted && (         
-              <div className=''>  
-                <OTPLogin 
-                  phoneNum={form.getValues("phoneNumber")} // Pass the phoneNumber from the form state
-                  onClick={onClick}
-                  otpStatus={handleOtpStatus}
-                />
-              </div> 
-            )}
-            <Button type="submit" className="form-btn mt-10">
-              Continue
-            </Button>
-        </form>
-      </Form>
+      </div>
+       <div className="grid grid-cols-2 gap-6">
+
+       <ApplicationInputPhone
+          control={form.control}
+          name="phoneNumber" // Ensure this matches the field name in your schema
+          label="Phone"
+          id="phoneNumber"
+          otpStatus={otpStatus} // Pass otpStatus as a prop
+        />
+
+          <RadioGroup
+            value={form.watch('phoneType')} // Use form.watch to reflect the current value
+            onValueChange={(value: "mobile" | "landline") => {
+              form.setValue('phoneType', value); // Correctly update phoneType
+            }}
+            className="flex space-x-4 pt-5"
+          >
+          <div className="flex items-center align-center space-x-2">
+            <RadioGroupItem value="mobile" id="mobile" />
+            <Label htmlFor="mobile" className='font-bolder'>Mobile</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="landline" id="landline" />
+            <Label htmlFor="landline" className='font-bolder'>Landline</Label>
+          </div>
+        </RadioGroup>
+
+      </div>
+      {isSubmitted && (
+        <div className='opt-login'>  
+          <OTPLogin 
+            phoneNum={form.getValues("phoneNumber")} // Pass the phoneNumber from the form state
+            onClick={onClick}
+            otpStatus={handleOtpStatus}
+          />
+        </div> 
+      )}
+
+      {/* Cancel Application and Continue Button */}
+      <div className="cancel-app flex justify-between items-center w-full mt-10">
+      <button
+          type="button"
+          onClick={handleCancelApplication}
+          className="text-[#006ac3] hover:text-blue-800"
+        >
+          Cancel Application
+        </button>
+
+        <Button
+          type="submit"
+          className="form-btnclient2"
+        >
+          Continue
+        </Button>
+
+      {/* Confirmation dialog */}
+      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+        <AlertDialogContent className="bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. By cancelling this application, you will lose all input data and will have to restart the application completely.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCloseDialog}>
+              No, take me back
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleContinue}>
+              Yes, I am sure
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  </form>
+</Form>
+
 
       <div className="flex flex-col gap-2">
         <button
@@ -173,31 +237,6 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
           </svg>
           Back
         </button>
-
-        <button
-          type="button"
-          onClick={handleCancelApplication}
-          className="text-[#006ac3] mt-10"
-        >
-          Cancel Application
-        </button>
-
-    
-
-        <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. By cancelling this application you will lose all input data and will have to restart the application completely.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={handleCloseDialog}>No, take me back</AlertDialogCancel>
-              <AlertDialogAction onClick={handleContinue}>Yes, I am sure</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
     </div>
   );
