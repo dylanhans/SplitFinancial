@@ -861,6 +861,17 @@
     }
   }
 
+  .opt-mobile{
+    opacity: 0; /* Start fully transparent */
+    animation: fadeIn 1.5s forwards; /* Animation will run for 1.5 seconds */
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1; /* End at fully visible */
+    }
+  }
+
   .conresult {
     opacity: 0; /* Start fully transparent */
     animation: fadeIn2 1.5s forwards; /* Same animation for both div and InputOTP */

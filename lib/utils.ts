@@ -298,6 +298,7 @@ export const applicationformSchema = z.object({
   poBox: z.string().min(1, { message: "P.O Box code must be at least 1 character." }).max(10).optional().or(z.literal('')), 
   country: z.string().default('Canada'),
   phoneType: z.enum(["mobile", "landline"]),
+  phoneOptional: phoneNumberSchema.optional().or(z.literal('')), 
 });
 
 export type appformSchema = z.infer<typeof applicationformSchema>;
@@ -317,6 +318,7 @@ export const step5schema = applicationformSchema.pick({
   phoneNumber: true,
   email: true,
   phoneType: true,
+  phoneOptional: true,
 });
 
 export type Step5Schema = z.infer<typeof step5schema>;

@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { applicationformSchema, appformSchema } from '@/lib/utils'
 import InputMask from 'react-input-mask';
 import { CheckCircleIcon } from '@heroicons/react/24/solid'; // Path for v2
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"; // Adjust the import based on your setup
 
 
 const formSchema = applicationformSchema;
@@ -18,9 +19,10 @@ interface ApplicationInputPhoneProps {
   className?: string;
   otpStatus: boolean; // Add this prop
   id?: string;
+  tooltip?: string;
 }
 
-const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, otpStatus }: ApplicationInputPhoneProps) => {
+const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, otpStatus, tooltip }: ApplicationInputPhoneProps) => {
   const { formState: { errors } } = useFormContext();
 
   return (
@@ -31,6 +33,18 @@ const ApplicationInputPhone = ({ control, name, label, placeholder = "+1", id, o
         <div className="form-item">
           <FormLabel className="form-label">
             {label}
+            {tooltip && (
+              <TooltipProvider>
+                <span className="ml-2 cursor-pointer text-blue-900 text-sm">
+                  <Tooltip>
+                    <TooltipTrigger>ⓘ</TooltipTrigger>
+                    <TooltipContent className="p-3 m-2 shadow-sm bg-white max-w-xs text-left">
+                      <p className="text-xs">{tooltip}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </span>
+              </TooltipProvider>
+            )}
           </FormLabel>
           <div className='flex w-full flex-col'>
             <FormControl>

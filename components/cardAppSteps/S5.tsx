@@ -72,7 +72,8 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
     defaultValues: {
       phoneNumber: formData.phoneNumber || '',
       email: formData.email || '',
-      phoneType: formData.phoneType || 'mobile'
+      phoneType: formData.phoneType || 'mobile',
+      phoneOptional: formData.phoneOptional || ''
     },
   });
 
@@ -80,7 +81,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   const onSubmit: SubmitHandler<Step5Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
-      const { phoneNumber, email, phoneType } = data;
+      const { phoneNumber, email, phoneType, phoneOptional } = data;
       
       // Update formData with relevant fields
       setFormData((prevData: any) => {
@@ -89,6 +90,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
           phoneNumber,
           email,
           phoneType,
+          phoneOptional,
         };
         
         return applicationData;
@@ -124,7 +126,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
-  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
+  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pl-1 pr-1 max-h-[700px] overflow-y-auto hide-scrollbar">
       {/* Grid for Phone and Email */}
       <div className="grid">
       <ApplicationInputInfo
@@ -142,10 +144,10 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
        <ApplicationInputPhone
           control={form.control}
           name="phoneNumber" // Ensure this matches the field name in your schema
-          label="Phone"
+          label="Phone number"
           id="phoneNumber"
-          otpStatus={otpStatus} // Pass otpStatus as a prop
-        />
+          otpStatus={form.getValues("phoneOptional") === "" ? otpStatus : false} // Pass otpStatus only if phoneOptional is empty
+          />
 
           <RadioGroup
             value={form.watch('phoneType')} // Use form.watch to reflect the current value
@@ -163,12 +165,29 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
             <Label htmlFor="landline" className='font-bolder'>Landline</Label>
           </div>
         </RadioGroup>
-
       </div>
+
+      {form.getValues("phoneType") === "landline" && (
+        <div className="grid grid-cols-2 gap-6">
+            <div className='opt-mobile'>
+              <ApplicationInputPhone
+              control={form.control}
+              name="phoneOptional" // Ensure this matches the field name in your schema
+              label="Mobile number (optional)"
+              id="phoneOptional"
+              otpStatus={otpStatus} // Pass otpStatus as a prop
+              tooltip="Add your mobile number so we can contact you on the go."
+              />
+            </div>
+          </div>
+      )}
+      
       {isSubmitted && (
         <div className='opt-login'>  
           <OTPLogin 
-            phoneNum={form.getValues("phoneNumber")} // Pass the phoneNumber from the form state
+            phoneNum={form.getValues("phoneOptional") 
+            ? form.getValues("phoneOptional") 
+            : form.getValues("phoneNumber")}            
             onClick={onClick}
             otpStatus={handleOtpStatus}
           />
