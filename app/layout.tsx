@@ -1,15 +1,16 @@
-export const dynamic = 'force-dynamic'
+import { ReactNode } from 'react';
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
+import LoadingOverlay from '@/components/MainLayout/LoadingOverlay';
+import { LoadingProvider } from './context/LoadingContext';
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const ibm_Plex_Serif = IBM_Plex_Serif({
   subsets: ['latin'],
   weight: ['400', '700'],
   variable: '--font-ibm-plex-serif'
-
-})
+});
 
 export const metadata: Metadata = {
   title: "Split Financial",
@@ -26,7 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${ibm_Plex_Serif.variable}`}>{children}</body>
+      <body className={`${inter.variable} ${ibm_Plex_Serif.variable}`}>
+        <LoadingProvider>
+          <LoadingOverlay />
+          {children}
+        </LoadingProvider>
+      </body>
     </html>
   );
 }

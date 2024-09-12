@@ -342,6 +342,33 @@
     text-decoration: none;
   }
 
+  /* loading state */
+  .loading-container {
+    position: relative;
+    width: 96px; /* Adjust size as needed */
+    height: 96px; /* Adjust size as needed */
+  }
+  
+  .loading-circle {
+    position: absolute;
+    inset: 0;
+    border: 4px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-top: 4px solid transparent; /* Transparent top border */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-image {
+    width: 96px; /* Same as container size */
+    height: 96px; /* Same as container size */
+    border-radius: 50%;
+  }
+
   
   .no-hover:hover {
     text-decoration: none;

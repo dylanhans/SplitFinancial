@@ -12,6 +12,7 @@ import {
 import { ConfirmationResult, getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { z } from 'zod'
 import { auth } from '@/firebase'
+import { useLoading } from '@/app/context/LoadingContext'
 
 interface OtpLoginProps {
     phoneNum: string;  // phoneNum will be a string based on the schema
@@ -115,32 +116,33 @@ interface OtpLoginProps {
       });
     };
   
+    const { setLoading } = useLoading();
 
     const requestOtp = async () => {
-      setResendCountdown(60);
       if (!recaptchaVerifier) {
         return setError("RecaptchaVerifier is not initialized.");
       }
+      setLoading(true); // Set loading true
       try {
-        // console.log('auth:', auth);
-        // console.log('pNumber:', pNumber);
-        // console.log('recaptchaVerifier:', recaptchaVerifier);
         const result = await signInWithPhoneNumber(auth, pNumber, recaptchaVerifier);
         otpStatus();
         setConfirmationResult(result);
-        // setSuccess("OTP sent successfully.");
+        setResendCountdown(60);
+
       } catch (err: any) {
-        console.error(err);
+        console.error("Failed to send OTP:", err);
         setResendCountdown(0);
         if (err.code === "auth/invalid-phone-number") {
-          console.log("Invalid phone number. Please check the number.");
+          console.log("Invalid phone number.");
         } else if (err.code === "auth/too-many-requests") {
-          console.log("Too many requests. Please try again later.");
-        }else if (err.code === "auth/invalid-app-credential") {
-          console.log("Invalid App Credential. Please try again later.");
+          console.log("Too many requests.");
+        } else if (err.code === "auth/invalid-app-credential") {
+          console.log("Invalid App Credential.");
         } else {
-          console.log("Failed to send OTP. Please try again.");
+          console.log("Failed to send OTP.");
         }
+      } finally {
+        setLoading(false); // Set loading false
       }
     };
   
@@ -149,6 +151,7 @@ interface OtpLoginProps {
     //     {/* Loading spinner */}
     //   </div>
     // );
+
   
     return (
       <div className='verify flex justify-center items-center w-full'>

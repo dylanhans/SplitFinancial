@@ -43,6 +43,7 @@ import { appformSchema, Step5Schema, step5schema } from '@/lib/utils';
 import ApplicationInputPhone from '../bank/ApplicationInput-Phone';
 import OTPLogin from '../bank/OTPLogin';
 import ApplicationInputInfo from '../bank/ApplicationInput-Info';
+import { useLoading } from '@/app/context/LoadingContext';
 
 interface Step5Props {
   onClick: () => void;
@@ -60,6 +61,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
   const [isChecked, setIsChecked] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [otpStatus, setOtpStatus] = useState(false);
+
 
   const handleOtpStatus = () => {
     // Handle the status passed from OtpLogin
