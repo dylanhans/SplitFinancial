@@ -45,7 +45,8 @@ export const cardsArray: CardsById = {
     cl: 1000,
     car: 22.99,
     pr: 20.99,
-    document: '/documents/SSCRA.html'
+    document: '/documents/SSCRA.html',
+    note: 'To apply for this card, you must have a minimum personal income of $80,000 or minimum household income of $150,000 or minimum total investable assets of $400,000.',
   },
   SSCA: {
     subtype: 'Student',
@@ -58,8 +59,8 @@ export const cardsArray: CardsById = {
     cl: 1000,
     car: 22.99,
     pr: 20.99,
-    document: '/documents/SSCA.html'
-
+    document: '/documents/SSCA.html',
+    note: 'To apply for this card, you must have a minimum personal income of $80,000 or minimum household income of $150,000 or minimum total investable assets of $400,000.',
   },
   SSHISA: {
     subtype: 'Standard',
@@ -72,7 +73,9 @@ export const cardsArray: CardsById = {
     cl: 1000,
     car: 22.99,
     pr: 20.99,
-    note: 'To apply for this card, you must have a minimum personal income of $80,000 or minimum household income of $150,000 or minimum total investable assets of $400,000.',
+    personalIncome:  60000,
+    minHouseIncome: 120000,
+    minTIA: 200000,
     document: '/documents/SSHISA.html'
 
   },

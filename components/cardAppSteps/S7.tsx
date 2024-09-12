@@ -36,7 +36,7 @@ import { Separator } from '@radix-ui/react-separator'
 import { getNextAppStep} from '@/lib/actions/bank.actions';
 import CustomInput from '../bank/CustomInput';
 import ApplicationInput from '../bank/ApplicationInput';
-import { appformSchema, Step7Schema, step7schema } from '@/lib/utils';
+import { appformSchema, Step6Schema, step6schema} from '@/lib/utils';
 import ApplicationInputPhone from '../bank/ApplicationInput-Phone';
 
 interface Step7Props {
@@ -55,8 +55,8 @@ const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormD
   const [isChecked, setIsChecked] = useState(false);
 
   // Define form with step-specific schema
-  const form = useForm<Step7Schema>({
-    resolver: zodResolver(step7schema),
+  const form = useForm<Step6Schema>({
+    resolver: zodResolver(step6schema),
     defaultValues: {
       phoneNumber: formData.phoneNumber || undefined,
       email: formData.email || '',
@@ -64,7 +64,7 @@ const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormD
   });
 
   // Define a submit handler.
-  const onSubmit: SubmitHandler<Step7Schema> = (data) => {
+  const onSubmit: SubmitHandler<Step6Schema> = (data) => {
     try {
       // Destructure only the fields needed for this step
       const { phoneNumber, email } = data;

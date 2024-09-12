@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod"
 import { TailSpin } from 'react-loader-spinner'
@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabsearch"
 import {
   Card,
   CardContent,
@@ -49,7 +49,6 @@ import ApplicationInput from '../bank/ApplicationInput';
 import { appformSchema, provinceOptions, Step5Schema, step5schema, Step6Schema, step6schema, unitTypeOptions } from '@/lib/utils';
 import ApplicationPhoneVerify from '../bank/ApplicationPhoneVerify';
 import OTPLogin from '../bank/OTPLogin';
-import { StandaloneSearchBox } from '@react-google-maps/api';
 import { MapsLoad } from '@/googlecloud';
 import { Label } from '@radix-ui/react-label';
 import ApplicationInputDropdown from '../bank/ApplicationInput-Dropdown';
@@ -64,19 +63,13 @@ interface Step6Props {
 
 
 const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
-  const { isLoaded, inputref, searchBoxRef } = MapsLoad();
+  const { isLoaded, inputRef, autocompleteRef, handlePlaceChanged } = MapsLoad();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [activeTab, setActiveTab] = useState("autocomplete");
-
-  const handleOnPlacesChanged = () => {
-    if (searchBoxRef.current) {
-      const places = searchBoxRef.current.getPlaces();
-      console.log("address", places);
-    }
-  };
+  const [isAutocompleteActive, setIsAutocompleteActive] = useState(true);  // true by default
+  const [isManualActive, setIsManualActive] = useState(false);
 
   // Define form with step-specific schema
   const form = useForm<Step6Schema>({
@@ -148,41 +141,76 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
     setIsAlertOpen(false);
   };
 
+
+  useEffect(() => {
+
+  }, [isAutocompleteActive, isManualActive]);
+
+  const handleTabClick = (tab: 'autocomplete' | 'manual') => {
+    if (tab === 'autocomplete') {
+      setIsAutocompleteActive(true);
+      setIsManualActive(false);
+    } else if (tab === 'manual') {
+      setIsAutocompleteActive(false);
+      setIsManualActive(true);
+    }
+  };
+
+  useEffect(() => {
+    if (isAutocompleteActive && isLoaded && inputRef.current) {
+      const autocomplete = new google.maps.places.Autocomplete(inputRef.current!, {
+        types: ['address'], // You can customize the types to your needs
+        componentRestrictions: { country: 'ca' }, // Example: restrict to CA
+      });
+      autocomplete.addListener('place_changed', handlePlaceChanged);
+      autocompleteRef.current = autocomplete;
+
+      return () => {
+        // Clean up previous autocomplete instance
+        if (autocompleteRef.current) {
+          google.maps.event.clearInstanceListeners(autocompleteRef.current);
+          autocompleteRef.current = null;
+        }
+      };
+    }
+  }, [isAutocompleteActive, isLoaded]);
+
+
   return (
     <div className="transition-all duration-500 slide-down-enter slide-down-enter-active">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pl-1 pr-1 h-full pt-40 overflow-y-auto hide-scrollbar">
-          
-
-    
-<Tabs defaultValue="autocomplete" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="autocomplete">
-            <svg xmlns="http://www.w3.org/2000/svg" className='mr-2' x="0px" y="0px" width="17.5" height="17.5" viewBox="0 0 30 30">
-              <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
-            </svg>
-          Address
-          </TabsTrigger>
-        <TabsTrigger value="manual">
-        <img className="mr-2" width="17.5" height="17.5" src="https://img.icons8.com/ios-glyphs/30/pencil--v1.png" alt="pencil--v1"/>
-          Enter manually
-          </TabsTrigger>
-      </TabsList>
+          <Tabs defaultValue="autocomplete" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger
+              value="autocomplete"
+              onClick={() => handleTabClick("autocomplete")}
+              className={` ${
+                isAutocompleteActive ? 'bg-white' : 'bg-gray-50'
+              }`}
+            >
+              Address
+            </TabsTrigger>
+            <TabsTrigger
+              value="manual"
+              onClick={() => handleTabClick("manual")}
+              className={`${
+                isManualActive ? 'bg-white' : 'bg-gray-50'
+              }`}
+            >
+              Enter manually
+            </TabsTrigger>
+          </TabsList>
       <TabsContent value="autocomplete">
         <Card>
           <CardContent className="p-4 space-y-4">
           {isLoaded && (
-          <div className="search-box-container w-full">
-            <StandaloneSearchBox
-              onLoad={(ref) => searchBoxRef.current = ref}
-              onPlacesChanged={handleOnPlacesChanged}
-            >
-              <input 
-                ref={inputref} 
-                placeholder="Enter your specific address" 
-                className="search-input"
-              />
-            </StandaloneSearchBox>
+          <div className="autocomplete-container w-full flex">
+            <input
+              ref={inputRef}
+              placeholder="Enter your specific address"
+              className="autocomplete-input w-full"
+            />
           </div>
           )}
           </CardContent>
@@ -295,7 +323,11 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
         />
       </div>
 
-    
+          </CardContent>
+          
+        </Card>
+      </TabsContent>
+    </Tabs>
 
     {/* Cancel Application and Continue Button */}
     <div className="cancel-app flex justify-between items-center w-full mt-10">
@@ -314,12 +346,6 @@ const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormD
         Continue
       </Button>
     </div>
-          </CardContent>
-          
-        </Card>
-      </TabsContent>
-    </Tabs>
-
     {/* Confirmation dialog */}
     <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
       <AlertDialogContent className="bg-white">

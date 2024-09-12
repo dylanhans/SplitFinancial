@@ -286,7 +286,7 @@ export const applicationformSchema = z.object({
   postalCode: z.string().min(6, { message: "Please enter at least 6 characters" }).max(6), 
   dateOfBirth: dateOfBirthSchema, 
   unitNum: z.string().min(1, { message: "Unit number must contain at least 1 character." }).optional().or(z.literal('')),
-  ssn: z.string().min(9, { message: "SSN must be exactly 9 digits." }).max(9, { message: "SSN must be exactly 9 digits." }).optional().or(z.literal('')),
+  ssn: z.string().min(9, { message: "SSN must be exactly 9 digits." }).max(9, { message: "SSN must be exactly 9 digits." }),
   city: z.string().max(50, { message: "City name cannot exceed 50 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   password: z.string().min(8, { message: "Password must be at least 8 characters long." }),

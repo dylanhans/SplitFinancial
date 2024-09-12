@@ -22,6 +22,9 @@ declare interface CardDetails {
   pr: number;
   note?: string;
   document: string;
+  personalIncome?: number;
+  minHouseIncome?: number;
+  minTIA?: number;
 }
 
 // ========================================

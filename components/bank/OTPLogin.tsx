@@ -155,10 +155,10 @@ interface OtpLoginProps {
   {confirmationResult && (
     <div className="otp-logged flex flex-col justify-center items-center shadow-sm rounded-sm p-4">
       <div className="conresult text-center">
-  <p className="text-md font-semibold">
+  <p className="font-smallboldish text-[13px]">
     Verify mobile number
   </p>
-  <p className="mb-4">
+  <p className="mb-4 font-smallboldish text-[13px]">
     Enter the 6-digit code we sent to {phoneNum}
   </p>
 
@@ -186,10 +186,10 @@ interface OtpLoginProps {
     </div>
 
     <div className=' w-full flex flex-col text-left'>
-      <p className="text-md ">
+      <p className="text-md font-smallboldish text-[13px]">
         Code sent to phone
       </p>
-      <p className='text-xs'>
+      <p className='text-xs font-smallboldish text-[13px]'>
         You should get a code within 20 seconds.
       </p>
     </div>
@@ -202,7 +202,7 @@ interface OtpLoginProps {
           `Resend code in 00:${String(resendCountdown).padStart(2, '0')}`
         ) : (
           <button 
-            className="underline" 
+            className="" 
             onClick={requestOtp} 
             disabled={resendCountdown > 0}
           >

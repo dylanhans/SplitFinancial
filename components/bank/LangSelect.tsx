@@ -34,7 +34,7 @@ const LangSelect = () => {
           <img 
             src="/icons/flag.svg" 
             alt="Canada Flag" 
-            className="mr-1 w-[50%] h-[50%]" 
+            className="mr-1 w-[35%] h-[50%]" 
           />
           <p className='text-[#006ac3] font-submore'>
             (FR)

@@ -181,9 +181,9 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
             </div>
           </div>
       )}
-      
+      {/* top-0 left-0 right-0 bottom-0 z-10 */}
       {isSubmitted && (
-        <div className='opt-login w-full'>  
+        <div className='opt-login w-[full]'>  
           <OTPLogin 
             phoneNum={form.getValues("phoneOptional") 
             ? form.getValues("phoneOptional") 

@@ -63,9 +63,11 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
                 </p>
               </a>
             </div>
-                <ScrollArea className="h-[300px] w-full text-[black] rounded-none border border-gray-300">
+            <div className='rounded-sm border border-gray-200'>
+                <ScrollArea className="h-[300px] w-full text-[black]">
                      <div dangerouslySetInnerHTML={{ __html: content }} className='p-4'/>
                 </ScrollArea>
+            </div>
             <p className="font-subbed mt-10 text-gray-700">
                 By clicking "Continue", you confirm that you have read the Information Box and agree to be considered for all the card options shown in the Information Box.
             </p>

@@ -837,6 +837,61 @@
 
   }
 
+  .tab-trigger {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tab-trigger::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    transition: width 1s ease;
+  }
+  
+  .cardnote-list {
+    list-style-type: none; /* Remove default bullets */
+    margin-left: 0; /* Adjust to align with custom bullets */
+    padding-left: 0; /* Adjust to align with custom bullets */
+  }
+  .shadow-top-bottom {
+    --tw-shadow-top: 0 -1px 2px 0 rgb(0 0 0 / 0.01);
+    --tw-shadow-bottom: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored-top: 0 -1px 2px 0 var(--tw-shadow-color);
+    --tw-shadow-colored-bottom: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+                var(--tw-ring-shadow, 0 0 #0000),
+                var(--tw-shadow-top),
+                var(--tw-shadow-bottom);
+}
+
+  .cardnote-list li {
+    position: relative;
+    margin-bottom: 2px;
+    padding-left: 20px; /* Space for the custom bullet */
+  }
+  
+  .cardnote-list li::before {
+    content: '•'; /* Custom bullet character */
+    color: black; /* Bullet color */
+    position: absolute;
+    left: 0;
+    padding-left: 5px;
+    font-size: 12.5px; /* Bullet size */
+  }
+
+  .bold-sm {
+    font-weight: 400 !important;
+  }
+
+
+  .tab-trigger.active::before {
+    width: 100%;
+  }
+
   .form-btnclient2{
     @apply bg-[#006ac3] text-white pt-1 pb-1 font-smallboldish rounded-none border border-[#006ac3] first-line:balance-text-16;
 
