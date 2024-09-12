@@ -64,12 +64,20 @@ interface Step6Props {
 
 
 const Step6: React.FC<Step6Props> = ({ onClick, onBack, type, formData, setFormData }) => {
-  const { isLoaded, inputref, searchBoxRef, handleOnPlacesChanged } = MapsLoad();
+  const { isLoaded, inputref, searchBoxRef } = MapsLoad();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  
+  const [activeTab, setActiveTab] = useState("autocomplete");
+
+  const handleOnPlacesChanged = () => {
+    if (searchBoxRef.current) {
+      const places = searchBoxRef.current.getPlaces();
+      console.log("address", places);
+    }
+  };
+
   // Define form with step-specific schema
   const form = useForm<Step6Schema>({
     resolver: zodResolver(step6schema),

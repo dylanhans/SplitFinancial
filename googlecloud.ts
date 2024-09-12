@@ -8,17 +8,11 @@ export function MapsLoad() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_UNRESTRICTED_GOOGLECLOUD_API_KEY!,
+    googleMapsApiKey: 'AIzaSyCX0nm7s2bPGhy28mHHrenuiUBUoHq5CwI',
     libraries: ["places"],
   });
   console.log(isLoaded)
   // Handle the places changed event
-  const handleOnPlacesChanged = () => {
-    if (searchBoxRef.current) {
-      const places = searchBoxRef.current.getPlaces();
-      console.log("address", places);
-    }
-  };
 
-  return { isLoaded, inputref, searchBoxRef, handleOnPlacesChanged };
+  return { isLoaded, inputref, searchBoxRef };
 }
