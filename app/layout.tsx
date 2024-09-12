@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
-import LoadingOverlay from '@/components/MainLayout/LoadingOverlay';
-import { LoadingProvider } from './context/LoadingContext';
+import LoadingOverlay from '@/components/MainLayout/LoadingOverlay'; // Ensure this is the correct path
+import { LoadingProvider } from './context/LoadingContext'; // Ensure this is the correct path
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const ibm_Plex_Serif = IBM_Plex_Serif({
@@ -29,8 +29,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${ibm_Plex_Serif.variable}`}>
         <LoadingProvider>
-          <LoadingOverlay />
-          {children}
+          <Suspense fallback={<LoadingOverlay />}>
+            <LoadingOverlay />
+            {children}
+          </Suspense>
         </LoadingProvider>
       </body>
     </html>

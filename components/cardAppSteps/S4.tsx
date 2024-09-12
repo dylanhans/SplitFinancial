@@ -181,7 +181,7 @@ const Step4: React.FC<Step4Props> = ({ onClick, onBack, type, formData, setFormD
       <ApplicationInputInfo
           control={form.control}
           name="ssn"
-          label="Social Insurance Number (optional)"
+          label="Social Insurance Number"
           placeholder=""
           id="ssn"
           className="w-full"
