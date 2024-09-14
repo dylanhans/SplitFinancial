@@ -27,12 +27,12 @@ const Step3: React.FC<Step1Props> = ({ onClick, card }) => {
   }
   
   return (
-    <div className="flex flex-col gap-5 md:gap-8 mt-12">
+    <div className="flex flex-col gap-5 mt-12">
       {/* Conditionally render the "main class" div */}
     <div className={`transition-all duration-300 slide-up-enter slide-up-enter-active`}>
           {/* // currentAppStep ? 'slide-up-enter slide-up-enter-active' : 'slide-up-exit slide-up-exit-active' */}
         <div className="main class pt-40">
-          <div className="flex ml-1 flex-col gap-1 md:gap-3">
+          <div className="flex ml-1 flex-col gap-1">
             <p className="font-bigtitle2 text-gray-900">
             Please review the following information.
             </p>

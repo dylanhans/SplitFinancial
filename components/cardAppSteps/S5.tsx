@@ -197,7 +197,7 @@ const Step5: React.FC<Step5Props> = ({ onClick, onBack, type, formData, setFormD
       )}
 
       {/* Cancel Application and Continue Button */}
-      <div className="cancel-app flex justify-between items-center w-full mt-10">
+    <div className="cancel-app flex justify-between items-center w-full mt-10">
       <button
           type="button"
           onClick={handleCancelApplication}

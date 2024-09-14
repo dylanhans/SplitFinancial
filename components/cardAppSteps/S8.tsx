@@ -11,18 +11,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Separator } from '@/components/ui/separator';
-
 import { useRouter } from 'next/navigation';
 
-interface Step7Props {
+interface Step8Props {
   onClick: () => void;
   card: {
     note: string;
   };
 }
 
-const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
+const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
   const router = useRouter();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
@@ -50,12 +48,17 @@ const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
         <div className="main-class pt-40">
           <div className="flex ml-1 flex-col gap-1">
           <p className="font-bigtitle2 text-gray-900">
-            Let's look over your application.
-          </p>
+              Please review the Document(s).
+            </p>
             <span className="font-subbed text-gray-900">
-            Please review your information and agree to the terms and conditions to continue.
+              The Information Box below shows details about the credit card you selected to apply 
+              for and in some cases details for other credit cards. When you apply we'll consider 
+              you for these cards based on your eligibility. At the end of this application 
+              you will find out if you have been approved for the card you selected, a different 
+              card, or more than one card. If we present you a card option in place of, or in addition to, the one 
+              you selected to apply for, please choose the card that best suits your needs.
             </span>
-            <Separator className="flex-grow border-t border-gray-300" />
+
             <p className="mt-3 text-gray-700">
               Is this the right product for you?
               <span className="block font-smallboldish">
@@ -132,4 +135,4 @@ const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
   );
 };
 
-export default Step7;
+export default Step8;
