@@ -53,8 +53,11 @@ import S5 from '../cardAppSteps/S5';
 import S6 from '../cardAppSteps/S6';
 import S7 from '../cardAppSteps/S7';
 import S8 from '../cardAppSteps/S8';
+import S9 from '../cardAppSteps/S9';
 
-type StepKey = 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7' | 's8';
+
+
+type StepKey = 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7' | 's8' | 's9';
 
 interface Steps {
   [key: string]: JSX.Element;
@@ -94,19 +97,20 @@ const formMachine = createMachine({
       on: {
         NEXT: 's8', // Default next step after s4
         UNIQUE: 's6', // If a specific option is selected, move to step 5
+        BACK: 's6',
+      },
+    },
+    s8: {
+      on: {
+        NEXT: 's9', // Default next step after s4
+        UNIQUE: 's6', // If a specific option is selected, move to step 5
         BACK: 's7',
       },
     },
-    // s6: {
-    //   on: {
-    //     NEXT: 's7', // Default next step after s4
-    //     UNIQUE: 's6', // If a specific option is selected, move to step 5
-    //     BACK: 's5',
-    //   },
-    // },
-    s8: { 
+    
+    s9: { 
       on: { 
-        BACK: 's7' } },
+        BACK: 's8' } },
     redirect: { type: 'final' }, // Example of a redirect state (sign-in)
   },
 });
@@ -228,8 +232,8 @@ const CardForm = ({ type }: { type: string }) => {
     s5: <S5 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s6: <S6 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s7: <S7 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
-    s8: <S8 onClick={handleNextStep} card={card} />,
-
+    s8: <S8 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
+    s9: <S9 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep} />,
   };
 
   const currentStepIndex = Object.keys(steps).indexOf(currentStepKey) + 1;

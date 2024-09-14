@@ -1,20 +1,28 @@
-'use client';
-import React, { useState } from 'react';
-import { Button } from '../ui/button';
+'use client'
+import React, { useState } from 'react'
+import { Button } from '../ui/button'
+import { useRouter } from 'next/navigation'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Separator } from '@/components/ui/separator';
 
-import { useRouter } from 'next/navigation';
-import { appformSchema } from '@/lib/utils';
+  AlertDialogFooter,
+
+  AlertDialogHeader,
+
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { appformSchema } from '@/lib/utils'
 
 interface Step7Props {
   onClick: () => void;
@@ -24,17 +32,13 @@ interface Step7Props {
   setFormData: React.Dispatch<React.SetStateAction<appformSchema>>;
 }
 
-const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormData  }) => {
-  const router = useRouter();
+const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormData }) => {
+  
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-
+  const [selectedOption, setSelectedOption] = useState<"yes" | "no" | null>(null);
+  const router = useRouter();
   const handleCancelApplication = () => {
     setIsAlertOpen(true);
-
-    // Clear saved form data and step on cancel
-    localStorage.removeItem('formData');
-    localStorage.removeItem('currentStep');
-    localStorage.removeItem('furthestStep');
   };
 
   const handleContinue = () => {
@@ -46,117 +50,65 @@ const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormD
     setIsAlertOpen(false);
   };
 
+
+
+  const handleOptionClick = (option: "yes" | "no") => {
+    setSelectedOption(option);
+    if (option="yes"){
+      onClick();
+    }
+    // else 
+    //   onRedirect();
+  };
+
+
   return (
-    <div className="flex flex-col gap-5 mt-12">
-      <div className="transition-all duration-300 slide-up-enter slide-up-enter-active">
-        <div className="main-class pt-40">
+    <header className="flex flex-col gap-5  mt-10">
+      <div className={`transition-all duration-300 slide-up-enter slide-up-enter-active`}>
+        <div className="main-class">
           <div className="flex ml-1 flex-col gap-1">
-          <p className="font-bigtitle2 text-gray-900">
-            Let's look over your application.
-          </p>
-            <span className="font-subbed text-gray-900">
-            Please review your information and agree to the terms and conditions to continue.
-            </span>
-          <div className='personal-info-confirmation'>
-            <div className='pt-5 pb-5'>
-              <Separator className="flex-grow border-t border-gray-300" />
-                <p className="mt-3 text-gray-700 flex justify-between items-center">
-                  Personal Information
-                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+            <h1 className="font-bigtitle2 text-gray-900">
+              Do you want to add a card for someone else?
+              <p className="font-sub mt-5 text-gray-900">
+               Add an authorized user to your account 
+                  <p> and share the benefits of your card.
+                    <TooltipProvider>
+                  <span className="balance-text-13 mt-3 ml-4 font-smallboldish text-blue-900 text-sm cursor-pointer">
+                    <Tooltip>
+                      <TooltipTrigger>ⓘ</TooltipTrigger>
+                      <TooltipContent className="p-3 m-2 shadow-sm bg-white">
+                        <p className="text-xs">
+                          Make sure you have your Client Card/Username and password handy, as you'll need them to sign in.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </span>
+                </TooltipProvider></p>
+                
                 </p>
-            </div>
-            <div className='personal-grid grid grid-cols-3 gap-4 '>
-              {/* Row 1 */}
-              <div>
-                <p className='text-gray-900'>
-                  Name: <span className='block font-smallboldish text-gray-700'> {formData.firstName} {formData.lastName}</span>
-              </p>
-              </div>
-              <div>
-              <p className='text-gray-900'>
-                  Date of Birth: <span className='block font-smallboldish text-gray-700'> {formData.dateOfBirth}</span>
-              </p>
-                </div>
-              <div>
-                <p className='text-gray-900'>
-                  Email Address: <span className='block font-smallboldish text-gray-700'> {formData.email}</span>
-              </p>
-              </div>
-              {/* Row 2 */}
-              <div><p className='text-gray-900'>
-                  Phone <span className='block font-smallboldish text-gray-700'> {formData.phoneNumber}</span>
-              </p></div>
-              <div>
-                <p className='text-gray-900'>
-                  Rent/Mortgage Payments <span className='block font-smallboldish text-gray-700'> </span>
-              </p>
-              </div>
-              <div>
-                <p className='text-gray-900'>
-                   <span className='block font-smallboldish text-gray-700'>  </span>
-              </p>
-              </div>
-              <div>
-                <p className='text-gray-900'>
-                  Home Address <span className='block font-smallboldish text-gray-700'> {formData.address} </span>
-              </p>
-              </div>
-
-            </div>
+            </h1>
           </div>
 
-          <div className='employment-info-confirmation text-gray-700'>
-            <div className='pt-5 pb-5'>
-              <Separator className="flex-grow border-t border-gray-300" />
-                <p className="mt-3 text-gray-700 flex justify-between items-center">
-                  Employment
-                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
-                </p>
-                </div>
-            <div className='personal-grid grid grid-cols-3 gap-4'>
-              {/* Row 1 */}
-              <div>Name: John Doe</div>
-              <div>Age: 30</div>
-              <div>Country: USA</div>
-              
-              {/* Row 2 */}
-              <div>Email: johndoe@email.com</div>
-              <div>Phone: (555) 555-5555</div>
-              <div>Address: 123 Main St</div>
-            </div>
+          {/* "No" and "Yes" buttons */}
+          <div className="flex justify-center items-center w-full gap-x-6">
+            <Button
+              type="button"
+              onClick={() => handleOptionClick("no")}
+              className={`form-btn1 mt-10 ${selectedOption === "no" ? "form-btn2" : ""}`}
+            >
+              No
+            </Button>
+            <Button
+              type="button"
+              onClick={() => handleOptionClick("yes")}
+              className={`form-btn1 mt-10 ${selectedOption === "yes" ? "form-btn2" : ""}`}
+            >
+              Yes
+            </Button>
           </div>
 
-          <div className='other-info-confirmation text-gray-700'>
-            <div className='pt-5 pb-5'>
-              <Separator className="flex-grow border-t border-gray-300" />
-                <p className="mt-3 text-gray-700 flex justify-between items-center">
-                  Other
-                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
-                </p>
-                </div>
-            <div className='personal-grid grid grid-cols-3 gap-4'>
-              {/* Row 1 */}
-              <div>Name: John Doe</div>
-              <div>Age: 30</div>
-              <div>Country: USA</div>
-              
-              {/* Row 2 */}
-              <div>Email: johndoe@email.com</div>
-              <div>Phone: (555) 555-5555</div>
-              <div>Address: 123 Main St</div>
-            </div>
-          </div>
-
-          <div className='pt-5'>
-          <Separator className="flex-grow border-t border-gray-300" />
-            <p className="mt-10 font-subbed text-gray-700">
-            By selecting 'Continue', I confirm that the information provided is accurate and complete to the best of my knowledge, and I acknowledge that I have reviewed and agree to the terms and conditions, as well as the privacy policy.            </p>
-          </div>
-          </div>
-
-
-          {/* Cancel and Continue Buttons */}
-          <div className="cancel-app flex justify-between items-center w-full mt-10">
+        </div>
+        <div className="cancel-app flex justify-between items-center w-full mt-10">
             <button
               type="button"
               onClick={handleCancelApplication}
@@ -193,9 +145,8 @@ const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormD
               </AlertDialogContent>
             </AlertDialog>
           </div>
-        </div>
       </div>
-    </div>
+    </header>
   );
 };
 

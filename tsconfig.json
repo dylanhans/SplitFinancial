@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(home)/layout.tsx", "googlecloud.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(home)/layout.tsx", "googlecloud.ts", "components/cardAppSteps/S8.tsx"],
   "exclude": ["node_modules"]
 }

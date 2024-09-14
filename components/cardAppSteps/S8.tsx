@@ -11,24 +11,21 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Separator } from '@/components/ui/separator';
+
 import { useRouter } from 'next/navigation';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { appformSchema } from '@/lib/utils';
+
 
 interface Step8Props {
   onClick: () => void;
-  card: {
-    note: string;
-  };
+  onBack: () => void;
+  type: string;
+  formData: appformSchema;
+  setFormData: React.Dispatch<React.SetStateAction<appformSchema>>;
 }
 
-const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
+const Step8: React.FC<Step8Props> = ({ onClick, onBack, type, formData, setFormData  }) => {
   const router = useRouter();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
@@ -56,60 +53,131 @@ const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
         <div className="main-class pt-40">
           <div className="flex ml-1 flex-col gap-1">
           <p className="font-bigtitle2 text-gray-900">
-              Please review the Document(s).
-            </p>
-            {/* <span className="font-subbed text-gray-900">
-              The Information Box below shows details about the credit card you selected to apply 
-              for and in some cases details for other credit cards. When you apply we'll consider 
-              you for these cards based on your eligibility. At the end of this application 
-              you will find out if you have been approved for the card you selected, a different 
-              card, or more than one card. If we present you a card option in place of, or in addition to, the one 
-              you selected to apply for, please choose the card that best suits your needs.
-            </span> */}
-
-            <p className="mt-3 text-gray-700">
-              Is this the right product for you?
-              <span className="block font-smallboldish">
-                RBC aims to ensure the products you choose are right for you; however this isn't always possible when you use our self-serve channels. If you need help making a choice on which credit card is right for you, please contact us (opens in a new window) or use our credit card selection tool (opens in a new window).
-              </span>
-            </p>
-
-            <p className="mt-3 text-gray-700">
-              Credit Card Insurance Product Summary
-              <span className="block font-smallboldish">
-                RBC credit cards include insurance coverage. For Quebec Residents: please read the Insurance Product Summary. By continuing, you confirm that you had the opportunity to read and download the summary detailing the coverage included with this credit card.
-              </span>
-            </p>
-
-            <p className="mt-3 text-gray-700">
-              Below is an overview of these Terms & Conditions and what you are agreeing to:
-              <ul className="cardnote-list font-smallboldish text-gray-700">
-                <li>Consent to this credit card application, credit review, and annual fee</li>
-                <li>Consent to the electronic delivery of the Information Box</li>
-                <li>Collection, use and disclosure of personal information</li>
-              </ul>
-            </p>
-
-            <p className="font-subbed mt-2 text-gray-700">
-              To continue, please click and review the document(s) below.
-            </p>
-
-            <div className='pt-2 pb-2 w-full flex flex-col'>
-              <div className='documents-interactive w-full shadow-sm p-4'>
-                <span>
-                
-                </span>
-              </div>
-              <div className='documents-interactive w-full shadow-sm p-4'>
-                Test
-              </div>
+            Let's look over your application.
+          </p>
+            <span className="font-subbed text-gray-900">
+            Please review your information and agree to the terms and conditions to continue.
+            </span>
+          <div className='personal-info-confirmation'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Personal Information
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
             </div>
+            <div className='personal-grid grid grid-cols-3 gap-4 '>
+              {/* Row 1 */}
+              <div>
+                <p className='text-gray-900'>
+                  Name: <span className='block font-smallboldish text-gray-700'> {formData.firstName} {formData.lastName}</span>
+              </p>
+              </div>
+              <div>
+              <p className='text-gray-900'>
+                  Date of Birth: <span className='block font-smallboldish text-gray-700'> {formData.dateOfBirth}</span>
+              </p>
+                </div>
+              <div>
+                <p className='text-gray-900'>
+                  Email Address: <span className='block font-smallboldish text-gray-700'> {formData.email}</span>
+              </p>
+              </div>
+              {/* Row 2 */}
+              <div><p className='text-gray-900'>
+                  Phone <span className='block font-smallboldish text-gray-700'> {formData.phoneNumber}</span>
+              </p></div>
+              <div>
+                <p className='text-gray-900'>
+                  Rent/Mortgage Payments <span className='block font-smallboldish text-gray-700'> </span>
+              </p>
+              </div>
+              <div>
+                <p className='text-gray-900'>
+                   <span className='block font-smallboldish text-gray-700'>  </span>
+              </p>
+              </div>
+              <div>
+                <p className='text-gray-900'>
+                  Home Address <span className='block font-smallboldish text-gray-700'> {formData.address} </span>
+              </p>
+              </div>
 
-            <p className="mt-10 font-smallboldish text-gray-700">
-              By selecting "Agree and Submit", I consent to be provided with the requested account(s) and have read and agree to the terms and conditions. I also consent to the privacy section.
-            </p>
-            {card.note}
+            </div>
           </div>
+
+          <div className='employment-info-confirmation text-gray-700'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Employment
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
+                </div>
+            <div className='personal-grid grid grid-cols-3 gap-4'>
+              {/* Row 1 */}
+              <div>Name: John Doe</div>
+              <div>Age: 30</div>
+              <div>Country: USA</div>
+              
+              {/* Row 2 */}
+              <div>Email: johndoe@email.com</div>
+              <div>Phone: (555) 555-5555</div>
+              <div>Address: 123 Main St</div>
+            </div>
+          </div>
+
+          <div className='other-info-confirmation text-gray-700'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Other
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
+                </div>
+            <div className='personal-grid grid grid-cols-3 gap-4'>
+              {/* Row 1 */}
+              <div>Name: John Doe</div>
+              <div>Age: 30</div>
+              <div>Country: USA</div>
+              
+              {/* Row 2 */}
+              <div>Email: johndoe@email.com</div>
+              <div>Phone: (555) 555-5555</div>
+              <div>Address: 123 Main St</div>
+            </div>
+          </div>
+
+          <div className='pt-5'>
+          <Separator className="flex-grow border-t border-gray-300" />
+            <p className="mt-10 font-subbed text-gray-700">
+            By selecting 'Continue', I confirm that the information provided is accurate and complete to the best of my knowledge, and I acknowledge that I have reviewed and agree to the terms and conditions, as well as the privacy policy.            </p>
+          </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+        <button
+          type="button"
+          onClick={onBack}
+          className="bg-white text-[#0060b1] pt-1 pb-1 font-smallboldish balance-text-16 hover:text-[#0061b1cd] mt-2 flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-arrow-left"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M15 8a.5.5 0 0 1-.5.5H4.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L4.707 7.5H14.5A.5.5 0 0 1 15 8z"
+            />
+          </svg>
+          Back
+        </button>
+      </div>
+
 
           {/* Cancel and Continue Buttons */}
           <div className="cancel-app flex justify-between items-center w-full mt-10">
@@ -123,6 +191,7 @@ const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
 
             <Button
               type="submit"
+              onClick={onClick}
               className="form-btnclient2"
             >
               Continue
