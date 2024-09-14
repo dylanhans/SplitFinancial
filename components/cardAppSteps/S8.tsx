@@ -12,6 +12,14 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useRouter } from 'next/navigation';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface Step8Props {
   onClick: () => void;
@@ -50,14 +58,14 @@ const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
           <p className="font-bigtitle2 text-gray-900">
               Please review the Document(s).
             </p>
-            <span className="font-subbed text-gray-900">
+            {/* <span className="font-subbed text-gray-900">
               The Information Box below shows details about the credit card you selected to apply 
               for and in some cases details for other credit cards. When you apply we'll consider 
               you for these cards based on your eligibility. At the end of this application 
               you will find out if you have been approved for the card you selected, a different 
               card, or more than one card. If we present you a card option in place of, or in addition to, the one 
               you selected to apply for, please choose the card that best suits your needs.
-            </span>
+            </span> */}
 
             <p className="mt-3 text-gray-700">
               Is this the right product for you?
@@ -82,11 +90,22 @@ const Step8: React.FC<Step8Props> = ({ onClick, card }) => {
               </ul>
             </p>
 
-            <p className="font-subbed mt-10 text-gray-700">
+            <p className="font-subbed mt-2 text-gray-700">
               To continue, please click and review the document(s) below.
             </p>
 
-            <p className="mt-10 text-gray-700">
+            <div className='pt-2 pb-2 w-full flex flex-col'>
+              <div className='documents-interactive w-full shadow-sm p-4'>
+                <span>
+                
+                </span>
+              </div>
+              <div className='documents-interactive w-full shadow-sm p-4'>
+                Test
+              </div>
+            </div>
+
+            <p className="mt-10 font-smallboldish text-gray-700">
               By selecting "Agree and Submit", I consent to be provided with the requested account(s) and have read and agree to the terms and conditions. I also consent to the privacy section.
             </p>
             {card.note}

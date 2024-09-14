@@ -14,15 +14,17 @@ import {
 import { Separator } from '@/components/ui/separator';
 
 import { useRouter } from 'next/navigation';
+import { appformSchema } from '@/lib/utils';
 
 interface Step7Props {
   onClick: () => void;
-  card: {
-    note: string;
-  };
+  onBack: () => void;
+  type: string;
+  formData: appformSchema;
+  setFormData: React.Dispatch<React.SetStateAction<appformSchema>>;
 }
 
-const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
+const Step7: React.FC<Step7Props> = ({ onClick, onBack, type, formData, setFormData  }) => {
   const router = useRouter();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
@@ -55,39 +57,103 @@ const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
             <span className="font-subbed text-gray-900">
             Please review your information and agree to the terms and conditions to continue.
             </span>
-            <Separator className="flex-grow border-t border-gray-300" />
-            <p className="mt-3 text-gray-700">
-              Is this the right product for you?
-              <span className="block font-smallboldish">
-                RBC aims to ensure the products you choose are right for you; however this isn't always possible when you use our self-serve channels. If you need help making a choice on which credit card is right for you, please contact us (opens in a new window) or use our credit card selection tool (opens in a new window).
-              </span>
-            </p>
+          <div className='personal-info-confirmation'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Personal Information
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
+            </div>
+            <div className='personal-grid grid grid-cols-3 gap-4 '>
+              {/* Row 1 */}
+              <div>
+                <p className='text-gray-900'>
+                  Name: <span className='block font-smallboldish text-gray-700'> {formData.firstName} {formData.lastName}</span>
+              </p>
+              </div>
+              <div>
+              <p className='text-gray-900'>
+                  Date of Birth: <span className='block font-smallboldish text-gray-700'> {formData.dateOfBirth}</span>
+              </p>
+                </div>
+              <div>
+                <p className='text-gray-900'>
+                  Email Address: <span className='block font-smallboldish text-gray-700'> {formData.email}</span>
+              </p>
+              </div>
+              {/* Row 2 */}
+              <div><p className='text-gray-900'>
+                  Phone <span className='block font-smallboldish text-gray-700'> {formData.phoneNumber}</span>
+              </p></div>
+              <div>
+                <p className='text-gray-900'>
+                  Rent/Mortgage Payments <span className='block font-smallboldish text-gray-700'> </span>
+              </p>
+              </div>
+              <div>
+                <p className='text-gray-900'>
+                   <span className='block font-smallboldish text-gray-700'>  </span>
+              </p>
+              </div>
+              <div>
+                <p className='text-gray-900'>
+                  Home Address <span className='block font-smallboldish text-gray-700'> {formData.address} </span>
+              </p>
+              </div>
 
-            <p className="mt-3 text-gray-700">
-              Credit Card Insurance Product Summary
-              <span className="block font-smallboldish">
-                RBC credit cards include insurance coverage. For Quebec Residents: please read the Insurance Product Summary. By continuing, you confirm that you had the opportunity to read and download the summary detailing the coverage included with this credit card.
-              </span>
-            </p>
-
-            <p className="mt-3 text-gray-700">
-              Below is an overview of these Terms & Conditions and what you are agreeing to:
-              <ul className="cardnote-list font-smallboldish text-gray-700">
-                <li>Consent to this credit card application, credit review, and annual fee</li>
-                <li>Consent to the electronic delivery of the Information Box</li>
-                <li>Collection, use and disclosure of personal information</li>
-              </ul>
-            </p>
-
-            <p className="font-subbed mt-10 text-gray-700">
-              To continue, please click and review the document(s) below.
-            </p>
-
-            <p className="mt-10 text-gray-700">
-              By selecting "Agree and Submit", I consent to be provided with the requested account(s) and have read and agree to the terms and conditions. I also consent to the privacy section.
-            </p>
-            {card.note}
+            </div>
           </div>
+
+          <div className='employment-info-confirmation text-gray-700'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Employment
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
+                </div>
+            <div className='personal-grid grid grid-cols-3 gap-4'>
+              {/* Row 1 */}
+              <div>Name: John Doe</div>
+              <div>Age: 30</div>
+              <div>Country: USA</div>
+              
+              {/* Row 2 */}
+              <div>Email: johndoe@email.com</div>
+              <div>Phone: (555) 555-5555</div>
+              <div>Address: 123 Main St</div>
+            </div>
+          </div>
+
+          <div className='other-info-confirmation text-gray-700'>
+            <div className='pt-5 pb-5'>
+              <Separator className="flex-grow border-t border-gray-300" />
+                <p className="mt-3 text-gray-700 flex justify-between items-center">
+                  Other
+                  <span className="text-right text-[#006ac3] font-smallboldish cursor-pointer hover-card-trigger">Edit</span>
+                </p>
+                </div>
+            <div className='personal-grid grid grid-cols-3 gap-4'>
+              {/* Row 1 */}
+              <div>Name: John Doe</div>
+              <div>Age: 30</div>
+              <div>Country: USA</div>
+              
+              {/* Row 2 */}
+              <div>Email: johndoe@email.com</div>
+              <div>Phone: (555) 555-5555</div>
+              <div>Address: 123 Main St</div>
+            </div>
+          </div>
+
+          <div className='pt-5'>
+          <Separator className="flex-grow border-t border-gray-300" />
+            <p className="mt-10 font-subbed text-gray-700">
+            By selecting 'Continue', I confirm that the information provided is accurate and complete to the best of my knowledge, and I acknowledge that I have reviewed and agree to the terms and conditions, as well as the privacy policy.            </p>
+          </div>
+          </div>
+
 
           {/* Cancel and Continue Buttons */}
           <div className="cancel-app flex justify-between items-center w-full mt-10">
@@ -101,6 +167,7 @@ const Step7: React.FC<Step7Props> = ({ onClick, card }) => {
 
             <Button
               type="submit"
+              onClick={onClick}
               className="form-btnclient2"
             >
               Continue

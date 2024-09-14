@@ -903,7 +903,7 @@
   
   .cardnote-list li::before {
     content: '•'; /* Custom bullet character */
-    color: black; /* Bullet color */
+    color: #006ac3; /* Bullet color */
     position: absolute;
     left: 0;
     padding-left: 5px;

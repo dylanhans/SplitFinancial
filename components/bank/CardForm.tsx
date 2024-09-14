@@ -227,7 +227,7 @@ const CardForm = ({ type }: { type: string }) => {
     s4: <S4 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s5: <S5 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s6: <S6 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
-    s7: <S7 onClick={handleNextStep} card={card} />,
+    s7: <S7 onClick={handleNextStep} onBack={handlePreviousStep} type={type} formData={formData} setFormData={setFormData} currentStep={currentStepKey} furthestStep={furthestStep}/>,
     s8: <S8 onClick={handleNextStep} card={card} />,
 
   };
