@@ -6,3 +6,7 @@ developing through planning and technological innovation, this pushes innovation
 
 
 ![split_v3](https://github.com/dylanhans/Split/assets/80360273/d58ab754-fcf9-42d2-9f67-f9628a434f76)
+
+![Application](https://github.com/user-attachments/assets/2031b3f9-97b2-4df2-b3cc-be538fb23739)
+
+![Summary](https://github.com/user-attachments/assets/9e35efbc-7a62-4b10-90f5-01385191384a)
