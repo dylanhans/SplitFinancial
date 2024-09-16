@@ -10,3 +10,8 @@ developing through planning and technological innovation, this pushes innovation
 ![Application](https://github.com/user-attachments/assets/2031b3f9-97b2-4df2-b3cc-be538fb23739)
 
 ![Summary](https://github.com/user-attachments/assets/9e35efbc-7a62-4b10-90f5-01385191384a)
+![Card Selection](https://github.com/user-attachments/assets/3e12312c-42c5-4fa0-b81d-508aa10f6468)
+![Signin](https://github.com/user-attachments/assets/d7a39cc5-8743-4c30-8f1f-067fe70cdd3c)
+![Transfer](https://github.com/user-attachments/assets/7208e7d0-40de-40cc-a27f-80663a9354fb)
+![Posted](https://github.com/user-attachments/assets/8c88ab3b-16f6-4295-a2d2-c06409343832)
+![Account Interface](https://github.com/user-attachments/assets/acf6ea39-680b-4c48-951b-a69ea8f55cac)
