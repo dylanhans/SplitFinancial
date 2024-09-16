@@ -1,8 +1,10 @@
 ### Venture to finance payments for in-store purchases
 
-split revolutionizes in-store purchases by offering seamless payment financing directly through Apple and Google Wallet. With swift and various frameworks, this application enables users to divide payments into manageable installments with minimal to no interest after CC’s. It simplifies the shopping experience, providing flexible payment options at the point of sale.
+Developing a cutting-edge banking platform that empowers users to finance in-store purchases by seamlessly integrating with their preferred digital wallets. Split offers flexible, interest-free options for qualified users, along with the choice for long-term financing.
 
-developing through planning and technological innovation, this pushes innovation and results in a groundbreaking financial tool that empowers users while ensuring secure transactions and financial privacy through their existing banking institutions.
+With swift and various frameworks, this application enables users to divide payments into manageable installments with minimal to no interest after a short application, a soft credit checks and a quantitative model to evaluate user eligibility through calculating metrics from their retrieved credit bureau data. The current tech stack is react, tailwind, next.js, typescript, redux, python, on AWS, integrating google cloud, plaid, dwolla, appwrite, and firebase. These will change in the near future to the appropriate infrastructure that can handle banking institution loads and scalability.
+
+At this time in the building stage, users can sign-in through their existing banking institutions using Plaid for secure transactions and financial privacy. 
 
 ### Concept Visual:
 
