@@ -37,7 +37,7 @@ export default function RootLayout({
                   alt="supported by sentry"
                   width={150}
                   height={150}
-                  className="sentry"
+                  className="sentry image"
                 />
                 {/* <Image 
                   src="/icons/equifax.png"
