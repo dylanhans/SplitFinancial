@@ -39,13 +39,13 @@ export default function RootLayout({
                   height={150}
                   className="sentry"
                 />
-                <Image 
+                {/* <Image 
                   src="/icons/equifax.png"
                   alt="equifax integrated"
                   width={150}
                   height={150}
                   className="equifax opacity-30 pt-1 filter grayscale brightness-800 contrast-50"
-                />
+                /> */}
               </div>
           </div>
        </div>
