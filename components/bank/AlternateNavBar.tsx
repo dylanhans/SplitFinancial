@@ -368,8 +368,8 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                   aria-label="Personal"
                   className={`tab-item cursor-pointer relative ${activeTab === 'account' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
-                  <TabsTrigger value="account">
-                    <a href="/" className="text-xl lg:text-sm">Accounts Summary</a>
+                  <TabsTrigger value="accountsummary">
+                    <a href="/summary" className="text-xl lg:text-sm">Accounts Summary</a>
                   </TabsTrigger>
                 </li>
                 <li
@@ -378,7 +378,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                   className={`tab-item cursor-pointer relative ${activeTab === 'transfer' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
                   <TabsTrigger value="transfer">
-                    <a href="/payment-transfer" className="text-xl lg:text-sm">Transfer</a>
+                    <a href="/summary/payment-transfer" className="text-xl lg:text-sm">Transfer</a>
                   </TabsTrigger>
                 </li>
                 <li
@@ -387,7 +387,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                   className={`tab-item cursor-pointer relative ${activeTab === 'history' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
                   <TabsTrigger value="history">
-                    <a href="/transaction-history" className="text-xl lg:text-sm">History</a>
+                    <a href="/summary/transaction-history" className="text-xl lg:text-sm">History</a>
                   </TabsTrigger>
                 </li>
                 <li
@@ -396,7 +396,7 @@ export const AlternateNavBar: React.FC<AlternateNavBarProps> = ({ user }) => {
                   className={`tab-item cursor-pointer relative ${activeTab === 'products-services' ? 'opacity-100 border-b-2 border-web-borderOverlay lg:border-0 pb-2 lg:pb-0' : 'opacity-70 border-b-2 border-transparent lg:border-0'}`}
                 >
                   <TabsTrigger value="products-services">
-                    <a href="/accounts-page" className="text-xl lg:text-sm">Products & Services</a>
+                    <a href="/summary/accounts-page" className="text-xl lg:text-sm">Products & Services</a>
                   </TabsTrigger>
                 </li>
                 <li

@@ -173,11 +173,9 @@ const AuthForm = ({type}:{type: string}) => {
         </header>
         {user ? (
         <div className="granted">
-            <a className="testnav" href="/apply">
-                <Button user={user}>
-                    Test
-                </Button>
-            </a>
+            <div className="flex flex-col gap-4">
+          <PlaidLink user={user} variant="primary" />
+        </div>
           {/* <PlaidLink user={user} variant="primary" /> */}
           {/* <AuthFormCredit /> */}
         </div>

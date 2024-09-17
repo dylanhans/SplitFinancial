@@ -155,7 +155,7 @@ const Step8: React.FC<Step8Props> = ({ onClick, onBack, type, formData, setFormD
           </div>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 mt-3">
         <button
           type="button"
           onClick={onBack}
@@ -180,7 +180,7 @@ const Step8: React.FC<Step8Props> = ({ onClick, onBack, type, formData, setFormD
 
 
           {/* Cancel and Continue Buttons */}
-          <div className="cancel-app flex justify-between items-center w-full mt-10">
+          <div className="cancel-app flex justify-between items-center w-full mt-5">
             <button
               type="button"
               onClick={handleCancelApplication}

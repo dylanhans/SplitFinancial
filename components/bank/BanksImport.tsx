@@ -55,7 +55,7 @@ const [isSheetOpen, setIsSheetOpen] = useState(false);
       );
       
       const handleBankChange = (account: { appwriteItemId: any }) => {
-        const newUrl = `/account?id=${account.appwriteItemId}`;
+        const newUrl = `/summary/account?id=${account.appwriteItemId}`;
         router.push(newUrl, { scroll: false });
       };
       
