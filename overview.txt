@@ -1,0 +1,97 @@
+Split Financial
+
+Software Architecture
+———————————————————————————————————————————————————————————————————
+Frontend Layer
+	Frameworks
+		React
+		NextJS
+		TypeScript/JavaScript
+	State Management
+		Redux or React Query
+	Other
+		Tailwind
+———————————————————————————————————————————————————————————————————
+Backend Layer
+	Frameworks
+		FastAPI for RESTful API
+		GraphQL (Partial for Complex)
+		^ Use AWS AppSync
+	Languages
+		Python or Go
+		TypeScript/JavaScript
+	Microservices
+		Kubernetes
+		^ Amazon EKS
+		Docker
+		
+———————————————————————————————————————————————————————————————————
+Database and Storage Layer
+	Transactional Data
+		Amazon RDS (PostgreSQL) w/ Aurora
+	High-read Loads (NoSQL)
+		Amazon DynamoDB (NoSQL)
+	Object Storage
+		Amazon S3
+	Caching
+		Redis
+		^ Amazon ElastiCache
+	Warehousing
+		Amazon Redshift
+———————————————————————————————————————————————————————————————————
+APIs Layer
+	Credit Evaluation & Risk Management
+		Equifax (TensorFlow)
+		AWS SageMaker
+	Languages
+		Python
+	APIs
+		AWS API Gateway
+———————————————————————————————————————————————————————————————————
+Security Layer
+	Zero-Trust Architecture
+		RESTful API
+		Partial GraphQL
+		TypeScript/JavaScript
+	Multi-Factor Auth
+		AWS Cognito
+	Client Confidential Monitoring
+		Sentry or AWS CloudWatch
+	Infrastructure Monitoring 
+		Prometheus
+———————————————————————————————————————————————————————————————————
+App Integration Layer
+	IOS
+		Swift
+	Frameworks
+		PassKit
+	Integrations
+		APIs (Exposed) to RESTful, etc.
+		Auth
+	Storage
+		Local, Realm/CoreData
+		Amazon S3
+		Amazon AppSync
+	Testing
+		TestFlight
+		AWS Device Farm
+———————————————————————————————————————————————————————————————————
+CI/CD Tool Layer
+	Files
+		Github Enterprise
+		AWS CodePipeline & CodeBuild
+———————————————————————————————————————————————————————————————————
+Client Side Layer
+	Notifications (Backend)
+		Apache Kafka
+		^ Amazon MSK
+	Messaging
+		Apple Push Notification Service
+	Emails
+		Amazon SES
+———————————————————————————————————————————————————————————————————
+UX Layer
+	System Design
+		Figma
+———————————————————————————————————————————————————————————————————
+
